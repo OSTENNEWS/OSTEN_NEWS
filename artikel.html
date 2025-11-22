@@ -195,13 +195,7 @@
     const grid = document.getElementById('grid');
 
     // membuat 100 kartu
-    const TOTAL = 100;
-    function createCard(i) {
-      const topic = topics[i % topics.length];
-      const title = `${topic} — Judul Artikel #${i+1}`;
-      const excerpt = excerpts[i % excerpts.length];
-      // gunakan picsum with seed supaya gambar stabil
-      const posterSrc = `https://picsum.photos/seed/art-${i+1}/800/500`;
+   
 
       const articleDate = new Date(Date.now() - (i * 86400000)).toLocaleDateString('id-ID');
 
