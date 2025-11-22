@@ -280,5 +280,31 @@
 
   </script>
 
+  <script>
+  const searchInput = document.getElementById('search');
+
+  function filterCards(keyword) {
+    keyword = keyword.toLowerCase();
+
+    // Semua kartu (manual + otomatis)
+    const allCards = document.querySelectorAll('.card');
+
+    allCards.forEach(card => {
+      const title = card.querySelector('.title')?.textContent.toLowerCase() || "";
+      const kicker = card.querySelector('.kicker')?.textContent.toLowerCase() || "";
+
+      if (title.includes(keyword) || kicker.includes(keyword)) {
+        card.style.display = "flex";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+
+  searchInput.addEventListener("input", () => {
+    filterCards(searchInput.value);
+  });
+</script>
+
 </body>
 </html>
