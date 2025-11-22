@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Grid Artikel — 100 Pilihan</title>
+  <style>
+    /* Reset kecil */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body { height: 100%; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#0f1724; color:#e6eef8; }
+
+    header {
+      padding: 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+      position: sticky;
+      top:0;
+      z-index: 20;
+    }
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo {
+      width:44px; height:44px; border-radius:8px;
+      background: linear-gradient(135deg,#1e293b,#0ea5a6);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; color:#fff; font-size:18px;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+    }
+    h1 { font-size:18px; letter-spacing:0.2px; }
+    .sub { font-size:13px; color:rgba(230,238,248,0.6); margin-top:2px; }
+
+    /* Controls */
+    .controls { display:flex; gap:8px; align-items:center; }
+    .search {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.04);
+      padding:8px 12px; border-radius:8px;
+      color:inherit; width:220px;
+    }
+    .btn {
+      background: linear-gradient(180deg,#06b6d4,#0284c7);
+      border:none; color:white; padding:9px 12px; border-radius:8px;
+      cursor:pointer; font-weight:600;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.45);
+    }
+    .btn.ghost {
+      background:transparent; border:1px solid rgba(255,255,255,0.06); color:inherit;
+      box-shadow:none;
+    }
+
+    main { padding: 20px; max-width:1200px; margin:0 auto; }
+
+    /* Grid */
+    .grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap:18px;
+      margin-top:18px;
+    }
+
+    /* Card */
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.03);
+      display:flex;
+      flex-direction:column;
+      transition: transform .18s ease, box-shadow .18s ease;
+      min-height: 320px;
+    }
+    .card:focus-within, .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(2,6,23,0.6);
+    }
+
+    .poster {
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      display:block;
+      background:#111827;
+    }
+    .content {
+      padding:12px 14px 16px 14px;
+      display:flex; flex-direction:column; gap:8px; flex:1;
+    }
+    .kicker { font-size:12px; color:#7dd3fc; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; }
+    .title { font-size:15px; font-weight:700; line-height:1.2; color:#e6eef8; }
+    .excerpt { font-size:13px; color: rgba(230,238,248,0.7); margin-top:6px; flex:1; }
+    .meta { display:flex; gap:8px; align-items:center; margin-top:8px; justify-content:space-between }
+    .meta-left { font-size:12px; color:rgba(230,238,248,0.55); }
+    .card-actions { display:flex; gap:8px; margin-top:8px; }
+
+    .enter-btn {
+      flex:0 0 auto;
+      padding:8px 10px;
+      border-radius:8px;
+      border:none;
+      background: linear-gradient(180deg,#06b6d4,#0284c7);
+      color:white; cursor:pointer; font-weight:700;
+    }
+    .read-more {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.06);
+      color:inherit;
+      padding:8px 10px;
+      border-radius:8px;
+      cursor:pointer;
+    }
+
+    /* Modal */
+    .overlay {
+      position:fixed; inset:0; display:none;
+      background:rgba(1,6,23,0.7); align-items:center; justify-content:center;
+      z-index: 60; padding:20px;
+    }
+    .overlay.open { display:flex; }
+    .modal {
+      width: min(980px, 98%);
+      max-height: 92vh;
+      background: linear-gradient(180deg,#061025,#07263d);
+      border-radius:12px;
+      overflow:auto;
+      padding:20px;
+      border:1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 30px 80px rgba(2,6,23,0.7);
+    }
+    .modal h2 { margin-bottom:8px; }
+    .modal .modal-meta { color:rgba(230,238,248,0.6); font-size:13px; margin-bottom:12px; }
+    .modal .modal-body { color:rgba(230,238,248,0.9); line-height:1.6; }
+
+    /* responsive tweaks */
+    @media (max-width:640px) {
+      header { padding:12px; }
+      .search { width: 140px; }
+      .poster { height:140px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">ART</div>
+      <div>
+        <h1>Platform Artikel</h1>
+        <div class="sub">Seratus pilihan — pilih yang membuat hidupmu sedikit lebih informatif</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <input class="search" id="search" placeholder="Cari judul atau topik..." aria-label="Cari artikel" />
+      <button class="btn ghost" id="filterBtn">Filter</button>
+      <button class="btn" id="shuffleBtn">Acak</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="grid" class="grid" aria-live="polite">
+      <!-- Cards akan dibuat oleh JS -->
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document">
+      <button id="closeModal" style="float:right;background:transparent;border:none;color:rgba(230,238,248,0.7);font-weight:700;cursor:pointer">Tutup ✕</button>
+      <h2 id="modalTitle">Judul Artikel</h2>
+      <div class="modal-meta" id="modalMeta">Topik • Tanggal</div>
+      <img id="modalPoster" src="" alt="" style="width:100%;max-height:320px;object-fit:cover;border-radius:8px;margin-bottom:12px;">
+      <div class="modal-body" id="modalBody">
+        <p>Cuplikan artikel atau isi artikel akan muncul di sini. Ini hanya contoh teks sebagai placeholder. Ketik artikel di sistem Anda, atau tautkan ke halaman detail jika ingin konten lengkap.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data generator ringan: topik acak & excerpt
+    const topics = ["Teknologi","Politik","Ekonomi","Kesehatan","Budaya","Lingkungan","Pendidikan","Gaya Hidup","Sains","Travel","Hukum","Kriminalitas"];
+    const excerpts = [
+      "Ringkasan singkat tentang isi artikel ini, memberikan gambaran garis besar agar pembaca tahu inti pembahasan.",
+      "Artikel ini membahas aspek penting yang sering terlewat, dengan data dan pendapat ahli sebagai rujukan.",
+      "Ulasan lengkap tentang fenomena terbaru, ditulis untuk pembaca yang ingin cepat paham.",
+      "Panduan praktis langkah demi langkah agar pembaca bisa menerapkan sendiri tanpa bingung.",
+      "Analisis mendalam dengan grafik dan referensi yang relevan untuk memperkuat argumen."
+    ];
+
+    const grid = document.getElementById('grid');
+
+    // membuat 100 kartu
+    const TOTAL = 100;
+    function createCard(i) {
+      const topic = topics[i % topics.length];
+      const title = `${topic} — Judul Artikel #${i+1}`;
+      const excerpt = excerpts[i % excerpts.length];
+      // gunakan picsum with seed supaya gambar stabil
+      const posterSrc = `https://picsum.photos/seed/art-${i+1}/800/500`;
+
+      const articleDate = new Date(Date.now() - (i * 86400000)).toLocaleDateString('id-ID');
+
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.tabIndex = 0;
+      card.innerHTML = `
+        <img class="poster" src="${posterSrc}" alt="Poster ${title}" loading="lazy">
+        <div class="content">
+          <div class="kicker">${topic}</div>
+          <div class="title">${title}</div>
+          <div class="excerpt">${excerpt}</div>
+          <div class="meta">
+            <div class="meta-left">Oleh Redaksi • ${articleDate}</div>
+            <div class="card-actions">
+              <button class="read-more" aria-label="Lihat cuplikan">Cuplikan</button>
+              <button class="enter-btn" data-title="${escapeHtml(title)}" data-topic="${topic}" data-excerpt="${escapeHtml(excerpt)}" data-poster="${posterSrc}" data-date="${articleDate}">Buka Artikel</button>
+            </div>
+          </div>
+        </div>
+      `;
+      return card;
+    }
+
+    // Escape sederhana untuk attribute safety
+    function escapeHtml(str) {
+      return str.replaceAll('"','&quot;').replaceAll("'",'&#39;');
+    }
+
+    // Render awal
+    function renderAll(order = null) {
+      grid.innerHTML = '';
+      const indices = Array.from({length: TOTAL}, (_,i)=>i);
+      if (order === 'shuffle') shuffleArray(indices);
+      for (const idx of indices) grid.appendChild(createCard(idx));
+    }
+
+    function shuffleArray(a) {
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+    }
+
+    renderAll();
+
+    // Event delegation untuk tombol di dalam card
+    document.body.addEventListener('click', (e) => {
+      if (e.target.matches('.enter-btn')) {
+        const btn = e.target;
+        openModal({
+          title: btn.dataset.title,
+          topic: btn.dataset.topic,
+          excerpt: btn.dataset.excerpt,
+          poster: btn.dataset.poster,
+          date: btn.dataset.date
+        });
+      } else if (e.target.matches('.read-more')) {
+        // optional: baca cuplikan -> fokus ke excerpt
+        const card = e.target.closest('.card');
+        card.querySelector('.excerpt').scrollIntoView({behavior:'smooth',block:'center'});
+      } else if (e.target.id === 'closeModal' || e.target.id === 'overlay') {
+        closeModal();
+      }
+    });
+
+    // Modal logic
+    const overlay = document.getElementById('overlay');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMeta = document.getElementById('modalMeta');
+    const modalPoster = document.getElementById('modalPoster');
+    const modalBody = document.getElementById('modalBody');
+
+    function openModal({title, topic, excerpt, poster, date}) {
+      modalTitle.textContent = title;
+      modalMeta.textContent = `${topic} • ${date}`;
+      modalPoster.src = poster;
+      modalPoster.alt = `Poster ${title}`;
+      modalBody.innerHTML = `
+        <p style="margin-bottom:12px;"><strong>Cuplikan:</strong> ${excerpt}</p>
+        <p>Ini adalah contoh isi artikel untuk <strong>${title}</strong>. Gantilah konten ini dengan artikel asli, atau arahkan tombol ke halaman detail terpisah jika Anda menyimpan setiap artikel sebagai file HTML terpisah.</p>
+        <p>Isi dapat memuat paragraf panjang, gambar tambahan, atau video embed — sesuaikan dengan kebutuhan sistem manajemen konten Anda.</p>
+      `;
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden','false');
+      // fokus ke tombol tutup untuk akses
+      document.getElementById('closeModal').focus();
+    }
+    function closeModal() {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden','true');
+    }
+
+    // Search sederhana
+    document.getElementById('search').addEventListener('input', (e) => {
+      const q = e.target.value.trim().toLowerCase();
+      const cards = Array.from(document.querySelectorAll('.card'));
+      if (!q) {
+        cards.forEach(c => c.style.display = '');
+        return;
+      }
+      cards.forEach(c => {
+        const title = c.querySelector('.title').textContent.toLowerCase();
+        const kicker = c.querySelector('.kicker').textContent.toLowerCase();
+        const excerpt = c.querySelector('.excerpt').textContent.toLowerCase();
+        c.style.display = (title.includes(q) || kicker.includes(q) || excerpt.includes(q)) ? '' : 'none';
+      });
+    });
+
+    // Shuffle button
+    document.getElementById('shuffleBtn').addEventListener('click', () => {
+      renderAll('shuffle');
+      // scroll to top of grid for UX
+      window.scrollTo({top: 0, behavior:'smooth'});
+    });
+
+    // Filter button (simple example: filter by topic)
+    document.getElementById('filterBtn').addEventListener('click', () => {
+      const topic = prompt("Masukkan topik untuk filter (contoh: Teknologi, Politik, Pendidikan). Kosongkan untuk reset:");
+      if (topic === null) return;
+      const q = topic.trim().toLowerCase();
+      const cards = Array.from(document.querySelectorAll('.card'));
+      if (!q) {
+        cards.forEach(c => c.style.display = '');
+        return;
+      }
+      cards.forEach(c => {
+        const kicker = c.querySelector('.kicker').textContent.toLowerCase();
+        c.style.display = kicker.includes(q) ? '' : 'none';
+      });
+    });
+
+    // keyboard close modal: esc
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Accessibility: click overlay to close
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal();
+    });
+
+  </script>
+</body>
+</html>
