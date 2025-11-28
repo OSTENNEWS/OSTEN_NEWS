@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="id">
 <head>
   <meta charset="utf-8" />
@@ -8,106 +9,118 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html,body { height: 100%; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:#0f1724; color:#e6eef8; }
 
-    header {
-      padding: 20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
-      position: sticky;
-      top:0;
-      z-index: 20;
-    }
-    .brand { display:flex; align-items:center; gap:12px; }
-    .logo {
-      width:44px; height:44px; border-radius:8px;
-      background: linear-gradient(135deg,#1e293b,#0ea5a6);
-      display:flex; align-items:center; justify-content:center;
-      font-weight:700; color:#fff; font-size:18px;
-      box-shadow: 0 6px 18px rgba(2,6,23,0.6);
-    }
-    h1 { font-size:18px; letter-spacing:0.2px; }
-    .sub { font-size:13px; color:rgba(230,238,248,0.6); margin-top:2px; }
+```
+header {
+  padding: 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+  position: sticky;
+  top:0;
+  z-index: 20;
+}
+.brand { display:flex; align-items:center; gap:12px; }
+.logo {
+  width:44px; height:44px; border-radius:8px;
+  background: linear-gradient(135deg,#1e293b,#0ea5a6);
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; color:#fff; font-size:18px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+}
+h1 { font-size:18px; letter-spacing:0.2px; }
+.sub { font-size:13px; color:rgba(230,238,248,0.6); margin-top:2px; }
 
-    .controls { display:flex; gap:8px; align-items:center; }
-    .search {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.04);
-      padding:8px 12px; border-radius:8px;
-      color:inherit; width:220px;
-    }
-    .btn {
-      background: linear-gradient(180deg,#06b6d4,#0284c7);
-      border:none; color:white; padding:9px 12px; border-radius:8px;
-      cursor:pointer; font-weight:600;
-      box-shadow: 0 6px 18px rgba(2,6,23,0.45);
-    }
-    .btn.ghost {
-      background:transparent; border:1px solid rgba(255,255,255,0.06); color:inherit;
-      box-shadow:none;
-    }
+.controls { display:flex; gap:8px; align-items:center; }
+.search {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding:8px 12px; border-radius:8px;
+  color:inherit; width:220px;
+}
+.btn {
+  background: linear-gradient(180deg,#06b6d4,#0284c7);
+  border:none; color:white; padding:9px 12px; border-radius:8px;
+  cursor:pointer; font-weight:600;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.45);
+}
+.btn.ghost {
+  background:transparent; border:1px solid rgba(255,255,255,0.06); color:inherit;
+  box-shadow:none;
+}
 
-    main { padding: 20px; max-width:1200px; margin:0 auto; }
+main { padding: 20px; max-width:1200px; margin:0 auto; }
 
-    .grid {
-      display:grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap:18px;
-      margin-top:18px;
-    }
+/* GRID: gunakan satu container untuk semua card */
+.grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* auto-fit agar mengisi baris sampai penuh */
+  gap:18px;
+  margin-top:18px;
+  width:100%;
+  align-items:start;
+}
 
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:12px; overflow:hidden;
-      border: 1px solid rgba(255,255,255,0.03);
-      display:flex; flex-direction:column;
-      transition: transform .18s ease, box-shadow .18s ease;
-      min-height: 320px;
-    }
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(2,6,23,0.6);
-    }
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:12px; overflow:hidden;
+  border: 1px solid rgba(255,255,255,0.03);
+  display:flex; flex-direction:column;
+  transition: transform .18s ease, box-shadow .18s ease;
+  min-height: 320px;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(2,6,23,0.6);
+}
 
-    .poster { width:100%; height:160px; object-fit:cover; background:#111827; }
-    .content { padding:12px 14px 16px 14px; display:flex; flex-direction:column; gap:8px; flex:1; }
-    .kicker { font-size:12px; color:#7dd3fc; font-weight:700; text-transform:uppercase; }
-    .title { font-size:15px; font-weight:700; }
-    .excerpt { font-size:13px; color: rgba(230,238,248,0.7); margin-top:6px; flex:1; }
-    .meta { display:flex; gap:8px; align-items:center; justify-content:space-between; margin-top:8px; }
-    .meta-left { font-size:12px; color:rgba(230,238,248,0.55); }
+.poster { width:100%; height:160px; object-fit:cover; background:#111827; display:block; }
+.content { padding:12px 14px 16px 14px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.kicker { font-size:12px; color:#7dd3fc; font-weight:700; text-transform:uppercase; }
+.title { font-size:15px; font-weight:700; }
+.excerpt { font-size:13px; color: rgba(230,238,248,0.7); margin-top:6px; flex:1; }
+.meta { display:flex; gap:8px; align-items:center; justify-content:space-between; margin-top:8px; }
+.meta-left { font-size:12px; color:rgba(230,238,248,0.55); }
 
-    .enter-btn {
-      padding:8px 10px; border-radius:8px;
-      background: linear-gradient(180deg,#06b6d4,#0284c7);
-      color:white; font-weight:700; border:none;
-      cursor:pointer;
-    }
-    .read-more {
-      background: transparent;
-      border:1px solid rgba(255,255,255,0.06);
-      color:inherit; padding:8px 10px; border-radius:8px;
-    }
+.enter-btn {
+  padding:8px 10px; border-radius:8px;
+  background: linear-gradient(180deg,#06b6d4,#0284c7);
+  color:white; font-weight:700; border:none;
+  cursor:pointer; text-decoration:none; display:inline-block;
+}
+.read-more {
+  background: transparent;
+  border:1px solid rgba(255,255,255,0.06);
+  color:inherit; padding:8px 10px; border-radius:8px;
+}
 
-    .overlay {
-      position:fixed; inset:0; display:none;
-      background:rgba(1,6,23,0.7);
-      align-items:center; justify-content:center;
-      z-index: 60; padding:20px;
-    }
-    .overlay.open { display:flex; }
+.overlay {
+  position:fixed; inset:0; display:none;
+  background:rgba(1,6,23,0.7);
+  align-items:center; justify-content:center;
+  z-index: 60; padding:20px;
+}
+.overlay.open { display:flex; }
 
-    .modal {
-      width:min(980px,98%);
-      max-height:92vh;
-      background: linear-gradient(180deg,#061025,#07263d);
-      border-radius:12px; padding:20px;
-      overflow:auto;
-      border:1px solid rgba(255,255,255,0.04);
-      box-shadow:0 30px 80px rgba(2,6,23,0.7);
-    }
+.modal {
+  width:min(980px,98%);
+  max-height:92vh;
+  background: linear-gradient(180deg,#061025,#07263d);
+  border-radius:12px; padding:20px;
+  overflow:auto;
+  border:1px solid rgba(255,255,255,0.04);
+  box-shadow:0 30px 80px rgba(2,6,23,0.7);
+}
+
+/* tweak responsif kecil */
+@media (max-width:420px){
+  .search { width:120px; }
+  .poster { height:140px; }
+}
+```
+
   </style>
 </head>
 
@@ -121,76 +134,75 @@
       </div>
     </div>
 
-    <div class="controls">
-      <input class="search" id="search" placeholder="Cari judul atau topik..." />
-      <button class="btn ghost" id="filterBtn">Filter</button>
-      <button class="btn" id="shuffleBtn">Acak</button>
-    </div>
+```
+<div class="controls">
+  <input class="search" id="search" placeholder="Cari judul atau topik..." />
+  <button class="btn ghost" id="filterBtn">Filter</button>
+  <button class="btn" id="shuffleBtn">Acak</button>
+</div>
+```
+
   </header>
 
   <main>
 
-    <!-- ARTIKEL MANUAL BLOCK 1 -->
-    <section class="grid">
+```
+<!-- SATUKAN SEMUA CARD DI SINI -->
+<section id="grid" class="grid">
 
-      <article class="card">
-        <img class="poster" src="jufufu.jpg" alt="Poster Artikel">
-        <div class="content">
-          <div class="kicker">Event</div>
-          <div class="title">Hari Guru</div>
-          <div class="excerpt">Hari Guru adalah momen untuk menghargai mereka yang membimbing, mengajari, dan membentuk karakter kita agar bisa melangkah lebih jauh.</div>
-          <div class="meta">
-            <div class="meta-left">Oleh Afif • 25 Nov 2025</div>
-            <div class="card-actions">
-              <a href="artikel-1.html" class="enter-btn">Buka Artikel</a>
-            </div>
-          </div>
+  <!-- Kartu manual 1 -->
+  <article class="card">
+    <img class="poster" src="jufufu.jpg" alt="Poster Artikel">
+    <div class="content">
+      <div class="kicker">Event</div>
+      <div class="title">Hari Guru</div>
+      <div class="excerpt">Hari Guru adalah momen untuk menghargai mereka yang membimbing, mengajari, dan membentuk karakter kita agar bisa melangkah lebih jauh.</div>
+      <div class="meta">
+        <div class="meta-left">Oleh Afif • 25 Nov 2025</div>
+        <div class="card-actions">
+          <a href="artikel-1.html" class="enter-btn">Buka Artikel</a>
         </div>
-      </article>
+      </div>
+    </div>
+  </article>
 
-    </section>
-
-    <!-- ARTIKEL MANUAL BLOCK 2 -->
-    <section class="grid">
-
-      <article class="card">
-        <img class="poster" src="pahlawan.jpg" alt="Poster Artikel">
-        <div class="content">
-          <div class="kicker">Event, Lomba</div>
-          <div class="title">Hari Pahlawan</div>
-          <div class="excerpt">Hari Pahlawan adalah hari untuk mengenang perjuangan para pahlawan yang mempertahankan kemerdekaan Indonesia.</div>
-          <div class="meta">
-            <div class="meta-left">Oleh Mualifah • 10 Nov 2025</div>
-            <div class="card-actions">
-              <a href="artikel-2.html" class="enter-btn">Buka Artikel</a>
-            </div>
-          </div>
+  <!-- Kartu manual 2 -->
+  <article class="card">
+    <img class="poster" src="pahlawan.jpg" alt="Poster Artikel">
+    <div class="content">
+      <div class="kicker">Event, Lomba</div>
+      <div class="title">Hari Pahlawan</div>
+      <div class="excerpt">Hari Pahlawan adalah hari untuk mengenang perjuangan para pahlawan yang mempertahankan kemerdekaan Indonesia.</div>
+      <div class="meta">
+        <div class="meta-left">Oleh Mualifah • 10 Nov 2025</div>
+        <div class="card-actions">
+          <a href="artikel-2.html" class="enter-btn">Buka Artikel</a>
         </div>
-      </article>
+      </div>
+    </div>
+  </article>
 
-    </section>
-
-    <!-- GRID OTOMATIS -->
-    <section id="grid" class="grid"></section>
+  <!-- Kartu otomatis akan dimasukkan di sini oleh JS -->
+</section>
+```
 
   </main>
 
   <!-- MODAL -->
-  <div id="overlay" class="overlay">
-    <div class="modal">
+
+  <div id="overlay" class="overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
       <button id="closeModal" style="float:right;background:transparent;border:none;color:rgba(230,238,248,0.7);font-weight:700;cursor:pointer">Tutup ✕</button>
       <h2 id="modalTitle"></h2>
       <div class="modal-meta" id="modalMeta"></div>
-      <img id="modalPoster" style="width:100%;max-height:320px;object-fit:cover;border-radius:8px;margin-bottom:12px;">
+      <img id="modalPoster" style="width:100%;max-height:320px;object-fit:cover;border-radius:8px;margin-bottom:12px;" alt="">
       <div class="modal-body" id="modalBody"></div>
     </div>
   </div>
 
   <script>
-
     /* GENERATOR 100 BOX (opsional) */
-    const TOTAL = 0;
-
+    const TOTAL = 0; // set >0 untuk mengisi otomatis
     const topics = ["Teknologi","Politik","Ekonomi","Kesehatan","Budaya","Lingkungan","Pendidikan"];
     const excerpts = [
       "Ringkasan singkat artikel.",
@@ -201,7 +213,7 @@
     const grid = document.getElementById('grid');
 
     function escapeHtml(str) {
-      return str.replaceAll('"','&quot;').replaceAll("'",'&#39;');
+      return String(str).replaceAll('"','&quot;').replaceAll("'",'&#39;');
     }
 
     function createCard(i) {
@@ -215,7 +227,7 @@
       card.className = 'card';
 
       card.innerHTML = `
-        <img class="poster" src="${posterSrc}">
+        <img class="poster" src="${posterSrc}" alt="Poster">
         <div class="content">
           <div class="kicker">${topic}</div>
           <div class="title">${title}</div>
@@ -239,7 +251,6 @@
     }
 
     function renderAll() {
-      grid.innerHTML = '';
       for (let i = 0; i < TOTAL; i++) {
         grid.appendChild(createCard(i));
       }
@@ -258,31 +269,32 @@
       modalTitle.textContent = data.title;
       modalMeta.textContent = `${data.topic} • ${data.date}`;
       modalPoster.src = data.poster;
+      modalPoster.alt = data.title;
       modalBody.innerHTML = `<p>${data.excerpt}</p>`;
       overlay.classList.add("open");
+      overlay.setAttribute('aria-hidden','false');
     }
     function closeModal() {
       overlay.classList.remove("open");
+      overlay.setAttribute('aria-hidden','true');
     }
 
     document.body.addEventListener('click', (e) => {
-      if (e.target.classList.contains('enter-btn') && e.target.dataset.title) {
+      const btn = e.target.closest('.enter-btn');
+      if (btn && btn.dataset.title) {
         openModal({
-          title: e.target.dataset.title,
-          topic: e.target.dataset.topic,
-          excerpt: e.target.dataset.excerpt,
-          poster: e.target.dataset.poster,
-          date: e.target.dataset.date
+          title: btn.dataset.title,
+          topic: btn.dataset.topic,
+          excerpt: btn.dataset.excerpt,
+          poster: btn.dataset.poster,
+          date: btn.dataset.date
         });
       }
       if (e.target.id === 'closeModal') closeModal();
     });
 
-  </script>
-
-  <script>
+    /* SEARCH */
     const searchInput = document.getElementById('search');
-
     function filterCards(keyword) {
       keyword = keyword.toLowerCase();
       const allCards = document.querySelectorAll('.card');
@@ -294,7 +306,6 @@
         card.style.display = (title.includes(keyword) || kicker.includes(keyword)) ? "flex" : "none";
       });
     }
-
     searchInput.addEventListener("input", () => {
       filterCards(searchInput.value);
     });
