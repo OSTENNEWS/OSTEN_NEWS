@@ -83,6 +83,7 @@
       padding:8px 10px; border-radius:8px;
       background: linear-gradient(180deg,#06b6d4,#0284c7);
       color:white; font-weight:700; border:none;
+      cursor:pointer;
     }
     .read-more {
       background: transparent;
@@ -129,10 +130,9 @@
 
   <main>
 
-    <!-- ARTIKEL MANUAL  -->
-    <section id="manual-articles" class="grid">
+    <!-- ARTIKEL MANUAL BLOCK 1 -->
+    <section class="grid">
 
-      <!-- Contoh manual 1 -->
       <article class="card">
         <img class="poster" src="jufufu.jpg" alt="Poster Artikel">
         <div class="content">
@@ -148,16 +148,15 @@
         </div>
       </article>
 
-    
-      
     </section>
-    <section id="manual-articles" class="grid">
 
-      <!-- Contoh manual 1 -->
+    <!-- ARTIKEL MANUAL BLOCK 2 -->
+    <section class="grid">
+
       <article class="card">
         <img class="poster" src="pahlawan.jpg" alt="Poster Artikel">
         <div class="content">
-          <div class="kicker">Event,Lomba</div>
+          <div class="kicker">Event, Lomba</div>
           <div class="title">Hari Pahlawan</div>
           <div class="excerpt">Hari Pahlawan adalah hari untuk mengenang perjuangan para pahlawan yang mempertahankan kemerdekaan Indonesia.</div>
           <div class="meta">
@@ -169,15 +168,12 @@
         </div>
       </article>
 
-    
-      
     </section>
 
-  
+    <!-- GRID OTOMATIS -->
     <section id="grid" class="grid"></section>
 
   </main>
-
 
   <!-- MODAL -->
   <div id="overlay" class="overlay">
@@ -190,11 +186,10 @@
     </div>
   </div>
 
-
   <script>
 
-    /* DATA GENERATOR (KALAU KAMU MAU 100 BOX OTOMATIS) */
-    const TOTAL = 0; // MATIKAN generator. Kalau mau ON, ganti ke 100.
+    /* GENERATOR 100 BOX (opsional) */
+    const TOTAL = 0;
 
     const topics = ["Teknologi","Politik","Ekonomi","Kesehatan","Budaya","Lingkungan","Pendidikan"];
     const excerpts = [
@@ -252,7 +247,6 @@
 
     renderAll();
 
-
     /* MODAL */
     const overlay = document.getElementById('overlay');
     const modalTitle = document.getElementById('modalTitle');
@@ -287,30 +281,24 @@
   </script>
 
   <script>
-  const searchInput = document.getElementById('search');
+    const searchInput = document.getElementById('search');
 
-  function filterCards(keyword) {
-    keyword = keyword.toLowerCase();
+    function filterCards(keyword) {
+      keyword = keyword.toLowerCase();
+      const allCards = document.querySelectorAll('.card');
 
-    // Semua kartu (manual + otomatis)
-    const allCards = document.querySelectorAll('.card');
+      allCards.forEach(card => {
+        const title = card.querySelector('.title')?.textContent.toLowerCase() || "";
+        const kicker = card.querySelector('.kicker')?.textContent.toLowerCase() || "";
 
-    allCards.forEach(card => {
-      const title = card.querySelector('.title')?.textContent.toLowerCase() || "";
-      const kicker = card.querySelector('.kicker')?.textContent.toLowerCase() || "";
+        card.style.display = (title.includes(keyword) || kicker.includes(keyword)) ? "flex" : "none";
+      });
+    }
 
-      if (title.includes(keyword) || kicker.includes(keyword)) {
-        card.style.display = "flex";
-      } else {
-        card.style.display = "none";
-      }
+    searchInput.addEventListener("input", () => {
+      filterCards(searchInput.value);
     });
-  }
-
-  searchInput.addEventListener("input", () => {
-    filterCards(searchInput.value);
-  });
-</script>
+  </script>
 
 </body>
 </html>
