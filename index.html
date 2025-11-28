@@ -45,12 +45,12 @@
             gap: 15px;
             margin: 0;
             padding: 0;
-            overflow-x: auto;      /* FIX: biar kalau panjang, bisa geser */
-            white-space: nowrap;   /* FIX: biar tidak turun ke bawah */
+            overflow-x: auto;
+            white-space: nowrap;
         }
 
         nav ul::-webkit-scrollbar {
-            display: none; /* biar scroll-nya tidak kelihatan */
+            display: none;
         }
 
         nav ul li a {
@@ -76,6 +76,36 @@
             max-width: 700px;
             margin: auto;
             display: block;
+        }
+
+        /* Bagian baru: Info tambahan */
+        .info-section {
+            padding: 30px 20px;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .info-section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .info-section p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Tombol Tanya AI */
+        .ask-ai-btn {
+            margin-top: 20px;
+            display: inline-block;
+            background: #0066ff;
+            color: #fff;
+            padding: 12px 22px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
         }
 
         footer {
@@ -128,6 +158,19 @@
             Semua kegiatan sekolah dan event besar dipublikasikan dalam bentuk artikel 
             yang ditulis dan didokumentasikan oleh Sekbid 9.
         </i>
+    </section>
+
+    <!-- Bagian Penjelasan Tambahan -->
+    <section class="info-section">
+        <h2>Apa itu Ostennews?</h2>
+        <p>
+            Ostennews merupakan wadah informasi yang dikelola oleh OSIS Seksi Bidang 9 
+            sebagai tempat publikasi kegiatan sekolah, event besar, dokumentasi, dan karya siswa. 
+            Platform ini dibuat untuk memberikan informasi yang rapi, mudah diakses, dan bermanfaat 
+            bagi seluruh warga sekolah.
+        </p>
+
+        <a href="tanya-ai.html" class="ask-ai-btn">Tanya AI</a>
     </section>
 
     <footer>
