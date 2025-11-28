@@ -12,12 +12,14 @@
             background: #f7f7f7;
             color: #222;
         }
+
         header {
             background: #0066ff;
             color: white;
             padding: 20px;
             text-align: center;
         }
+
         nav {
             background: #ffffff;
             padding: 10px 20px;
@@ -29,37 +31,53 @@
             top: 0;
             z-index: 10;
         }
+
         nav .logo {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             color: #0066ff;
+            white-space: nowrap;
         }
+
         nav ul {
             list-style: none;
             display: flex;
-            gap: 20px;
+            gap: 15px;
             margin: 0;
+            padding: 0;
+            overflow-x: auto;      /* FIX: biar kalau panjang, bisa geser */
+            white-space: nowrap;   /* FIX: biar tidak turun ke bawah */
         }
+
+        nav ul::-webkit-scrollbar {
+            display: none; /* biar scroll-nya tidak kelihatan */
+        }
+
         nav ul li a {
             text-decoration: none;
             color: #222;
             font-weight: 600;
+            font-size: 15px;
         }
+
         .hero {
-            padding: 80px 20px;
+            padding: 50px 20px;
             text-align: center;
             background: linear-gradient(to right, #e3f0ff, #f0f8ff);
         }
+
         .hero h1 {
-            font-size: 38px;
+            font-size: 30px;
             margin-bottom: 15px;
         }
+
         .hero p, .hero i {
-            font-size: 18px;
+            font-size: 16px;
             max-width: 700px;
             margin: auto;
             display: block;
         }
+
         footer {
             background: #ffffff;
             text-align: center;
@@ -67,12 +85,11 @@
             margin-top: 40px;
             border-top: 1px solid #ddd;
         }
-        footer p {
-            margin: 5px 0;
-        }
+
         .credit-box {
             margin-top: 15px;
         }
+
         .credit-button {
             display: inline-block;
             padding: 10px 20px;
@@ -82,11 +99,9 @@
             text-decoration: none;
             font-weight: bold;
         }
-        .credit-button:hover {
-            opacity: 0.8;
-        }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -100,7 +115,7 @@
             <li><a href="artikel.html">Artikel</a></li>
             <li><a href="poster.html">Poster</a></li>
             <li><a href="Dekumentasi.html">Dekumentasi</a></li>
-            <li><a href="Credit.html">Credits </a></li>
+            <li><a href="Credit.html">Credits</a></li>
         </ul>
     </nav>
 
@@ -109,13 +124,13 @@
         <p>Membawa pandangan baru, inspirasi, dan edukasi melalui tulisan yang mudah dipahami.</p>
         <br>
         <i>
-        Ostennews adalah media publikasi dari program kerja OSIS Seksi Bidang 9. 
-        Semua kegiatan sekolah dan event besar dipublikasikan dalam bentuk artikel 
-        yang ditulis dan didokumentasikan oleh Sekbid 9.
+            Ostennews adalah media publikasi dari program kerja OSIS Seksi Bidang 9. 
+            Semua kegiatan sekolah dan event besar dipublikasikan dalam bentuk artikel 
+            yang ditulis dan didokumentasikan oleh Sekbid 9.
         </i>
     </section>
 
-
+    <footer>
         <div class="credit-box">
             <p>Jika website memiliki bug atau kelemahan, hubungi:</p>
             <p><b>WhatsApp: +62 888-8547-368</b></p>
