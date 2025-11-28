@@ -1,0 +1,254 @@
+import React, { useEffect, useState, useRef } from "react";
+
+// ChatAI_interface.jsx
+// Single-file React component using TailwindCSS for a clean chat UI
+// Features: dark/light theme, new conversation, conversations list, API key settings (localStorage), message input, minimal OpenAI call scaffold
+// IMPORTANT: Do NOT hardcode API keys. The UI saves the key to localStorage if the user provides it.
+
+export default function ChatAIInterface() {
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem("chat_theme");
+    return saved || "dark";
+  });
+
+  const [conversations, setConversations] = useState(() => {
+    const saved = localStorage.getItem("chat_conversations");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const [activeId, setActiveId] = useState(() => {
+    const saved = localStorage.getItem("chat_activeId");
+    return saved || null;
+  });
+
+  const [input, setInput] = useState("");
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [apiKey, setApiKey] = useState(() => localStorage.getItem("openai_api_key") || "");
+  const [isThinking, setIsThinking] = useState(false);
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("chat_theme", theme);
+  }, [theme]);
+
+  useEffect(() => {
+    localStorage.setItem("chat_conversations", JSON.stringify(conversations));
+  }, [conversations]);
+
+  useEffect(() => {
+    localStorage.setItem("chat_activeId", activeId);
+  }, [activeId]);
+
+  useEffect(() => {
+    localStorage.setItem("openai_api_key", apiKey);
+  }, [apiKey]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [activeId, conversations]);
+
+  function scrollToBottom() {
+    if (messagesEndRef.current) messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+
+  function newConversation() {
+    const id = Date.now().toString();
+    const conv = {
+      id,
+      title: "Obrolan baru",
+      messages: [
+        { role: "system", content: "Kamu adalah asisten yang membantu dengan jelas dan singkat." },
+      ],
+      createdAt: new Date().toISOString(),
+    };
+    setConversations((c) => [conv, ...c]);
+    setActiveId(id);
+  }
+
+  function deleteConversation(id) {
+    setConversations((c) => c.filter((x) => x.id !== id));
+    if (activeId === id) setActiveId(null);
+  }
+
+  function updateActiveMessages(updater) {
+    setConversations((prev) => prev.map((conv) => conv.id === activeId ? updater(conv) : conv));
+  }
+
+  async function sendMessage() {
+    if (!activeId) {
+      newConversation();
+      // Wait a tick for activeId to update — naive but works inside single-component demo
+      setTimeout(() => sendMessage(), 50);
+      return;
+    }
+
+    const text = input.trim();
+    if (!text) return;
+
+    // append user message locally first
+    updateActiveMessages((conv) => ({ ...conv, messages: [...conv.messages, { role: "user", content: text }] }));
+    setInput("");
+    setIsThinking(true);
+
+    // Basic scaffold for calling OpenAI-like API. Replace endpoint if you have your own proxy/backend.
+    // This will attempt to call the OpenAI Chat Completions endpoint directly.
+    // WARNING: do not embed a key into client-side code in production. Use a server-side proxy.
+
+    try {
+      const activeConv = conversations.find((c) => c.id === activeId) || { messages: [] };
+      const payload = {
+        model: "gpt-4o-mini", // change to whichever model you use
+        messages: [...activeConv.messages, { role: "user", content: text }].map((m) => ({ role: m.role, content: m.content })),
+        max_tokens: 800,
+      };
+
+      if (!apiKey) throw new Error("No API key set. Please open Settings and paste your API key there.");
+
+      const resp = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!resp.ok) {
+        const text = await resp.text();
+        throw new Error(`API error: ${resp.status} ${text}`);
+      }
+
+      const data = await resp.json();
+      // The shape depends on model — this expects choices[0].message.content
+      const assistantText = data?.choices?.[0]?.message?.content || "(no response)";
+
+      updateActiveMessages((conv) => ({ ...conv, messages: [...conv.messages, { role: "assistant", content: assistantText }] }));
+    } catch (err) {
+      updateActiveMessages((conv) => ({ ...conv, messages: [...conv.messages, { role: "assistant", content: `Error: ${err.message}` }] }));
+    } finally {
+      setIsThinking(false);
+    }
+  }
+
+  function exportConversation(conv) {
+    const blob = new Blob([conv.messages.map((m) => `${m.role}: ${m.content}`).join("\n\n")], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${conv.title || "conversation"}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  const activeConv = conversations.find((c) => c.id === activeId);
+
+  return (
+    <div className="h-screen flex bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      {/* Sidebar */}
+      <aside className="w-80 border-r border-gray-200 dark:border-gray-800 p-4 flex flex-col gap-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold">ChatAI</h2>
+          <div className="flex items-center gap-2">
+            <button onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))} className="px-2 py-1 rounded-md bg-gray-200 dark:bg-gray-800">
+              {theme === "dark" ? "Terang" : "Gelap"}
+            </button>
+            <button onClick={() => setIsSettingsOpen(true)} className="px-2 py-1 rounded-md border">Settings</button>
+          </div>
+        </div>
+
+        <div className="flex gap-2">
+          <button onClick={newConversation} className="flex-1 px-3 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded">Obrolan Baru</button>
+          <button onClick={() => { if (activeId && activeConv) exportConversation(activeConv); }} className="px-3 py-2 border rounded">Export</button>
+        </div>
+
+        <div className="flex-1 overflow-auto">
+          {conversations.length === 0 && <p className="text-sm text-gray-500">Tidak ada obrolan. Klik "Obrolan Baru" untuk memulai.</p>}
+          <ul className="mt-2 space-y-2">
+            {conversations.map((c) => (
+              <li key={c.id} className={`p-2 rounded cursor-pointer ${c.id === activeId ? "bg-indigo-600 text-white" : "bg-gray-50 dark:bg-gray-800"}`} onClick={() => setActiveId(c.id)}>
+                <div className="flex justify-between items-center">
+                  <div className="truncate">{c.title}</div>
+                  <div className="flex items-center gap-2">
+                    <button onClick={(e) => { e.stopPropagation(); exportConversation(c); }} className="text-xs px-2 py-1 border rounded">Export</button>
+                    <button onClick={(e) => { e.stopPropagation(); deleteConversation(c.id); }} className="text-xs px-2 py-1 border rounded">Hapus</button>
+                  </div>
+                </div>
+                <div className="text-xs text-gray-400">{new Date(c.createdAt).toLocaleString()}</div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="text-xs text-gray-500">Made with mild sarcasm and functional UI.</div>
+      </aside>
+
+      {/* Main chat area */}
+      <main className="flex-1 flex flex-col">
+        <header className="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
+          <div>
+            <h3 className="text-xl font-semibold">{activeConv ? activeConv.title : "Pilih obrolan atau buat yang baru"}</h3>
+            {activeConv && <div className="text-sm text-gray-500">{activeConv.messages.length} pesan</div>}
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="text-sm text-gray-500">{isThinking ? "Membalas..." : "Siap"}</div>
+          </div>
+        </header>
+
+        <section className="flex-1 overflow-auto p-6">
+          {!activeConv && <div className="text-center text-gray-500">Mulai obrolan baru atau pilih yang sudah ada di kiri.</div>}
+
+          <div className="space-y-4 max-w-3xl mx-auto">
+            {activeConv && activeConv.messages.map((m, i) => (
+              <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+                <div className={`rounded-xl p-3 max-w-[70%] ${m.role === "user" ? "bg-indigo-600 text-white" : "bg-gray-200 dark:bg-gray-800"}`}>
+                  <div className="whitespace-pre-wrap">{m.content}</div>
+                  <div className="text-xs text-gray-400 mt-1">{m.role}</div>
+                </div>
+              </div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+        </section>
+
+        <footer className="p-4 border-t border-gray-200 dark:border-gray-800">
+          <div className="max-w-3xl mx-auto flex gap-2">
+            <textarea value={input} onChange={(e) => setInput(e.target.value)} rows={2} className="flex-1 p-3 rounded border resize-none" placeholder="Ketik pesan..." />
+            <button onClick={sendMessage} disabled={isThinking} className="px-4 py-2 rounded bg-green-600 text-white">Kirim</button>
+          </div>
+        </footer>
+      </main>
+
+      {/* Settings modal (simple) */}
+      {isSettingsOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50">
+          <div className="bg-white dark:bg-gray-900 p-6 rounded-lg w-[520px]">
+            <div className="flex justify-between items-center mb-4">
+              <h4 className="text-lg font-semibold">Settings</h4>
+              <button onClick={() => setIsSettingsOpen(false)} className="px-2 py-1 border rounded">Close</button>
+            </div>
+
+            <div className="space-y-3">
+              <label className="block text-sm">OpenAI API Key</label>
+              <input type="password" value={apiKey} onChange={(e) => setApiKey(e.target.value)} placeholder="Paste your key here (kept in localStorage)" className="w-full p-2 rounded border" />
+              <div className="flex gap-2">
+                <button onClick={() => { setApiKey(""); localStorage.removeItem("openai_api_key"); }} className="px-3 py-1 border rounded">Clear key</button>
+                <button onClick={() => { localStorage.setItem("openai_api_key", apiKey); alert("API key saved locally. Do not paste production keys in public devices."); }} className="px-3 py-1 bg-indigo-600 text-white rounded">Save</button>
+              </div>
+
+              <hr />
+
+              <div className="text-sm text-gray-500">Theme</div>
+              <div className="flex gap-2 mt-2">
+                <button onClick={() => setTheme("light")} className={`px-3 py-1 rounded ${theme === "light" ? "bg-indigo-600 text-white" : "border"}`}>Light</button>
+                <button onClick={() => setTheme("dark")} className={`px-3 py-1 rounded ${theme === "dark" ? "bg-indigo-600 text-white" : "border"}`}>Dark</button>
+              </div>
+
+              <div className="mt-4 text-xs text-yellow-600">Security note: Do not share your API key. If you accidentally pasted a key in public chat or an unsafe place, revoke it immediately.</div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
