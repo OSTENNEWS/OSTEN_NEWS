@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dokumentasi Kegiatan</title>
+  <style>
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:#f4f6f8;
+    }
+    header{
+      background:#2b6cb0;
+      color:white;
+      padding:20px;
+      text-align:center;
+      font-size:1.5rem;
+    }
+    .container{
+      max-width:1000px;
+      margin:20px auto;
+      padding:10px;
+    }
+    .controls{
+      display:flex;
+      gap:10px;
+      margin-bottom:20px;
+    }
+    select, input{
+      padding:10px;
+      border-radius:8px;
+      border:1px solid #ccc;
+      flex:1;
+    }
+    .card{
+      background:white;
+      border-radius:12px;
+      padding:15px;
+      margin-bottom:20px;
+      box-shadow:0 3px 8px rgba(0,0,0,0.08);
+    }
+    .card img{
+      width:100%;
+      border-radius:8px;
+    }
+    .btn{
+      display:inline-block;
+      margin-top:10px;
+      padding:10px 14px;
+      background:#2b6cb0;
+      color:white;
+      border-radius:6px;
+      text-decoration:none;
+    }
+  </style>
+</head>
+<body>
+  <header>Dokumentasi Sekolah</header>
+
+  <div class="container">
+
+    <div class="controls">
+      <select id="kategoriFilter">
+        <option value="semua">Semua Kategori</option>
+        <option value="Apel" selected>Apel</option>
+        <option value="Upacara" selected>Upacara</option>
+          <option value="Event" selected>Upacara</option>
+      </select>
+      <input type="text" id="searchBox" placeholder="Cari dokumentasi..." />
+    </div>
+
+    <div id="dokContainer">
+
+      <!-- Contoh Card (bisa kamu duplikasi bebas) -->
+      <div class="card" data-kategori="Apel">
+        <img src="https://drive.google.com/file/d/1uqwqIo85b_XrUq3xSG407y_SZ_ZG9_wG/view?usp=drivesdk" />
+        <h3>Dokumentasi Apel hari guru</h3>
+        <p>Pelaksanaan apel pagi seluruh siswa hari guru.</p>
+        <a class="btn" href="https://drive.google.com/drive/folders/1y-ogjD3vQPoz896zgbg7xSF14nuH8big">Buka Dokumentasi</a>
+      </div>
+
+      <div class="card" data-kategori="Apel">
+        <img src="https://drive.google.com/file/d/1s9Bf5mUCWxSTZRTJN6_6jzZk_wuG_xfD/view?usp=drivesdk" />
+        <h3>Apel Hari Senin 17 nov 2025</h3>
+        <p>Apel pagi seluruh siswa.</p>
+        <a class="btn" href="https://drive.google.com/drive/folders/17y4trW_fsLW2IPzll52ZJ2-iqahtoQo-">Buka Dokumentasi</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const kategoriFilter = document.getElementById("kategoriFilter");
+    const searchBox = document.getElementById("searchBox");
+    const cards = document.querySelectorAll(".card");
+
+    function filterDok() {
+      const kategori = kategoriFilter.value.toLowerCase();
+      const search = searchBox.value.toLowerCase();
+
+      cards.forEach(card => {
+        const katCard = card.getAttribute("data-kategori").toLowerCase();
+        const teks = card.innerText.toLowerCase();
+
+        const cocokKategori = kategori === "semua" || katCard.includes(kategori);
+        const cocokSearch = teks.includes(search);
+
+        card.style.display = (cocokKategori && cocokSearch) ? "block" : "none";
+      });
+    }
+
+    kategoriFilter.addEventListener("change", filterDok);
+    searchBox.addEventListener("keyup", filterDok);
+  </script>
+</body>
+</html>
