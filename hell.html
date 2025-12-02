@@ -6,10 +6,6 @@
     <title>OSTENNEWS+</title>
 
     <style>
-        header::before {
-    transform: scale(1.25) translate(var(--px, 0), var(--py, 0));
-}
-
         * {
             margin: 0;
             padding: 0;
@@ -22,10 +18,8 @@
             color: #e8e8e8;
             overflow-x: hidden;
         }
-     
 
-
-        /* HEADER PARALLAX */
+        /* HEADER */
         header {
             position: relative;
             height: 330px;
@@ -42,22 +36,17 @@
             inset: 0;
             background: url("jufufu1.jpg") center/cover no-repeat;
             filter: brightness(0.45) saturate(1.2);
-            transform: scale(1.2);
-            animation: parallax 16s ease-in-out infinite alternate;
-        }
-
-        @keyframes parallax {
-            0% { transform: scale(1.2) translateY(0); }
-            100% { transform: scale(1.27) translateY(-30px); }
+            transform: scale(1.22) translate(var(--px, 0), var(--py, 0));
+            transition: transform 0.15s linear;
         }
 
         header h1 {
             position: relative;
-            font-size: 38px;
+            font-size: 36px;
             letter-spacing: 3px;
-            animation: fadeSlide 1.7s ease-out forwards;
-            opacity: 0;
             text-shadow: 0 4px 10px rgba(0,0,0,0.6);
+            animation: fadeSlide 1.5s ease-out forwards;
+            opacity: 0;
         }
 
         @keyframes fadeSlide {
@@ -65,61 +54,54 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* NAV FUTURISTIK */
+        /* NAV */
         nav {
-            background: rgba(15, 20, 30, 0.95);
-            backdrop-filter: blur(8px);
-            padding: 14px 26px;
+            background: rgba(15, 20, 30, 0.88);
+            backdrop-filter: blur(10px);
+            padding: 12px 22px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.5);
             position: sticky;
             top: 0;
-            z-index: 50;
+            z-index: 99;
             border-bottom: 1px solid #2d3b55;
-            animation: navFade 1s ease-out;
-        }
-
-        @keyframes navFade {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            box-shadow: 0 3px 12px rgba(0,0,0,0.5);
         }
 
         .logo {
-            font-size: 22px;
-            font-weight: bold;
+            font-size: 20px;
+            font-weight: 700;
             background: linear-gradient(90deg, #4da6ff, #77e3ff);
             -webkit-background-clip: text;
             color: transparent;
-            letter-spacing: 1px;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: 22px;
+            gap: 18px;
         }
 
         nav ul li a {
-            color: #d1d1d1;
+            color: #d6d6d6;
             text-decoration: none;
-            font-weight: 600;
             font-size: 15px;
-            position: relative;
+            font-weight: 600;
             padding-bottom: 4px;
-            transition: 0.25s;
+            position: relative;
+            transition: 0.2s;
         }
 
         nav ul li a::after {
             content: "";
             position: absolute;
-            left: 0;
             bottom: 0;
+            left: 0;
             width: 0%;
             height: 2px;
             background: #66c1ff;
-            transition: 0.3s;
+            transition: 0.25s;
         }
 
         nav ul li a:hover {
@@ -132,13 +114,13 @@
 
         /* HERO */
         .hero {
-            padding: 65px 20px;
+            padding: 55px 20px;
             text-align: center;
             animation: fadeSlide 1.3s ease-out;
         }
 
         .hero h1 {
-            font-size: 34px;
+            font-size: 32px;
             color: #8ecfff;
             margin-bottom: 12px;
         }
@@ -146,34 +128,33 @@
         .hero p {
             max-width: 780px;
             margin: auto;
-            color: #d0d0d0;
-            line-height: 1.8;
             font-size: 16px;
+            line-height: 1.7;
+            color: #d0d0d0;
         }
 
-        /* CARD FUTURISTIK */
+        /* CARD */
         .info-section {
             max-width: 900px;
-            margin: 60px auto;
-            padding: 28px 30px;
+            margin: 55px auto;
+            padding: 26px 26px;
             background: rgba(255,255,255,0.06);
             border: 1px solid rgba(120,160,255,0.23);
             border-radius: 14px;
             backdrop-filter: blur(12px);
-            animation: floatUp 1.4s ease-out;
             box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+            animation: floatUp 1.3s ease-out;
         }
 
         @keyframes floatUp {
-            0% { opacity: 0; transform: translateY(35px); }
+            0% { opacity: 0; transform: translateY(30px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
         .info-section h2 {
-            font-size: 26px;
-            margin-bottom: 15px;
+            font-size: 24px;
+            margin-bottom: 14px;
             color: #9fdcff;
-            letter-spacing: 1px;
         }
 
         .info-section p {
@@ -182,34 +163,85 @@
             color: #dedede;
         }
 
+        /* FOOTER */
         footer {
             margin-top: 70px;
             padding: 25px;
-            text-align: center;
             background: rgba(20, 20, 32, 0.95);
+            text-align: center;
             border-top: 1px solid #2f3f60;
             color: #bfc9d6;
             font-size: 14px;
         }
 
+        /* RESPONSIVE HP */
+        @media (max-width: 768px) {
+            header {
+                height: 260px;
+            }
+
+            header h1 {
+                font-size: 27px;
+                letter-spacing: 2px;
+            }
+
+            nav ul {
+                gap: 12px;
+            }
+
+            nav ul li a {
+                font-size: 13.5px;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .info-section {
+                margin: 40px 16px;
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 10px 16px;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            nav ul li a {
+                font-size: 12px;
+            }
+
+            header {
+                height: 220px;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            .hero p {
+                font-size: 14.5px;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <script>
+
+<script>
 // PARALLAX BACKGROUND
 document.addEventListener("mousemove", (e) => {
     const x = (e.clientX / window.innerWidth - 0.5) * 20;
     const y = (e.clientY / window.innerHeight - 0.5) * 20;
 
-    document.querySelector("header").style.setProperty(
-        "--px", `${x}px`
-    );
-    document.querySelector("header").style.setProperty(
-        "--py", `${y}px`
-    );
+    document.querySelector("header").style.setProperty("--px", `${x}px`);
+    document.querySelector("header").style.setProperty("--py", `${y}px`);
 });
-
 
 // PARTICLE EFFECT
 const particleCount = 45;
@@ -221,24 +253,23 @@ container.style.overflow = "hidden";
 document.body.appendChild(container);
 
 for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement("div");
-    particle.style.position = "absolute";
-    particle.style.width = "4px";
-    particle.style.height = "4px";
-    particle.style.borderRadius = "50%";
-    particle.style.background = "rgba(120,190,255,0.8)";
-    particle.style.boxShadow = "0 0 10px rgba(120,190,255,0.6)";
-    particle.style.left = Math.random() * 100 + "vw";
-    particle.style.top = Math.random() * 100 + "vh";
-    particle.style.opacity = 0.7;
-    particle.style.animation = `floatParticle ${5 + Math.random()*10}s linear infinite`;
-    container.appendChild(particle);
+    const p = document.createElement("div");
+    p.style.position = "absolute";
+    p.style.width = "4px";
+    p.style.height = "4px";
+    p.style.borderRadius = "50%";
+    p.style.background = "rgba(120,190,255,0.8)";
+    p.style.boxShadow = "0 0 10px rgba(120,190,255,0.6)";
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.top = Math.random() * 100 + "vh";
+    p.style.opacity = 0.7;
+    p.style.animation = `float ${5 + Math.random()*10}s linear infinite`;
+    container.appendChild(p);
 }
 
-// ANIMATION FOR PARTICLES
 const style = document.createElement("style");
 style.innerHTML = `
-@keyframes floatParticle {
+@keyframes float {
     0% { transform: translateY(0px) translateX(0px); }
     50% { transform: translateY(-40px) translateX(15px); }
     100% { transform: translateY(0px) translateX(0px); }
@@ -246,7 +277,7 @@ style.innerHTML = `
 `;
 document.head.appendChild(style);
 
-// GLOW ON HOVER UNTUK NAV DAN CARD
+// GLOW HOVER
 document.querySelectorAll("nav a, .info-section").forEach(el => {
     el.addEventListener("mouseenter", () => {
         el.style.transition = "0.3s";
@@ -257,7 +288,6 @@ document.querySelectorAll("nav a, .info-section").forEach(el => {
     });
 });
 </script>
-
 
 <header>
     <h1>Selamat Datang di OSTEN NEWS</h1>
@@ -277,21 +307,19 @@ document.querySelectorAll("nav a, .info-section").forEach(el => {
 <section class="hero" id="home">
     <h1>Tempat Artikel Informatif dan Positif</h1>
     <p>
-        Membawa pandangan baru, inspirasi, dan edukasi melalui tulisan yang mudah dipahami.
+        Membawa inspirasi, informasi, dan edukasi melalui tulisan yang mudah dipahami.
         <br><br>
-        <i>
-            Ostennews adalah media publikasi OSIS Seksi Bidang 9, tempat seluruh event besar dan kegiatan sekolah dirangkum dengan rapi dan menarik.
-        </i>
+        <i>Ostennews adalah media publikasi OSIS Seksi Bidang 9 untuk dokumentasi event sekolah.</i>
     </p>
 </section>
 
 <section class="info-section">
     <h2>Apa itu Ostennews?</h2>
     <p>
-        Ostennews merupakan pusat informasi resmi dari OSIS Seksi Bidang 9.  
-        Semua kegiatan sekolah, dokumentasi, karya siswa, serta event besar 
-        dipublikasikan melalui platform ini agar seluruh warga sekolah dapat 
-        mengakses informasi secara modern, cepat, dan nyaman.
+        Ostennews merupakan pusat informasi resmi dari OSIS Seksi Bidang 9.
+        Semua kegiatan sekolah, dokumentasi, karya siswa, dan event besar
+        dipublikasikan secara rapi dan modern agar seluruh warga sekolah
+        dapat mengakses informasi dengan cepat dan nyaman.
     </p>
 </section>
 
