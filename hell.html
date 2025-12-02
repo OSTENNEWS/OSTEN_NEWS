@@ -61,18 +61,33 @@ nav ul {
 }
 
 /* HERO MOBILE FIX */
-.hero {
-    padding: 50px 18px;
+.hero-header {
+    position: relative;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 0 20px;
 }
 
-.hero h1 {
+.hero-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("jufufu1.jpg") center center/cover no-repeat;
+    filter: brightness(0.45);
+    transform: scale(1.2);
+    z-index: -1;
+}
+
+.hero-header h1 {
     font-size: 26px;
+    color: #fff;
+    font-weight: 700;
 }
 
-.hero p {
-    font-size: 15px;
-    line-height: 1.6;
-}
 
 /* CARD MOBILE */
 .info-section {
@@ -215,9 +230,10 @@ document.querySelectorAll("nav a, .info-section").forEach(el => {
 });
 </script>
 
-<header>
+<header class="hero-header">
     <h1>Selamat Datang di OSTEN NEWS</h1>
 </header>
+
 
 <nav>
     <div class="logo">OSTENNEWS+</div>
