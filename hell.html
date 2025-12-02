@@ -6,181 +6,244 @@
     <title>OSTENNEWS+</title>
 
     <style>
-/* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* BACKGROUND FIX */
-body {
-    font-family: Arial, sans-serif;
-    background: #0e0f15;
-    color: #fff;
-}
+        body {
+            font-family: "Inter", Arial, sans-serif;
+            background: #0b0f18;
+            color: #e8e8e8;
+            overflow-x: hidden;
+        }
 
-/* HEADER */
-header {
-    position: relative;
-    height: 260px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-}
+        /* HEADER */
+        header {
+            position: relative;
+            height: 330px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
 
-header::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: url("jufufu1.jpg") center center/cover no-repeat;
-    filter: brightness(0.45) saturate(1.2);
-    z-index: -1;
-}
+        header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url("jufufu1.jpg") center/cover no-repeat;
+            filter: brightness(0.45) saturate(1.2);
+            transform: scale(1.22) translate(var(--px, 0), var(--py, 0));
+            transition: transform 0.15s linear;
+        }
 
-header h1 {
-    font-size: 28px;
-    padding: 0 20px;
-    line-height: 1.2;
-}
+        header h1 {
+            position: relative;
+            font-size: 36px;
+            letter-spacing: 3px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.6);
+            animation: fadeSlide 1.5s ease-out forwards;
+            opacity: 0;
+        }
 
-/* NAVIGATION */
-nav {
-    background: rgba(15, 20, 30, 0.95);
-    backdrop-filter: blur(8px);
-    padding: 10px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    border-bottom: 1px solid #2d3b55;
-    overflow-x: auto;
-}
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(25px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
 
-nav::-webkit-scrollbar {
-    display: none;
-}
+        /* NAV */
+        nav {
+            background: rgba(15, 20, 30, 0.88);
+            backdrop-filter: blur(10px);
+            padding: 12px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            border-bottom: 1px solid #2d3b55;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.5);
+        }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 18px;
-    white-space: nowrap;
-}
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #4da6ff, #77e3ff);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
 
-nav a {
-    color: #cfe2ff;
-    text-decoration: none;
-    font-weight: bold;
-}
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 18px;
+        }
 
-/* HERO */
-.hero {
-    text-align: center;
-    padding: 40px 20px;
-}
+        nav ul li a {
+            color: #d6d6d6;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            padding-bottom: 4px;
+            position: relative;
+            transition: 0.2s;
+        }
 
-.hero h1 {
-    font-size: 26px;
-    font-weight: 700;
-}
+        nav ul li a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #66c1ff;
+            transition: 0.25s;
+        }
 
-.hero p {
-    margin-top: 10px;
-    font-size: 15px;
-    color: #d7e4f7;
-}
+        nav ul li a:hover {
+            color: #ffffff;
+        }
 
-/* SECTION */
-.info-section {
-    margin: 35px 12px;
-    padding: 22px 20px;
-    background: rgba(25, 32, 46, 0.7);
-    border-radius: 12px;
-    border: 1px solid #32425e;
-}
+        nav ul li a:hover::after {
+            width: 100%;
+        }
 
-.info-section h2 {
-    font-size: 22px;
-    margin-bottom: 10px;
-}
+        /* HERO */
+        .hero {
+            padding: 55px 20px;
+            text-align: center;
+            animation: fadeSlide 1.3s ease-out;
+        }
 
-.info-section p {
-    font-size: 15px;
-}
+        .hero h1 {
+            font-size: 32px;
+            color: #8ecfff;
+            margin-bottom: 12px;
+        }
 
-/* FOOTER */
-footer {
-    margin-top: 70px;
-    padding: 25px;
-    background: rgba(20, 20, 32, 0.95);
-    text-align: center;
-    border-top: 1px solid #2f3f60;
-    color: #bfc9d6;
-    font-size: 14px;
-}
+        .hero p {
+            max-width: 780px;
+            margin: auto;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #d0d0d0;
+        }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    header {
-        height: 240px;
-    }
+        /* CARD */
+        .info-section {
+            max-width: 900px;
+            margin: 55px auto;
+            padding: 26px 26px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(120,160,255,0.23);
+            border-radius: 14px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+            animation: floatUp 1.3s ease-out;
+        }
 
-    header h1 {
-        font-size: 24px;
-    }
+        @keyframes floatUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
 
-    nav ul {
-        gap: 12px;
-    }
+        .info-section h2 {
+            font-size: 24px;
+            margin-bottom: 14px;
+            color: #9fdcff;
+        }
 
-    nav a {
-        font-size: 13.5px;
-    }
+        .info-section p {
+            font-size: 15.5px;
+            line-height: 1.75;
+            color: #dedede;
+        }
 
-    .info-section {
-        margin: 35px 15px;
-    }
-}
+        /* FOOTER */
+        footer {
+            margin-top: 70px;
+            padding: 25px;
+            background: rgba(20, 20, 32, 0.95);
+            text-align: center;
+            border-top: 1px solid #2f3f60;
+            color: #bfc9d6;
+            font-size: 14px;
+        }
 
-@media (max-width: 480px) {
-    header {
-        height: 200px;
-    }
+        /* RESPONSIVE HP */
+        @media (max-width: 768px) {
+            header {
+                height: 260px;
+            }
 
-    header h1 {
-        font-size: 20px;
-    }
+            header h1 {
+                font-size: 27px;
+                letter-spacing: 2px;
+            }
 
-    nav a {
-        font-size: 12px;
-    }
+            nav ul {
+                gap: 12px;
+            }
 
-    .hero h1 {
-        font-size: 22px;
-    }
+            nav ul li a {
+                font-size: 13.5px;
+            }
 
-    .hero p {
-        font-size: 14px;
-    }
-}
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .info-section {
+                margin: 40px 16px;
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 10px 16px;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            nav ul li a {
+                font-size: 12px;
+            }
+
+            header {
+                height: 220px;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            .hero p {
+                font-size: 14.5px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-<!-- PARALLAX + PARTICLE -->
 <script>
+// PARALLAX BACKGROUND
 document.addEventListener("mousemove", (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 15;
-    const y = (e.clientY / window.innerHeight - 0.5) * 15;
-    document.querySelector("header").style.transform = `translate(${x}px, ${y}px)`;
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+
+    document.querySelector("header").style.setProperty("--px", `${x}px`);
+    document.querySelector("header").style.setProperty("--py", `${y}px`);
 });
 
+// PARTICLE EFFECT
 const particleCount = 45;
 const container = document.createElement("div");
 container.style.position = "fixed";
@@ -200,26 +263,38 @@ for (let i = 0; i < particleCount; i++) {
     p.style.left = Math.random() * 100 + "vw";
     p.style.top = Math.random() * 100 + "vh";
     p.style.opacity = 0.7;
-    p.style.animation = `float ${4 + Math.random()*10}s linear infinite`;
+    p.style.animation = `float ${5 + Math.random()*10}s linear infinite`;
     container.appendChild(p);
 }
 
 const style = document.createElement("style");
 style.innerHTML = `
 @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-40px); }
-    100% { transform: translateY(0px); }
-}`;
+    0% { transform: translateY(0px) translateX(0px); }
+    50% { transform: translateY(-40px) translateX(15px); }
+    100% { transform: translateY(0px) translateX(0px); }
+}
+`;
 document.head.appendChild(style);
+
+// GLOW HOVER
+document.querySelectorAll("nav a, .info-section").forEach(el => {
+    el.addEventListener("mouseenter", () => {
+        el.style.transition = "0.3s";
+        el.style.boxShadow = "0 0 12px rgba(120,180,255,0.7)";
+    });
+    el.addEventListener("mouseleave", () => {
+        el.style.boxShadow = "none";
+    });
+});
 </script>
 
-<header class="hero-header">
+<header>
     <h1>Selamat Datang di OSTEN NEWS</h1>
 </header>
 
 <nav>
-    <div class="logo"><b>OSTENNEWS+</b></div>
+    <div class="logo">OSTENNEWS+</div>
     <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="artikel.html">Artikel</a></li>
@@ -242,7 +317,9 @@ document.head.appendChild(style);
     <h2>Apa itu Ostennews?</h2>
     <p>
         Ostennews merupakan pusat informasi resmi dari OSIS Seksi Bidang 9.
-        Semua kegiatan sekolah, dokumentasi, karya siswa, dan event besar dipublikasikan secara rapi dan modern agar seluruh warga sekolah dapat mengakses informasi dengan cepat dan nyaman.
+        Semua kegiatan sekolah, dokumentasi, karya siswa, dan event besar
+        dipublikasikan secara rapi dan modern agar seluruh warga sekolah
+        dapat mengakses informasi dengan cepat dan nyaman.
     </p>
 </section>
 
