@@ -6,6 +6,10 @@
     <title>OSTENNEWS+</title>
 
     <style>
+        header::before {
+    transform: scale(1.25) translate(var(--px, 0), var(--py, 0));
+}
+
         * {
             margin: 0;
             padding: 0;
@@ -18,6 +22,8 @@
             color: #e8e8e8;
             overflow-x: hidden;
         }
+     
+
 
         /* HEADER PARALLAX */
         header {
@@ -190,6 +196,68 @@
 </head>
 
 <body>
+    <script>
+// PARALLAX BACKGROUND
+document.addEventListener("mousemove", (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+
+    document.querySelector("header").style.setProperty(
+        "--px", `${x}px`
+    );
+    document.querySelector("header").style.setProperty(
+        "--py", `${y}px`
+    );
+});
+
+
+// PARTICLE EFFECT
+const particleCount = 45;
+const container = document.createElement("div");
+container.style.position = "fixed";
+container.style.inset = "0";
+container.style.zIndex = "-1";
+container.style.overflow = "hidden";
+document.body.appendChild(container);
+
+for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement("div");
+    particle.style.position = "absolute";
+    particle.style.width = "4px";
+    particle.style.height = "4px";
+    particle.style.borderRadius = "50%";
+    particle.style.background = "rgba(120,190,255,0.8)";
+    particle.style.boxShadow = "0 0 10px rgba(120,190,255,0.6)";
+    particle.style.left = Math.random() * 100 + "vw";
+    particle.style.top = Math.random() * 100 + "vh";
+    particle.style.opacity = 0.7;
+    particle.style.animation = `floatParticle ${5 + Math.random()*10}s linear infinite`;
+    container.appendChild(particle);
+}
+
+// ANIMATION FOR PARTICLES
+const style = document.createElement("style");
+style.innerHTML = `
+@keyframes floatParticle {
+    0% { transform: translateY(0px) translateX(0px); }
+    50% { transform: translateY(-40px) translateX(15px); }
+    100% { transform: translateY(0px) translateX(0px); }
+}
+`;
+document.head.appendChild(style);
+
+// GLOW ON HOVER UNTUK NAV DAN CARD
+document.querySelectorAll("nav a, .info-section").forEach(el => {
+    el.addEventListener("mouseenter", () => {
+        el.style.transition = "0.3s";
+        el.style.boxShadow = "0 0 12px rgba(120,180,255,0.7)";
+    });
+    el.addEventListener("mouseleave", () => {
+        el.style.boxShadow = "none";
+    });
+});
+</script>
+
 
 <header>
     <h1>Selamat Datang di OSTEN NEWS</h1>
