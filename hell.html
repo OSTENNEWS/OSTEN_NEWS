@@ -3,330 +3,892 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OSTENNEWS+</title>
-
+    <title>OSTENNEWS+ | Media OSIS Seksi Bidang 9</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #4da6ff;
+            --primary-dark: #0d8af5;
+            --secondary: #77e3ff;
+            --accent: #ff6b9d;
+            --dark-bg: #0b0f18;
+            --darker-bg: #070a12;
+            --card-bg: rgba(20, 26, 40, 0.7);
+            --border-color: rgba(100, 150, 255, 0.15);
+            --text: #e8e8e8;
+            --text-light: #b0c6e0;
+            --glow: 0 0 15px rgba(77, 166, 255, 0.7);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: "Inter", Arial, sans-serif;
-            background: #0b0f18;
-            color: #e8e8e8;
-            overflow-x: hidden;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* HEADER */
-        header {
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Tech Grid Background */
+        .tech-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                linear-gradient(transparent 65%, rgba(11, 15, 24, 0.9) 100%),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(20, 60, 120, 0.1) 3px, rgba(20, 60, 120, 0.1) 4px);
+            opacity: 0.7;
+        }
+
+        /* Scanlines Effect */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.03) 50%,
+                rgba(0, 0, 0, 0.1) 50%
+            );
+            background-size: 100% 4px;
+            z-index: -1;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+
+        /* Header dengan efek parallax */
+        .main-header {
             position: relative;
-            height: 330px;
+            height: 100vh;
+            min-height: 600px;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
             overflow: hidden;
+            isolation: isolate;
         }
 
-        header::before {
-            content: "";
+        .header-bg {
             position: absolute;
-            inset: 0;
-            background: url("jufufu1.jpg") center/cover no-repeat;
-            filter: brightness(0.45) saturate(1.2);
-            transform: scale(1.22) translate(var(--px, 0), var(--py, 0));
-            transition: transform 0.15s linear;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, rgba(11, 15, 24, 0.9) 0%, rgba(20, 40, 80, 0.6) 100%),
+                url("https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80") center/cover no-repeat;
+            filter: brightness(0.7) contrast(1.1);
+            transform: scale(1.1);
+            z-index: -1;
+            transition: transform 0.3s ease-out;
         }
 
-        header h1 {
-            position: relative;
-            font-size: 36px;
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, transparent 10%, rgba(11, 15, 24, 0.8) 70%);
+            z-index: -1;
+        }
+
+        .header-content {
+            text-align: center;
+            max-width: 900px;
+            padding: 0 20px;
+            z-index: 2;
+        }
+
+        .header-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
             letter-spacing: 3px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.6);
-            animation: fadeSlide 1.5s ease-out forwards;
-            opacity: 0;
+            text-shadow: 0 0 20px rgba(77, 166, 255, 0.5);
+            position: relative;
+            display: inline-block;
         }
 
-        @keyframes fadeSlide {
-            0% { opacity: 0; transform: translateY(25px); }
-            100% { opacity: 1; transform: translateY(0); }
+        .header-logo::after {
+            content: '+';
+            color: var(--accent);
+            font-size: 5rem;
+            position: absolute;
+            top: -10px;
+            right: -30px;
+            text-shadow: 0 0 15px rgba(255, 107, 157, 0.7);
         }
 
-        /* NAV */
-        nav {
-            background: rgba(15, 20, 30, 0.88);
+        .header-tagline {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Navigation */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 20, 30, 0.85);
             backdrop-filter: blur(10px);
-            padding: 12px 22px;
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 99;
-            border-bottom: 1px solid #2d3b55;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.5);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
         }
 
-        .logo {
-            font-size: 20px;
-            font-weight: 700;
-            background: linear-gradient(90deg, #4da6ff, #77e3ff);
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 18px;
-        }
-
-        nav ul li a {
-            color: #d6d6d6;
-            text-decoration: none;
-            font-size: 15px;
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
             font-weight: 600;
-            padding-bottom: 4px;
-            position: relative;
-            transition: 0.2s;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            letter-spacing: 1.5px;
         }
 
-        nav ul li a::after {
-            content: "";
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::before {
+            content: '';
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 0%;
+            width: 0;
             height: 2px;
-            background: #66c1ff;
-            transition: 0.25s;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
         }
 
-        nav ul li a:hover {
-            color: #ffffff;
+        .nav-links a:hover {
+            color: white;
         }
 
-        nav ul li a:hover::after {
+        .nav-links a:hover::before {
             width: 100%;
         }
 
-        /* HERO */
+        .nav-links a.active {
+            color: white;
+        }
+
+        .nav-links a.active::before {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+
+        /* Hero Section */
         .hero {
-            padding: 55px 20px;
+            padding-top: 100px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
             text-align: center;
-            animation: fadeSlide 1.3s ease-out;
+            padding: 40px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero h1 {
-            font-size: 32px;
-            color: #8ecfff;
-            margin-bottom: 12px;
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(77, 166, 255, 0.05), transparent);
+            z-index: -1;
         }
 
-        .hero p {
-            max-width: 780px;
-            margin: auto;
-            font-size: 16px;
+        .hero-title {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .hero-text {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        /* Cards Section */
+        .cards-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(77, 166, 255, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(77, 166, 255, 0.4);
+            box-shadow: var(--glow);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .card-text {
+            color: var(--text-light);
             line-height: 1.7;
-            color: #d0d0d0;
         }
 
-        /* CARD */
+        /* Info Section */
         .info-section {
-            max-width: 900px;
-            margin: 55px auto;
-            padding: 26px 26px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(120,160,255,0.23);
-            border-radius: 14px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.45);
-            animation: floatUp 1.3s ease-out;
+            background: var(--card-bg);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            padding: 50px;
+            margin-top: 40px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes floatUp {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
+        .info-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(77, 166, 255, 0.05) 0%, transparent 70%);
+            z-index: -1;
         }
 
-        .info-section h2 {
-            font-size: 24px;
-            margin-bottom: 14px;
-            color: #9fdcff;
+        .info-title {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
         }
 
-        .info-section p {
-            font-size: 15.5px;
-            line-height: 1.75;
-            color: #dedede;
+        .info-text {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.8;
         }
 
-        /* FOOTER */
-        footer {
-            margin-top: 70px;
-            padding: 25px;
-            background: rgba(20, 20, 32, 0.95);
+        /* Footer */
+        .main-footer {
+            background: rgba(7, 10, 18, 0.95);
+            border-top: 1px solid var(--border-color);
+            padding: 50px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .contact-info {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .contact-info i {
+            color: var(--primary);
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .copyright {
             text-align: center;
-            border-top: 1px solid #2f3f60;
-            color: #bfc9d6;
-            font-size: 14px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-light);
+            font-size: 0.9rem;
         }
 
-        /* RESPONSIVE HP */
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--glow);
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-logo {
+                font-size: 3.5rem;
+            }
+            
+            .header-logo::after {
+                font-size: 4rem;
+                right: -25px;
+            }
+            
+            .cards-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
-            header {
-                height: 260px;
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: rgba(15, 20, 30, 0.95);
+                backdrop-filter: blur(10px);
+                width: 100%;
+                text-align: center;
+                padding: 20px 0;
+                border-top: 1px solid var(--border-color);
+                transition: right 0.3s ease;
+                z-index: 999;
             }
-
-            header h1 {
-                font-size: 27px;
-                letter-spacing: 2px;
+            
+            .nav-links.active {
+                right: 0;
             }
-
-            nav ul {
-                gap: 12px;
+            
+            .nav-toggle {
+                display: block;
             }
-
-            nav ul li a {
-                font-size: 13.5px;
+            
+            .header-logo {
+                font-size: 2.8rem;
             }
-
-            .hero h1 {
-                font-size: 26px;
+            
+            .header-logo::after {
+                font-size: 3.2rem;
+                right: -20px;
             }
-
-            .info-section {
-                margin: 40px 16px;
-                padding: 22px;
+            
+            .header-tagline {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .info-section, .hero-content {
+                padding: 30px;
             }
         }
 
-        @media (max-width: 480px) {
-            nav {
-                padding: 10px 16px;
+        @media (max-width: 576px) {
+            .header-logo {
+                font-size: 2.2rem;
             }
-
-            nav ul {
-                gap: 10px;
+            
+            .header-logo::after {
+                font-size: 2.5rem;
+                right: -15px;
+                top: -5px;
             }
-
-            nav ul li a {
-                font-size: 12px;
+            
+            .section-title {
+                font-size: 1.8rem;
             }
-
-            header {
-                height: 220px;
+            
+            .hero-title {
+                font-size: 1.8rem;
             }
-
-            header h1 {
-                font-size: 22px;
-            }
-
-            .hero p {
-                font-size: 14.5px;
+            
+            .card {
+                padding: 25px;
             }
         }
     </style>
 </head>
 
 <body>
+    <!-- Tech Grid Background -->
+    <div class="tech-grid"></div>
+    
+    <!-- Scanlines Effect -->
+    <div class="scanlines"></div>
+    
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="main-header" id="header">
+        <div class="header-bg" id="header-bg"></div>
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <h1 class="header-logo">OSTENNEWS</h1>
+            <p class="header-tagline">Media Publikasi Resmi OSIS Seksi Bidang 9 - Informasi Terkini, Dokumentasi Lengkap</p>
+            <a href="#about" class="btn">Jelajahi Sekarang</a>
+        </div>
+    </header>
 
-<script>
-// PARALLAX BACKGROUND
-document.addEventListener("mousemove", (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    <!-- Navigation -->
+    <nav class="main-nav" id="nav">
+        <a href="#" class="nav-logo">OSTENNEWS+</a>
+        <button class="nav-toggle" id="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="artikel.html">Artikel</a></li>
+            <li><a href="poster.html">Poster</a></li>
+            <li><a href="Dekumentasi.html">Dokumentasi</a></li>
+            <li><a href="Credit.html">Credits</a></li>
+        </ul>
+    </nav>
 
-    document.querySelector("header").style.setProperty("--px", `${x}px`);
-    document.querySelector("header").style.setProperty("--py", `${y}px`);
-});
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h2 class="hero-title">Tempat Artikel Informatif dan Positif</h2>
+                <p class="hero-text">
+                    Membawa <span class="highlight">inspirasi, informasi, dan edukasi</span> melalui tulisan yang mudah dipahami dan disajikan dengan tampilan modern.
+                    <br><br>
+                    <i>Ostennews adalah media publikasi OSIS Seksi Bidang 9 untuk dokumentasi event sekolah, informasi kegiatan, dan karya siswa dalam platform digital yang interaktif.</i>
+                </p>
+                <a href="artikel.html" class="btn">Baca Artikel Terbaru</a>
+            </div>
+        </section>
 
-// PARTICLE EFFECT
-const particleCount = 45;
-const container = document.createElement("div");
-container.style.position = "fixed";
-container.style.inset = "0";
-container.style.zIndex = "-1";
-container.style.overflow = "hidden";
-document.body.appendChild(container);
+        <!-- Cards Section -->
+        <section id="about">
+            <h2 class="section-title">Fitur Utama</h2>
+            <div class="cards-section">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <h3 class="card-title">Artikel Informatif</h3>
+                    <p class="card-text">Tulisan berkualitas tentang kegiatan sekolah, prestasi siswa, dan informasi pendidikan terkini yang disajikan dengan bahasa yang mudah dipahami.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3 class="card-title">Dokumentasi Lengkap</h3>
+                    <p class="card-text">Arsip foto dan video dari setiap kegiatan sekolah yang dapat diakses kapan saja oleh seluruh warga sekolah.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="card-title">Pengumuman Resmi</h3>
+                    <p class="card-text">Platform resmi untuk pengumuman OSIS dan sekolah, memastikan informasi penting sampai dengan cepat dan akurat.</p>
+                </div>
+            </div>
+        </section>
 
-for (let i = 0; i < particleCount; i++) {
-    const p = document.createElement("div");
-    p.style.position = "absolute";
-    p.style.width = "4px";
-    p.style.height = "4px";
-    p.style.borderRadius = "50%";
-    p.style.background = "rgba(120,190,255,0.8)";
-    p.style.boxShadow = "0 0 10px rgba(120,190,255,0.6)";
-    p.style.left = Math.random() * 100 + "vw";
-    p.style.top = Math.random() * 100 + "vh";
-    p.style.opacity = 0.7;
-    p.style.animation = `float ${5 + Math.random()*10}s linear infinite`;
-    container.appendChild(p);
-}
+        <!-- Info Section -->
+        <section>
+            <h2 class="section-title">Tentang OSTENNEWS</h2>
+            <div class="info-section">
+                <h3 class="info-title">Media Digital OSIS Seksi Bidang 9</h3>
+                <p class="info-text">
+                    OSTENNEWS+ merupakan pusat informasi digital resmi dari OSIS Seksi Bidang 9 yang dirancang dengan teknologi terkini untuk memberikan pengalaman terbaik dalam mengakses informasi sekolah. Semua kegiatan sekolah, dokumentasi, karya siswa, dan event besar dipublikasikan secara rapi dan modern dengan antarmuka yang intuitif.
+                    <br><br>
+                    Dengan desain yang terinspirasi dari konsep futuristik, kami bertujuan untuk menciptakan platform yang tidak hanya informatif tetapi juga memberikan pengalaman visual yang memukau. Setiap konten dijamin akurat, positif, dan bermanfaat bagi perkembangan siswa serta kemajuan sekolah.
+                </p>
+                <a href="Credit.html" class="btn" style="margin-top: 30px;">Tim Pengembang</a>
+            </div>
+        </section>
+    </main>
 
-const style = document.createElement("style");
-style.innerHTML = `
-@keyframes float {
-    0% { transform: translateY(0px) translateX(0px); }
-    50% { transform: translateY(-40px) translateX(15px); }
-    100% { transform: translateY(0px) translateX(0px); }
-}
-`;
-document.head.appendChild(style);
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3 class="footer-logo">OSTENNEWS+</h3>
+                    <p class="footer-text">Media publikasi resmi OSIS Seksi Bidang 9. Menyajikan informasi terkini, dokumentasi lengkap, dan artikel edukatif untuk seluruh warga sekolah.</p>
+                </div>
+                
+                <div class="footer-links-container">
+                    <h4 class="footer-title">Menu Cepat</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="artikel.html">Artikel</a></li>
+                        <li><a href="poster.html">Poster</a></li>
+                        <li><a href="Dekumentasi.html">Dokumentasi</a></li>
+                        <li><a href="Credit.html">Credits</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4 class="footer-title">Kontak & Bantuan</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> ostennews@osis.sch.id</p>
+                        <p><i class="fas fa-phone"></i> +62 888-8547-368</p>
+                        <p><i class="fas fa-map-marker-alt"></i> OSIS Seksi Bidang 9</p>
+                        <p>Jika website memiliki bug atau kelemahan, hubungi kami segera.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 OSTENNEWS+. All rights reserved. | Media Publikasi OSIS Seksi Bidang 9</p>
+            </div>
+        </div>
+    </footer>
 
-// GLOW HOVER
-document.querySelectorAll("nav a, .info-section").forEach(el => {
-    el.addEventListener("mouseenter", () => {
-        el.style.transition = "0.3s";
-        el.style.boxShadow = "0 0 12px rgba(120,180,255,0.7)";
-    });
-    el.addEventListener("mouseleave", () => {
-        el.style.boxShadow = "none";
-    });
-});
-</script>
+    <script>
+        // Parallax Effect for Header Background
+        document.addEventListener('mousemove', (e) => {
+            const headerBg = document.getElementById('header-bg');
+            const x = (e.clientX / window.innerWidth - 0.5) * 30;
+            const y = (e.clientY / window.innerHeight - 0.5) * 30;
+            
+            headerBg.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
+        });
 
-<header>
-    <h1>Selamat Datang di OSTEN NEWS</h1>
-</header>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(15, 20, 30, 0.95)';
+                nav.style.padding = '10px 30px';
+            } else {
+                nav.style.background = 'rgba(15, 20, 30, 0.85)';
+                nav.style.padding = '15px 30px';
+            }
+        });
 
-<nav>
-    <div class="logo">OSTENNEWS+</div>
-    <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="artikel.html">Artikel</a></li>
-        <li><a href="poster.html">Poster</a></li>
-        <li><a href="Dekumentasi.html">Dokumentasi</a></li>
-        <li><a href="Credit.html">Credits</a></li>
-    </ul>
-</nav>
+        // Mobile Navigation Toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+        
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            navToggle.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
 
-<section class="hero" id="home">
-    <h1>Tempat Artikel Informatif dan Positif</h1>
-    <p>
-        Membawa inspirasi, informasi, dan edukasi melalui tulisan yang mudah dipahami.
-        <br><br>
-        <i>Ostennews adalah media publikasi OSIS Seksi Bidang 9 untuk dokumentasi event sekolah.</i>
-    </p>
-</section>
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                navToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
 
-<section class="info-section">
-    <h2>Apa itu Ostennews?</h2>
-    <p>
-        Ostennews merupakan pusat informasi resmi dari OSIS Seksi Bidang 9.
-        Semua kegiatan sekolah, dokumentasi, karya siswa, dan event besar
-        dipublikasikan secara rapi dan modern agar seluruh warga sekolah
-        dapat mengakses informasi dengan cepat dan nyaman.
-    </p>
-</section>
+        // Create Floating Particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 50;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Random size between 1px and 4px
+            const size = Math.random() * 3 + 1;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Random position
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.top = `${Math.random() * 100}vh`;
+            
+            // Random color variation
+            const colorVariation = Math.random() * 40 - 20;
+            particle.style.backgroundColor = `rgb(${77 + colorVariation}, ${166 + colorVariation}, 255)`;
+            
+            // Random opacity
+            particle.style.opacity = Math.random() * 0.5 + 0.2;
+            
+            // Animation
+            const duration = Math.random() * 20 + 10;
+            const delay = Math.random() * 5;
+            
+            particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+            
+            particlesContainer.appendChild(particle);
+        }
 
-<footer>
-    <p>Jika website memiliki bug atau kelemahan, hubungi:</p>
-    <p><b>WhatsApp: +62 888-8547-368</b></p>
-</footer>
+        // Add floating animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes float {
+                0%, 100% { transform: translate(0, 0) rotate(0deg); }
+                25% { transform: translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px) rotate(${Math.random() * 10 - 5}deg); }
+                50% { transform: translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px) rotate(${Math.random() * 10 - 5}deg); }
+                75% { transform: translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px) rotate(${Math.random() * 10 - 5}deg); }
+            }
+        `;
+        document.head.appendChild(style);
 
+        // Card hover effect enhancement
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
