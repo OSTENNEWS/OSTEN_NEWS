@@ -2,13 +2,24 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>OSTENNEWS+ | Media OSIS Seksi Bidang 9</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* PERFORMA OPTIMIZATION */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
         :root {
             --primary: #4da6ff;
             --primary-dark: #0d8af5;
@@ -16,46 +27,48 @@
             --accent: #ff6b9d;
             --dark-bg: #0b0f18;
             --darker-bg: #070a12;
-            --card-bg: rgba(20, 26, 40, 0.7);
+            --card-bg: rgba(20, 26, 40, 0.85);
             --border-color: rgba(100, 150, 255, 0.15);
             --text: #e8e8e8;
             --text-light: #b0c6e0;
             --glow: 0 0 15px rgba(77, 166, 255, 0.7);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
         }
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         body {
-            font-family: 'Inter', Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             background: var(--dark-bg);
             color: var(--text);
             overflow-x: hidden;
             line-height: 1.6;
+            /* Hardware acceleration untuk performa lebih baik */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
         }
 
-        /* Tech Grid Background */
-        .tech-grid {
+        /* Simplified Background untuk performa mobile */
+        .bg-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
             background: 
-                linear-gradient(transparent 65%, rgba(11, 15, 24, 0.9) 100%),
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(20, 60, 120, 0.1) 3px, rgba(20, 60, 120, 0.1) 4px);
-            opacity: 0.7;
+                radial-gradient(circle at 20% 30%, rgba(77, 166, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 107, 157, 0.03) 0%, transparent 50%),
+                linear-gradient(to bottom, #0b0f18 0%, #070a12 100%);
+            z-index: -2;
+            pointer-events: none;
         }
 
-        /* Scanlines Effect */
+        /* Scanlines yang dioptimalkan untuk mobile */
         .scanlines {
             position: fixed;
             top: 0;
@@ -64,30 +77,35 @@
             height: 100%;
             background: linear-gradient(
                 to bottom,
-                rgba(255, 255, 255, 0.03) 50%,
-                rgba(0, 0, 0, 0.1) 50%
+                transparent 49%,
+                rgba(255, 255, 255, 0.02) 50%,
+                transparent 51%
             );
-            background-size: 100% 4px;
+            background-size: 100% 8px;
             z-index: -1;
             pointer-events: none;
-            animation: scanline 8s linear infinite;
+            opacity: 0.5;
+            /* Animasi yang lebih ringan untuk mobile */
+            animation: scanline 20s linear infinite;
         }
 
         @keyframes scanline {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 100%; }
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100%); }
         }
 
-        /* Header dengan efek parallax */
+        /* Header dengan performa tinggi */
         .main-header {
             position: relative;
             height: 100vh;
-            min-height: 600px;
+            min-height: 500px;
+            max-height: 900px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             isolation: isolate;
+            will-change: transform;
         }
 
         .header-bg {
@@ -98,21 +116,13 @@
             height: 100%;
             background: 
                 linear-gradient(45deg, rgba(11, 15, 24, 0.9) 0%, rgba(20, 40, 80, 0.6) 100%),
-                url("https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80") center/cover no-repeat;
+                url("https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=1926&q=40") center/cover no-repeat;
+            background-attachment: scroll; /* Ubah dari fixed untuk mobile */
             filter: brightness(0.7) contrast(1.1);
-            transform: scale(1.1);
             z-index: -1;
-            transition: transform 0.3s ease-out;
-        }
-
-        .header-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, transparent 10%, rgba(11, 15, 24, 0.8) 70%);
-            z-index: -1;
+            transform: scale(1.05);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
         .header-content {
@@ -120,19 +130,20 @@
             max-width: 900px;
             padding: 0 20px;
             z-index: 2;
+            position: relative;
         }
 
         .header-logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 4.5rem;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
             font-weight: 700;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-shadow: 0 0 20px rgba(77, 166, 255, 0.5);
             position: relative;
             display: inline-block;
@@ -141,57 +152,64 @@
         .header-logo::after {
             content: '+';
             color: var(--accent);
-            font-size: 5rem;
+            font-size: clamp(2.8rem, 9vw, 5rem);
             position: absolute;
             top: -10px;
-            right: -30px;
+            right: -25px;
             text-shadow: 0 0 15px rgba(255, 107, 157, 0.7);
         }
 
         .header-tagline {
-            font-size: 1.5rem;
+            font-size: clamp(1rem, 4vw, 1.5rem);
             color: var(--text-light);
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
             font-weight: 300;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
-        /* Navigation */
+        /* Navigation yang dioptimalkan */
         .main-nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(15, 20, 30, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(15, 20, 30, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
-            padding: 15px 30px;
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all var(--transition-normal);
+            will-change: transform, background, padding;
+        }
+
+        .nav-scrolled {
+            padding: 8px 20px;
+            background: rgba(15, 20, 30, 0.98);
         }
 
         .nav-logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
             font-weight: 600;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-decoration: none;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
+            white-space: nowrap;
         }
 
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: clamp(15px, 3vw, 25px);
             list-style: none;
         }
 
@@ -199,10 +217,11 @@
             color: var(--text-light);
             text-decoration: none;
             font-weight: 500;
-            font-size: 1rem;
-            padding: 8px 0;
+            font-size: clamp(0.85rem, 3vw, 1rem);
+            padding: 6px 0;
             position: relative;
-            transition: color 0.3s;
+            transition: color var(--transition-fast);
+            white-space: nowrap;
         }
 
         .nav-links a::before {
@@ -213,21 +232,15 @@
             width: 0;
             height: 2px;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transition: width 0.3s ease;
+            transition: width var(--transition-normal);
         }
 
-        .nav-links a:hover {
-            color: white;
-        }
-
-        .nav-links a:hover::before {
-            width: 100%;
-        }
-
+        .nav-links a:hover,
         .nav-links a.active {
             color: white;
         }
 
+        .nav-links a:hover::before,
         .nav-links a.active::before {
             width: 100%;
         }
@@ -239,25 +252,34 @@
             color: var(--primary);
             font-size: 1.5rem;
             cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            transition: background var(--transition-fast);
+        }
+
+        .nav-toggle:hover {
+            background: rgba(77, 166, 255, 0.1);
         }
 
         /* Main Content */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
         section {
-            padding: 80px 0;
+            padding: 60px 0;
+            position: relative;
         }
 
         .section-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
             font-weight: 600;
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
             color: white;
             position: relative;
             display: inline-block;
@@ -277,20 +299,20 @@
 
         /* Hero Section */
         .hero {
-            padding-top: 100px;
+            padding-top: 80px;
         }
 
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
             text-align: center;
-            padding: 40px;
+            padding: 30px;
             background: var(--card-bg);
-            border-radius: 15px;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
         }
@@ -307,16 +329,16 @@
         }
 
         .hero-title {
-            font-size: 2.2rem;
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
             color: var(--secondary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             font-weight: 600;
         }
 
         .hero-text {
-            font-size: 1.1rem;
+            font-size: clamp(0.95rem, 3.5vw, 1.1rem);
             color: var(--text-light);
-            line-height: 1.8;
+            line-height: 1.7;
             margin-bottom: 1.5rem;
         }
 
@@ -328,118 +350,232 @@
         /* Cards Section */
         .cards-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 25px;
             margin-top: 40px;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 10px;
             border: 1px solid var(--border-color);
-            padding: 30px;
-            transition: all 0.3s ease;
+            padding: 25px;
+            transition: all var(--transition-normal);
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(77, 166, 255, 0.1), transparent);
-            transition: left 0.7s ease;
-        }
-
-        .card:hover::before {
-            left: 100%;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transform: translateZ(0);
+            will-change: transform, box-shadow;
         }
 
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             border-color: rgba(77, 166, 255, 0.4);
             box-shadow: var(--glow);
         }
 
         .card-icon {
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 5vw, 2.5rem);
             color: var(--primary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .card-title {
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
             font-weight: 600;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             color: white;
         }
 
         .card-text {
             color: var(--text-light);
-            line-height: 1.7;
+            line-height: 1.6;
+            font-size: clamp(0.9rem, 3vw, 1rem);
         }
 
-        /* Info Section */
-        .info-section {
+        /* Artikel Terbaru Section */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .article-card {
             background: var(--card-bg);
-            border-radius: 15px;
+            border-radius: 10px;
+            overflow: hidden;
             border: 1px solid var(--border-color);
-            padding: 50px;
-            margin-top: 40px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all var(--transition-normal);
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow);
+        }
+
+        .article-image {
+            height: 180px;
+            width: 100%;
+            background: linear-gradient(45deg, #1a2b4d, #2a3f6d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
             overflow: hidden;
         }
 
-        .info-section::before {
+        .article-image::after {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -50%;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(77, 166, 255, 0.05) 0%, transparent 70%);
-            z-index: -1;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(77, 166, 255, 0.1), transparent);
         }
 
-        .info-title {
-            font-size: 2rem;
+        .article-content {
+            padding: 20px;
+        }
+
+        .article-date {
+            font-size: 0.85rem;
             color: var(--secondary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .article-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .article-excerpt {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        /* Counters Section */
+        .counters-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .counter-item {
+            text-align: center;
+            padding: 25px 15px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: all var(--transition-normal);
+        }
+
+        .counter-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(77, 166, 255, 0.4);
+        }
+
+        .counter-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .counter-text {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+
+        /* Event Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 40px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 12px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid var(--dark-bg);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-bottom: 5px;
             font-weight: 600;
         }
 
-        .info-text {
-            font-size: 1.1rem;
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .timeline-desc {
             color: var(--text-light);
-            line-height: 1.8;
+            font-size: 0.95rem;
         }
 
         /* Footer */
         .main-footer {
             background: rgba(7, 10, 18, 0.95);
             border-top: 1px solid var(--border-color);
-            padding: 50px 0 30px;
-            margin-top: 80px;
+            padding: 40px 0 20px;
+            margin-top: 60px;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
         .footer-logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: 600;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
@@ -450,13 +586,14 @@
 
         .footer-text {
             color: var(--text-light);
-            line-height: 1.7;
+            line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         .footer-title {
             font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             color: white;
         }
 
@@ -465,22 +602,25 @@
         }
 
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .footer-links a {
             color: var(--text-light);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color var(--transition-fast);
+            font-size: 0.95rem;
         }
 
         .footer-links a:hover {
             color: var(--primary);
+            padding-left: 5px;
         }
 
         .contact-info {
             color: var(--text-light);
-            line-height: 1.8;
+            line-height: 1.7;
+            font-size: 0.95rem;
         }
 
         .contact-info i {
@@ -491,28 +631,60 @@
 
         .copyright {
             text-align: center;
-            padding-top: 30px;
+            padding-top: 25px;
             border-top: 1px solid var(--border-color);
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+        }
+
+        /* Social Media */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(77, 166, 255, 0.1);
+            color: var(--primary);
+            text-decoration: none;
+            transition: all var(--transition-normal);
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
         }
 
         /* Button */
         .btn {
-            display: inline-block;
-            padding: 12px 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
             background: linear-gradient(90deg, var(--primary), var(--primary-dark));
             color: white;
             text-decoration: none;
             border-radius: 6px;
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             border: none;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all var(--transition-normal);
             position: relative;
             overflow: hidden;
             z-index: 1;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            gap: 8px;
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         .btn::before {
@@ -536,54 +708,102 @@
             box-shadow: var(--glow);
         }
 
-        /* Floating Particles */
-        .particles {
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Loading Animation */
+        .loading {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: -1;
+            background: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
         }
 
-        .particle {
-            position: absolute;
-            background: var(--primary);
+        .loading.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(77, 166, 255, 0.2);
+            border-top: 4px solid var(--primary);
             border-radius: 50%;
-            opacity: 0.5;
+            animation: spin 1s linear infinite;
         }
 
-        /* Responsive Design */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all var(--transition-normal);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Design dengan Performa Tinggi */
         @media (max-width: 992px) {
-            .header-logo {
-                font-size: 3.5rem;
-            }
-            
-            .header-logo::after {
-                font-size: 4rem;
-                right: -25px;
-            }
-            
-            .cards-section {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
                 top: 70px;
                 right: -100%;
                 flex-direction: column;
-                background: rgba(15, 20, 30, 0.95);
+                background: rgba(15, 20, 30, 0.98);
                 backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
                 width: 100%;
                 text-align: center;
                 padding: 20px 0;
                 border-top: 1px solid var(--border-color);
-                transition: right 0.3s ease;
+                transition: right var(--transition-normal);
                 z-index: 999;
+                max-height: calc(100vh - 70px);
+                overflow-y: auto;
             }
             
             .nav-links.active {
@@ -591,75 +811,120 @@
             }
             
             .nav-toggle {
-                display: block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             
-            .header-logo {
-                font-size: 2.8rem;
+            .main-header {
+                min-height: 400px;
             }
             
-            .header-logo::after {
-                font-size: 3.2rem;
-                right: -20px;
+            section {
+                padding: 50px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding-top: 70px;
             }
             
-            .header-tagline {
-                font-size: 1.2rem;
+            .hero-content {
+                padding: 25px 20px;
             }
             
-            .section-title {
-                font-size: 2rem;
+            .card, .counter-item {
+                padding: 20px;
             }
             
-            .info-section, .hero-content {
-                padding: 30px;
+            .timeline::before {
+                left: 15px;
+            }
+            
+            .timeline-item {
+                padding-left: 45px;
+            }
+            
+            .timeline-dot {
+                left: 8px;
+                width: 16px;
+                height: 16px;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
             }
         }
 
         @media (max-width: 576px) {
-            .header-logo {
-                font-size: 2.2rem;
+            .main-nav {
+                padding: 10px 15px;
             }
             
-            .header-logo::after {
-                font-size: 2.5rem;
-                right: -15px;
-                top: -5px;
+            .nav-scrolled {
+                padding: 8px 15px;
             }
             
-            .section-title {
-                font-size: 1.8rem;
+            .main-header {
+                min-height: 350px;
             }
             
-            .hero-title {
-                font-size: 1.8rem;
+            .header-tagline {
+                margin-bottom: 1.5rem;
             }
             
-            .card {
-                padding: 25px;
+            .btn {
+                padding: 10px 22px;
+            }
+            
+            .footer-content {
+                gap: 25px;
+            }
+        }
+
+        /* Optimasi untuk perangkat dengan performa rendah */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            
+            .scanlines {
+                animation: none;
+                opacity: 0.3;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Tech Grid Background -->
-    <div class="tech-grid"></div>
-    
-    <!-- Scanlines Effect -->
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Background Elements -->
+    <div class="bg-overlay"></div>
     <div class="scanlines"></div>
-    
-    <!-- Floating Particles -->
-    <div class="particles" id="particles"></div>
     
     <!-- Header -->
     <header class="main-header" id="header">
         <div class="header-bg" id="header-bg"></div>
-        <div class="header-overlay"></div>
         <div class="header-content">
             <h1 class="header-logo">OSTENNEWS</h1>
             <p class="header-tagline">Media Publikasi Resmi OSIS Seksi Bidang 9 - Informasi Terkini, Dokumentasi Lengkap</p>
-            <a href="#about" class="btn">Jelajahi Sekarang</a>
+            <a href="#about" class="btn">
+                <i class="fas fa-arrow-down"></i>
+                Jelajahi Sekarang
+            </a>
         </div>
     </header>
 
@@ -671,10 +936,10 @@
         </button>
         <ul class="nav-links" id="nav-links">
             <li><a href="#home" class="active">Home</a></li>
-            <li><a href="artikel.html">Artikel</a></li>
-            <li><a href="poster.html">Poster</a></li>
-            <li><a href="Dekumentasi.html">Dokumentasi</a></li>
-            <li><a href="Credit.html">Credits</a></li>
+            <li><a href="#articles">Artikel</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#stats">Statistik</a></li>
+            <li><a href="artikel.html">Selengkapnya</a></li>
         </ul>
     </nav>
 
@@ -689,7 +954,39 @@
                     <br><br>
                     <i>Ostennews adalah media publikasi OSIS Seksi Bidang 9 untuk dokumentasi event sekolah, informasi kegiatan, dan karya siswa dalam platform digital yang interaktif.</i>
                 </p>
-                <a href="artikel.html" class="btn">Baca Artikel Terbaru</a>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 25px;">
+                    <a href="artikel.html" class="btn">
+                        <i class="fas fa-newspaper"></i>
+                        Baca Artikel
+                    </a>
+                    <a href="Dekumentasi.html" class="btn btn-outline">
+                        <i class="fas fa-photo-video"></i>
+                        Dokumentasi
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section id="stats">
+            <h2 class="section-title">Statistik Kami</h2>
+            <div class="counters-section">
+                <div class="counter-item">
+                    <div class="counter-number" data-target="124">0</div>
+                    <p class="counter-text">Artikel Terbit</p>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-number" data-target="56">0</div>
+                    <p class="counter-text">Kegiatan Didokumentasi</p>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-number" data-target="89">0</div>
+                    <p class="counter-text">Poster Digital</p>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-number" data-target="1000">0+</div>
+                    <p class="counter-text">Pengunjung Bulanan</p>
+                </div>
             </div>
         </section>
 
@@ -723,172 +1020,63 @@
             </div>
         </section>
 
-        <!-- Info Section -->
-        <section>
-            <h2 class="section-title">Tentang OSTENNEWS</h2>
-            <div class="info-section">
-                <h3 class="info-title">Media Digital OSIS Seksi Bidang 9</h3>
-                <p class="info-text">
-                    OSTENNEWS+ merupakan pusat informasi digital resmi dari OSIS Seksi Bidang 9 yang dirancang dengan teknologi terkini untuk memberikan pengalaman terbaik dalam mengakses informasi sekolah. Semua kegiatan sekolah, dokumentasi, karya siswa, dan event besar dipublikasikan secara rapi dan modern dengan antarmuka yang intuitif.
-                    <br><br>
-                    Dengan desain yang terinspirasi dari konsep futuristik, kami bertujuan untuk menciptakan platform yang tidak hanya informatif tetapi juga memberikan pengalaman visual yang memukau. Setiap konten dijamin akurat, positif, dan bermanfaat bagi perkembangan siswa serta kemajuan sekolah.
-                </p>
-                <a href="Credit.html" class="btn" style="margin-top: 30px;">Tim Pengembang</a>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <h3 class="footer-logo">OSTENNEWS+</h3>
-                    <p class="footer-text">Media publikasi resmi OSIS Seksi Bidang 9. Menyajikan informasi terkini, dokumentasi lengkap, dan artikel edukatif untuk seluruh warga sekolah.</p>
+        <!-- Articles Section -->
+        <section id="articles">
+            <h2 class="section-title">Artikel Terbaru</h2>
+            <div class="articles-grid">
+                <div class="article-card">
+                    <div class="article-image">
+                        <i class="fas fa-graduation-cap" style="font-size: 3rem; color: rgba(255,255,255,0.2);"></i>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-date">
+                            <i class="far fa-calendar"></i>
+                            15 Maret 2023
+                        </div>
+                        <h3 class="article-title">Prestasi Siswa di Olimpiade Sains Nasional</h3>
+                        <p class="article-excerpt">Dua siswa berhasil meraih medali perak dalam Olimpiade Sains Nasional tingkat provinsi...</p>
+                        <a href="#" class="btn" style="padding: 8px 16px; font-size: 0.9rem;">Baca Selengkapnya</a>
+                    </div>
                 </div>
                 
-                <div class="footer-links-container">
-                    <h4 class="footer-title">Menu Cepat</h4>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="artikel.html">Artikel</a></li>
-                        <li><a href="poster.html">Poster</a></li>
-                        <li><a href="Dekumentasi.html">Dokumentasi</a></li>
-                        <li><a href="Credit.html">Credits</a></li>
-                    </ul>
+                <div class="article-card">
+                    <div class="article-image">
+                        <i class="fas fa-users" style="font-size: 3rem; color: rgba(255,255,255,0.2);"></i>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-date">
+                            <i class="far fa-calendar"></i>
+                            10 Maret 2023
+                        </div>
+                        <h3 class="article-title">Kegiatan Bakti Sosial OSIS 2023</h3>
+                        <p class="article-excerpt">OSIS mengadakan kegiatan bakti sosial ke panti asuhan dengan mengumpulkan donasi dari siswa...</p>
+                        <a href="#" class="btn" style="padding: 8px 16px; font-size: 0.9rem;">Baca Selengkapnya</a>
+                    </div>
                 </div>
                 
-                <div class="footer-contact">
-                    <h4 class="footer-title">Kontak & Bantuan</h4>
-                    <div class="contact-info">
-                        <p><i class="fas fa-envelope"></i> ostennews@osis.sch.id</p>
-                        <p><i class="fas fa-phone"></i> +62 888-8547-368</p>
-                        <p><i class="fas fa-map-marker-alt"></i> SMKN 10 SURABAYA</p>
-                        <p>Jika website memiliki bug atau kelemahan, hubungi kami segera.</p>
+                <div class="article-card">
+                    <div class="article-image">
+                        <i class="fas fa-laptop-code" style="font-size: 3rem; color: rgba(255,255,255,0.2);"></i>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-date">
+                            <i class="far fa-calendar"></i>
+                            5 Maret 2023
+                        </div>
+                        <h3 class="article-title">Workshop Pembuatan Website untuk Siswa</h3>
+                        <p class="article-excerpt">Sebanyak 30 siswa mengikuti workshop pembuatan website dasar yang diadakan oleh OSIS...</p>
+                        <a href="#" class="btn" style="padding: 8px 16px; font-size: 0.9rem;">Baca Selengkapnya</a>
                     </div>
                 </div>
             </div>
-            
-            <div class="copyright">
-                <p>&copy; 2025 OSTENNEWS+. All rights reserved. | Media Publikasi OSIS Seksi Bidang 9</p>
-            </div>
-        </div>
-    </footer>
+        </section>
 
-    <script>
-        // Parallax Effect for Header Background
-        document.addEventListener('mousemove', (e) => {
-            const headerBg = document.getElementById('header-bg');
-            const x = (e.clientX / window.innerWidth - 0.5) * 30;
-            const y = (e.clientY / window.innerHeight - 0.5) * 30;
-            
-            headerBg.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
-        });
-
-        // Navbar Scroll Effect
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(15, 20, 30, 0.95)';
-                nav.style.padding = '10px 30px';
-            } else {
-                nav.style.background = 'rgba(15, 20, 30, 0.85)';
-                nav.style.padding = '15px 30px';
-            }
-        });
-
-        // Mobile Navigation Toggle
-        const navToggle = document.getElementById('nav-toggle');
-        const navLinks = document.getElementById('nav-links');
-        
-        navToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            navToggle.innerHTML = navLinks.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                navToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            });
-        });
-
-        // Create Floating Particles
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = 50;
-        
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            
-            // Random size between 1px and 4px
-            const size = Math.random() * 3 + 1;
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            
-            // Random position
-            particle.style.left = `${Math.random() * 100}vw`;
-            particle.style.top = `${Math.random() * 100}vh`;
-            
-            // Random color variation
-            const colorVariation = Math.random() * 40 - 20;
-            particle.style.backgroundColor = `rgb(${77 + colorVariation}, ${166 + colorVariation}, 255)`;
-            
-            // Random opacity
-            particle.style.opacity = Math.random() * 0.5 + 0.2;
-            
-            // Animation
-            const duration = Math.random() * 20 + 10;
-            const delay = Math.random() * 5;
-            
-            particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
-            
-            particlesContainer.appendChild(particle);
-        }
-
-        // Add floating animation
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes float {
-                0%, 100% { transform: translate(0, 0) rotate(0deg); }
-                25% { transform: translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px) rotate(${Math.random() * 10 - 5}deg); }
-                50% { transform: translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px) rotate(${Math.random() * 10 - 5}deg); }
-                75% { transform: translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px) rotate(${Math.random() * 10 - 5}deg); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Card hover effect enhancement
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.zIndex = '10';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.zIndex = '1';
-            });
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+        <!-- Events Timeline -->
+        <section id="events">
+            <h2 class="section-title">Jadwal Kegiatan</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">25 Maret 2023</div>
+                    <h3 class="timeline-title">Lomba Poster Digital</h3>
+                    <p class="timeline-desc">Lomba membuat poster
