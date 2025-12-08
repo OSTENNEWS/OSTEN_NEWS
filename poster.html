@@ -2,175 +2,1376 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Artikel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Poster | OSTENNEWS+</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
+        :root {
+            --primary: #4da6ff;
+            --primary-dark: #0d8af5;
+            --secondary: #77e3ff;
+            --accent: #ff6b9d;
+            --dark-bg: #0a0e17;
+            --darker-bg: #070a12;
+            --card-bg: rgba(16, 20, 31, 0.9);
+            --border-color: rgba(77, 166, 255, 0.25);
+            --text: #e8f1ff;
+            --text-light: #a6c8ff;
+            --glow: 0 0 20px rgba(77, 166, 255, 0.5);
+            --cyber-blue: #00f7ff;
+            --hacker-green: #00ff9d;
+        }
+
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f7f7f7;
-            color: #222;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
-        header {
-            background: #0066ff;
-            color: white;
-            padding: 20px;
-            text-align: center;
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        nav {
-            background: #ffffff;
-            padding: 10px 20px;
+
+        body {
+            font-family: 'Rajdhani', 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(77, 166, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(255, 107, 157, 0.03) 0%, transparent 20%),
+                linear-gradient(180deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            min-height: 100vh;
+        }
+
+        /* Holographic Grid Effect */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(12, 222, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(12, 222, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            pointer-events: none;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        /* Terminal lines effect */
+        .terminal-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 255, 157, 0.05) 2px,
+                rgba(0, 255, 157, 0.05) 4px
+            );
+            pointer-events: none;
+        }
+
+        /* Navigation dengan efek cyber */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(11, 16, 28, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(77, 166, 255, 0.3);
+            z-index: 1000;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 
+                0 5px 20px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            font-family: 'Rajdhani', sans-serif;
         }
-        nav .logo {
-            font-size: 20px;
-            font-weight: bold;
-            color: #0066ff;
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-            margin: 0;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: #222;
+
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
             font-weight: 600;
+            background: linear-gradient(90deg, var(--cyber-blue), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            letter-spacing: 2px;
+            padding: 5px 0;
+            position: relative;
         }
-        .hero {
-            padding: 80px 20px;
+
+        .nav-logo::before {
+            content: '[';
+            color: var(--cyber-blue);
+            margin-right: 5px;
+        }
+
+        .nav-logo::after {
+            content: ']';
+            color: var(--cyber-blue);
+            margin-left: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 8px 15px;
+            position: relative;
+            transition: all 0.3s;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid transparent;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(77, 166, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+
+        .nav-links a:hover::before {
+            transform: translateX(100%);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: white;
+            border-color: rgba(77, 166, 255, 0.5);
+            box-shadow: 0 0 15px rgba(77, 166, 255, 0.3);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--cyber-blue);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            width: 44px;
+            height: 44px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-toggle:hover {
+            background: rgba(77, 166, 255, 0.1);
+            box-shadow: 0 0 15px rgba(77, 166, 255, 0.3);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: rgba(11, 16, 28, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 9999;
+            padding: 90px 30px 30px;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 1px solid var(--border-color);
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-links {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .mobile-links li {
+            margin-bottom: 10px;
+        }
+
+        .mobile-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 12px 15px;
+            display: block;
+            border: 1px solid transparent;
+            border-left: 3px solid var(--cyber-blue);
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mobile-links a:hover,
+        .mobile-links a.active {
+            color: white;
+            border-color: var(--cyber-blue);
+            background: rgba(77, 166, 255, 0.1);
+            padding-left: 20px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 700;
             text-align: center;
-            background: linear-gradient(to right, #e3f0ff, #f0f8ff);
+            margin-bottom: 4rem;
+            color: white;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        .hero h1 {
-            font-size: 38px;
-            margin-bottom: 15px;
+
+        .section-title::before {
+            content: '[ ';
+            color: var(--cyber-blue);
         }
-        .hero p {
-            font-size: 18px;
-            max-width: 650px;
-            margin: auto;
+
+        .section-title::after {
+            content: ' ]';
+            color: var(--cyber-blue);
         }
+
+        .section-title span {
+            background: linear-gradient(90deg, var(--cyber-blue), var(--hacker-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Hero Section */
+        .poster-hero {
+            padding-top: 140px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(0, 247, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(0, 255, 157, 0.1) 0%, transparent 50%),
+                linear-gradient(45deg, rgba(10, 14, 23, 0.9) 0%, rgba(20, 28, 46, 0.7) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 7vw, 4rem);
+            color: var(--cyber-blue);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 
+                0 0 30px rgba(0, 247, 255, 0.7),
+                0 0 60px rgba(0, 247, 255, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.5;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        /* Poster Grid Section */
         .poster-section {
-            padding: 40px 20px;
-            max-width: 1100px;
-            margin: auto;
+            padding: 80px 0;
         }
-        .poster-section h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 28px;
+
+        .filter-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
         }
+
+        .filter-btn {
+            padding: 12px 24px;
+            background: rgba(16, 20, 31, 0.6);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--cyber-blue), var(--hacker-green));
+            color: var(--dark-bg);
+            border-color: transparent;
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
         .poster-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
         }
+
+        /* Poster Item dengan efek sci-fi */
         .poster-item {
-            background: #fff;
-            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(16, 20, 31, 0.9) 0%, rgba(22, 28, 44, 0.9) 100%);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
             overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
-        .poster-item img {
+
+        .poster-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 180px;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 247, 255, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+
+        .poster-item:hover::before {
+            opacity: 1;
+        }
+
+        .poster-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(0, 247, 255, 0.5);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.5),
+                0 0 30px rgba(0, 247, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .poster-image-container {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .poster-image {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+            filter: brightness(0.9) contrast(1.1);
         }
-        .poster-item p {
-            padding: 15px;
-            font-size: 14px;
+
+        .poster-item:hover .poster-image {
+            transform: scale(1.08);
+            filter: brightness(1) contrast(1.2);
         }
-      
-.button-7 {
-  background-color: #0095ff;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.15385;
-  margin: 0;
-  outline: none;
-  padding: 8px .8em;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: baseline;
-  white-space: nowrap;
-}
 
-.button-7:hover,
-.button-7:focus {
-  background-color: #07c;
-}
+        .poster-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 247, 255, 0.9);
+            color: var(--dark-bg);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
 
-.button-7:focus {
-  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
-}
+        .poster-content {
+            padding: 25px;
+        }
 
-.button-7:active {
-  background-color: #0064bd;
-  box-shadow: none;
-}
+        .poster-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.3;
+        }
+
+        .poster-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .poster-date {
+            color: var(--hacker-green);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .poster-date i {
+            font-size: 0.9rem;
+        }
+
+        /* Button dengan efek cyber */
+        .poster-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--cyber-blue), var(--hacker-green));
+            color: var(--dark-bg);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            font-size: 0.95rem;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .poster-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
+        }
+
+        .poster-btn:hover::before {
+            left: 100%;
+        }
+
+        .poster-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(0, 247, 255, 0.5);
+            color: var(--dark-bg);
+        }
+
+        .poster-btn:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(16, 20, 31, 0.5);
+            border-radius: 15px;
+            border: 2px dashed var(--border-color);
+            margin-top: 30px;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            color: var(--cyber-blue);
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .empty-text {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .empty-subtext {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            opacity: 0.7;
+            max-width: 500px;
+            margin: 0 auto;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        /* Footer */
+        .main-footer {
+            background: linear-gradient(180deg, rgba(7, 10, 18, 0.95) 0%, rgba(11, 16, 28, 0.95) 100%);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 0 30px;
+            margin-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--cyber-blue), transparent);
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--cyber-blue), var(--hacker-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
+        }
+
+        .footer-text {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 1rem;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .footer-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.8rem;
+            color: var(--cyber-blue);
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--hacker-green);
+            box-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .footer-links li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--hacker-green);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1rem;
+            font-family: 'Rajdhani', sans-serif;
+            display: inline-block;
+            padding: 3px 0;
+        }
+
+        .footer-links a:hover {
+            color: var(--cyber-blue);
+            transform: translateX(5px);
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+        }
+
+        .contact-info {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1rem;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-info i {
+            color: var(--cyber-blue);
+            margin-right: 12px;
+            width: 20px;
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(77, 166, 255, 0.2);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .nav-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
+            
+            .poster-hero {
+                padding-top: 120px;
+            }
+            
+            .poster-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .filter-controls {
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
+            
+            .hero-title {
+                font-size: clamp(2rem, 6vw, 3rem);
+            }
+            
+            .footer-content {
+                gap: 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .poster-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .mobile-menu {
+                width: 100%;
+            }
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            background: rgba(11, 16, 28, 0.9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cyber-blue);
+            font-size: 1.3rem;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.9);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .back-to-top:hover {
+            color: white;
+            background: var(--cyber-blue);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 247, 255, 0.4);
+        }
+
+        /* Scroll Progress Indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cyber-blue), var(--hacker-green));
+            z-index: 1001;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+        }
     </style>
 </head>
-<body>
-    <header>
-        <h1>Selamat Datang di POSTER INFORMATIF</h1>
-    </header>
 
-    <nav>
-        <div class="logo">OSTENNEWS+</div>
-        <ul>
+<body>
+    <!-- Holographic Grid Background -->
+    <div class="grid-overlay"></div>
+    
+    <!-- Terminal Lines Effect -->
+    <div class="terminal-lines"></div>
+    
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <ul class="mobile-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="artikel.html">Artikel</a></li>
-            <li><a href="#poster">Poster</a></li>
-            <li><a href="Dekumentasi.html">Dekumentasi</a></li>
+            <li><a href="#poster" class="active">Poster</a></li>
+            <li><a href="Dekumentasi.html">Dokumentasi</a></li>
+            <li><a href="Credit.html">Credits</a></li>
+        </ul>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="main-nav" id="nav">
+        <a href="index.html" class="nav-logo">OSTENNEWS+</a>
+        <button class="nav-toggle" id="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="artikel.html">Artikel</a></li>
+            <li><a href="#poster" class="active">Poster</a></li>
+            <li><a href="Dekumentasi.html">Dokumentasi</a></li>
+            <li><a href="Credit.html">Credits</a></li>
         </ul>
     </nav>
 
-    <section class="hero" id="home">
-        <h1>Tempat Poster yang informatif dan Menarik</h1>
-        <p>Membawa pandangan baru, inspirasi, dan edukasi melalui tulisan yang mudah dipahami.</p>
-    </section>
-
-    <section class="poster-section" id="poster">
-        <h2>Koleksi Poster Edukatif</h2>
-        <div class="poster-grid">
-            <div class="poster-item">
-                <img src="jufufu.jpg" alt="Poster 1" />
-                <p>Poster Hari Guru </p>
-                 <a href="https://drive.google.com/file/d/1NFVry7qR1IZHahuE1-GyI2LlPYpwdc1V/view">
-                   <button class="button-7" role="button">Buka Poster </button>
-                     </a>
-            </div>
-               <div class="poster-item">
-<img src="pahlawan.png" />
-<p>Poster Hari pahlawan.</p>
-                    <a href="https://drive.google.com/file/d/1NFVry7qR1IZHahuE1-GyI2LlPYpwdc1V/view">
-                   <button class="button-7" role="button">Buka Poster </button>
-                     </a>
-</div>
-<div class="poster-item">
-<img src="https://via.placeholder.com/300x180" alt="Poster 3" />
-<p>ON GOING</p>
-</div>
-
-      
+    <!-- Hero Section -->
+    <section class="poster-hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">POSTER INFORMATIF</h1>
+            <h2 class="hero-subtitle">Visual Edukasi Masa Depan</h2>
+            <p class="hero-description">
+                Koleksi poster edukatif dengan desain futuristik yang membawa inspirasi, 
+                informasi, dan pandangan baru melalui visual yang memukau dan mudah dipahami.
+            </p>
         </div>
     </section>
+
+    <!-- Poster Grid Section -->
+    <section class="poster-section" id="poster">
+        <div class="container">
+            <h2 class="section-title"><span>Koleksi Poster</span></h2>
+            
+            <!-- Filter Controls -->
+            <div class="filter-controls">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="pendidikan">Pendidikan</button>
+                <button class="filter-btn" data-filter="event">Event Sekolah</button>
+                <button class="filter-btn" data-filter="informasi">Informasi</button>
+                <button class="filter-btn" data-filter="inspirasi">Inspirasi</button>
+            </div>
+            
+            <!-- Poster Grid -->
+            <div class="poster-grid" id="poster-grid">
+                <!-- 
+                    CARA MENAMBAHKAN POSTER BARU:
+                    
+                    1. Copy template di bawah ini
+                    2. Paste dalam div#poster-grid
+                    3. Isi data sesuai kebutuhan
+                    
+                    Template:
+                    <div class="poster-item" data-category="[kategori]">
+                        <div class="poster-image-container">
+                            <span class="poster-category">[Kategori]</span>
+                            <img src="[URL_GAMBAR]" alt="[DESKRIPSI]" class="poster-image">
+                        </div>
+                        <div class="poster-content">
+                            <h3 class="poster-title">[JUDUL_POSTER]</h3>
+                            <p class="poster-description">[DESKRIPSI_SINGKAT]</p>
+                            <div class="poster-date">
+                                <i class="far fa-calendar-alt"></i>
+                                [TANGGAL]
+                            </div>
+                            <a href="[LINK_POSTER]" target="_blank" class="poster-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                                Lihat Poster
+                            </a>
+                        </div>
+                    </div>
+                -->
+                
+                <!-- Poster 1: Hari Guru -->
+                <div class="poster-item" data-category="event">
+                    <div class="poster-image-container">
+                        <span class="poster-category">Event</span>
+                        <img src="jufufu.jpg" alt="Poster Hari Guru" class="poster-image">
+                    </div>
+                    <div class="poster-content">
+                        <h3 class="poster-title">Hari Guru Nasional</h3>
+                        <p class="poster-description">Poster peringatan Hari Guru dengan tema "Guru Penggerak, Indonesia Maju".</p>
+                        <div class="poster-date">
+                            <i class="far fa-calendar-alt"></i>
+                            25 November 2025
+                        </div>
+                        <a href="https://drive.google.com/file/d/1NFVry7qR1IZHahuE1-GyI2LlPYpwdc1V/view" target="_blank" class="poster-btn">
+                            <i class="fas fa-external-link-alt"></i>
+                            Lihat Poster
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Poster 2: Hari Pahlawan -->
+                <div class="poster-item" data-category="inspirasi">
+                    <div class="poster-image-container">
+                        <span class="poster-category">Inspirasi</span>
+                        <img src="pahlawan.png" alt="Poster Hari Pahlawan" class="poster-image">
+                    </div>
+                    <div class="poster-content">
+                        <h3 class="poster-title">Hari Pahlawan</h3>
+                        <p class="poster-description">Poster peringatan Hari Pahlawan dengan pesan kepahlawanan masa kini.</p>
+                        <div class="poster-date">
+                            <i class="far fa-calendar-alt"></i>
+                            10 November 2025
+                        </div>
+                        <a href="https://drive.google.com/file/d/1NFVry7qR1IZHahuE1-GyI2LlPYpwdc1V/view" target="_blank" class="poster-btn">
+                            <i class="fas fa-external-link-alt"></i>
+                            Lihat Poster
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Poster 3: Literasi Digital -->
+                <div class="poster-item" data-category="pendidikan">
+                    <div class="poster-image-container">
+                        <span class="poster-category">Pendidikan</span>
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Poster Literasi Digital" class="poster-image">
+                    </div>
+                    <div class="poster-content">
+                        <h3 class="poster-title">Literasi Digital</h3>
+                        <p class="poster-description">Poster edukasi tentang pentingnya literasi digital di era teknologi.</p>
+                        <div class="poster-date">
+                            <i class="far fa-calendar-alt"></i>
+                            Desember 2025
+                        </div>
+                        <a href="https://drive.google.com" target="_blank" class="poster-btn">
+                            <i class="fas fa-external-link-alt"></i>
+                            Lihat Poster
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Poster 4: OSIS Announcement -->
+                <div class="poster-item" data-category="informasi">
+                    <div class="poster-image-container">
+                        <span class="poster-category">Informasi</span>
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pengumuman OSIS" class="poster-image">
+                    </div>
+                    <div class="poster-content">
+                        <h3 class="poster-title">Pengumuman OSIS</h3>
+                        <p class="poster-description">Poster pengumuman kegiatan OSIS periode Desember 2025.</p>
+                        <div class="poster-date">
+                            <i class="far fa-calendar-alt"></i>
+                            1 Desember 2025
+                        </div>
+                        <a href="https://drive.google.com" target="_blank" class="poster-btn">
+                            <i class="fas fa-external-link-alt"></i>
+                            Lihat Poster
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Poster 5: Anti Bullying -->
+                <div class="poster-item" data-category="inspirasi">
+                    <div class="poster-image-container">
+                        <span class="poster-category">Inspirasi</span>
+                        <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Anti Bullying Campaign" class="poster-image">
+                    </div>
+                    <div class="poster-content">
+                        <h3 class="poster-title">Stop Bullying</h3>
+                        <p class="poster-description">Kampanye anti bullying dengan pesan toleransi dan empati.</p>
+                        <div class="poster-date">
+                            <i class="far fa-calendar-alt"></i>
+                            November 2025
+                        </div>
+                        <a href="https://drive.google.com" target="_blank" class="poster-btn">
+                            <i class="fas fa-external-link-alt"></i>
+                            Lihat Poster
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Poster 6: Event Sekolah -->
+                <div class="poster-item" data-category="event">
+                    <div class="poster-image-container">
+                        <span class="poster-category">Event</span>
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event Sekolah" class="poster-image">
+                    </div>
+                    <div class="poster-content">
+                        <h3 class="poster-title">Science Fair 2025</h3>
+                        <p class="poster-description">Poster kegiatan pameran sains tahunan sekolah.</p>
+                        <div class="poster-date">
+                            <i class="far fa-calendar-alt"></i>
+                            15 Desember 2025
+                        </div>
+                        <a href="https://drive.google.com" target="_blank" class="poster-btn">
+                            <i class="fas fa-external-link-alt"></i>
+                            Lihat Poster
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Template untuk poster baru (contoh, bisa dihapus) -->
+                <!--
+                <div class="poster-item" data-category="pendidikan">
+                    <div class="poster-image-container">
+                        <span class="poster-category">Pendidikan</span>
+                        <img src="URL_GAMBAR" alt="DESKRIPSI" class="poster-image">
+                    </div>
+                    <div class="poster-content">
+                        <h3 class="poster-title">JUDUL_POSTER</h3>
+                        <p class="poster-description">DESKRIPSI_SINGKAT_POSTER.</p>
+                        <div class="poster-date">
+                            <i class="far fa-calendar-alt"></i>
+                            TANGGAL
+                        </div>
+                        <a href="LINK_POSTER" target="_blank" class="poster-btn">
+                            <i class="fas fa-external-link-alt"></i>
+                            Lihat Poster
+                        </a>
+                    </div>
+                </div>
+                -->
+                
+            </div>
+            
+            <!-- Empty State (akan muncul jika tidak ada poster) -->
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <div class="empty-icon">
+                    <i class="fas fa-images"></i>
+                </div>
+                <h3 class="empty-text">Tidak Ada Poster</h3>
+                <p class="empty-subtext">
+                    Belum ada poster yang tersedia untuk kategori ini. 
+                    Poster baru akan segera ditambahkan.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3 class="footer-logo">OSTENNEWS+</h3>
+                    <p class="footer-text">Media publikasi resmi OSIS Seksi Bidang 9. Menyajikan poster edukatif dengan desain futuristik untuk seluruh warga sekolah.</p>
+                </div>
+                
+                <div class="footer-links-container">
+                    <h4 class="footer-title">Menu Cepat</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="artikel.html">Artikel</a></li>
+                        <li><a href="#poster">Poster</a></li>
+                        <li><a href="Dekumentasi.html">Dokumentasi</a></li>
+                        <li><a href="Credit.html">Credits</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4 class="footer-title">Kontak & Bantuan</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> ostennews@osis.sch.id</p>
+                        <p><i class="fas fa-phone"></i> +62 888-8547-368</p>
+                        <p><i class="fas fa-map-marker-alt"></i> SMKN 10 SURABAYA</p>
+                        <p>Jika menemui kendala atau ingin menambahkan poster, hubungi kami.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 OSTENNEWS+. All rights reserved. | Media Publikasi OSIS Seksi Bidang 9</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sound Effects -->
+    <audio id="hover-sound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-hover-sci-fi-909.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="click-sound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="ui-sound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-sci-fi-interface-902.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Sound Effects Management
+        const sounds = {
+            hover: document.getElementById('hover-sound'),
+            click: document.getElementById('click-sound'),
+            ui: document.getElementById('ui-sound')
+        };
+
+        // Mengatur volume sound effects
+        Object.values(sounds).forEach(sound => {
+            if (sound) sound.volume = 0.3;
+        });
+
+        // Play sound function dengan error handling
+        function playSound(soundName) {
+            try {
+                const sound = sounds[soundName];
+                if (sound) {
+                    sound.currentTime = 0;
+                    sound.play().catch(e => console.log("Audio play failed:", e));
+                }
+            } catch (e) {
+                console.log("Sound error:", e);
+            }
+        }
+
+        // Mobile Menu Toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileOverlay = document.getElementById('mobile-menu-overlay');
+        
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+            playSound('ui');
+        }
+        
+        if (navToggle) {
+            navToggle.addEventListener('click', toggleMobileMenu);
+        }
+        
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', toggleMobileMenu);
+        }
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-links a').forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const posterItems = document.querySelectorAll('.poster-item');
+        const posterGrid = document.getElementById('poster-grid');
+        const emptyState = document.getElementById('empty-state');
+        
+        function filterPosters(category) {
+            let hasVisibleItems = false;
+            
+            posterItems.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                    hasVisibleItems = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Show/hide empty state
+            if (hasVisibleItems) {
+                emptyState.style.display = 'none';
+            } else {
+                emptyState.style.display = 'block';
+            }
+        }
+        
+        // Add event listeners to filter buttons
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Filter posters
+                const category = this.getAttribute('data-filter');
+                filterPosters(category);
+                
+                // Play sound
+                playSound('click');
+            });
+        });
+
+        // Add hover sound to interactive elements
+        const interactiveElements = document.querySelectorAll('.poster-btn, .filter-btn, .poster-item, .nav-links a');
+        
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                playSound('hover');
+            });
+            
+            element.addEventListener('click', () => {
+                playSound('click');
+            });
+        });
+
+        // Scroll Progress Indicator
+        const scrollProgress = document.getElementById('scroll-progress');
+        
+        function updateScrollProgress() {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            if (scrollProgress) {
+                scrollProgress.style.width = scrolled + '%';
+            }
+        }
+        
+        // Back to Top Button
+        const backToTop = document.getElementById('back-to-top');
+        
+        function toggleBackToTop() {
+            if (backToTop) {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+        }
+        
+        if (backToTop) {
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                playSound('click');
+            });
+        }
+        
+        // Update scroll progress and back to top button
+        window.addEventListener('scroll', function() {
+            updateScrollProgress();
+            toggleBackToTop();
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial filter
+            filterPosters('all');
+            
+            // Update scroll indicators
+            updateScrollProgress();
+            toggleBackToTop();
+            
+            // Add animation to poster items on load
+            posterItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Escape to close mobile menu
+            if (e.code === 'Escape' && mobileMenu.classList.contains('active')) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroContent = document.querySelector('.hero-content');
+            
+            if (heroContent) {
+                const speed = 0.5;
+                const yPos = -(scrolled * speed);
+                heroContent.style.transform = `translateY(${yPos}px)`;
+            }
+        });
+    </script>
 </body>
 </html>
