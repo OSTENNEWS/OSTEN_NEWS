@@ -1,140 +1,1207 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dokumentasi Kegiatan</title>
-  <style>
-    body{
-      margin:0;
-      font-family:Arial, sans-serif;
-      background:#f4f6f8;
-    }
-    header{
-      background:#2b6cb0;
-      color:white;
-      padding:20px;
-      text-align:center;
-      font-size:1.5rem;
-    }
-    .container{
-      max-width:1000px;
-      margin:20px auto;
-      padding:10px;
-    }
-    .controls{
-      display:flex;
-      gap:10px;
-      margin-bottom:20px;
-    }
-    select, input{
-      padding:10px;
-      border-radius:8px;
-      border:1px solid #ccc;
-      flex:1;
-    }
-    .card{
-      background:white;
-      border-radius:12px;
-      padding:15px;
-      margin-bottom:20px;
-      box-shadow:0 3px 8px rgba(0,0,0,0.08);
-    }
-    .card img{
-      width:100%;
-      border-radius:8px;
-    }
-    .btn{
-      display:inline-block;
-      margin-top:10px;
-      padding:10px 14px;
-      background:#2b6cb0;
-      color:white;
-      border-radius:6px;
-      text-decoration:none;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Dokumentasi | OSTENNEWS+</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5d9eff;
+            --primary-light: #8abaff;
+            --secondary: #85d7ff;
+            --accent: #ff85a2;
+            --bg-light: #f8faff;
+            --bg-white: #ffffff;
+            --bg-card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #6c7a92;
+            --border: #e1e8f0;
+            --shadow: rgba(149, 157, 165, 0.1);
+            --hover-shadow: rgba(93, 158, 255, 0.15);
+            --gradient: linear-gradient(135deg, #5d9eff 0%, #85d7ff 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .main-nav {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px var(--shadow);
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-logo i {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 8px 0;
+            position: relative;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+            border-radius: 1px;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--primary);
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 8px;
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-toggle:hover {
+            background: rgba(93, 158, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: var(--bg-white);
+            z-index: 1000;
+            padding: 80px 25px 25px;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 25px var(--shadow);
+            border-left: 1px solid var(--border);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-links {
+            list-style: none;
+        }
+
+        .mobile-links li {
+            margin-bottom: 12px;
+        }
+
+        .mobile-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 12px 15px;
+            display: block;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mobile-links a:hover,
+        .mobile-links a.active {
+            background: rgba(93, 158, 255, 0.1);
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 80px 0 50px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--text-light);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .filter-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-title i {
+            color: var(--primary);
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .filter-select,
+        .search-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--text);
+            background: var(--bg-white);
+            transition: all 0.3s;
+        }
+
+        .filter-select:focus,
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(93, 158, 255, 0.1);
+        }
+
+        .search-input-container {
+            position: relative;
+            flex: 2;
+            min-width: 250px;
+        }
+
+        .search-input {
+            padding-left: 45px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            pointer-events: none;
+        }
+
+        /* Documentation Grid */
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        /* Documentation Card */
+        .doc-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .doc-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px var(--hover-shadow);
+            border-color: var(--primary-light);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gradient);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(93, 158, 255, 0.3);
+        }
+
+        .card-image-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .doc-card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 22px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .card-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+        }
+
+        .card-date {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-date i {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        /* Button */
+        .card-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            min-width: 140px;
+        }
+
+        .card-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(93, 158, 255, 0.3);
+            color: white;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--bg-white);
+            border-radius: 16px;
+            border: 2px dashed var(--border);
+            margin: 40px 0;
+        }
+
+        .empty-icon {
+            font-size: 3.5rem;
+            color: var(--primary-light);
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .empty-title {
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .empty-text {
+            color: var(--text-light);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .main-footer {
+            background: var(--bg-white);
+            border-top: 1px solid var(--border);
+            padding: 50px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-text {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .footer-links a i {
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+
+        .contact-info {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .contact-info p {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .contact-info i {
+            color: var(--primary);
+            margin-top: 3px;
+            width: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--bg-white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px var(--shadow);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .nav-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .hero-section {
+                padding: 60px 0 40px;
+            }
+            
+            .hero-stats {
+                gap: 30px;
+            }
+            
+            .stat-number {
+                font-size: 1.8rem;
+            }
+            
+            .filter-controls {
+                flex-direction: column;
+            }
+            
+            .filter-group,
+            .search-input-container {
+                min-width: 100%;
+            }
+            
+            .docs-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .footer-content {
+                gap: 30px;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-nav {
+                padding: 15px 20px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .docs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-image-container {
+                height: 180px;
+            }
+            
+            .mobile-menu {
+                width: 100%;
+            }
+        }
+
+        /* Animation for card appearance */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .doc-card {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+    </style>
 </head>
+
 <body>
-  <header>Dokumentasi Sekolah</header>
+    <!-- Navigation -->
+    <nav class="main-nav" id="nav">
+        <a href="index.html" class="nav-logo">
+            <i class="fas fa-newspaper"></i>
+            OSTENNEWS+
+        </a>
+        <button class="nav-toggle" id="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="artikel.html"><i class="fas fa-newspaper"></i> Artikel</a></li>
+            <li><a href="poster.html"><i class="fas fa-image"></i> Poster</a></li>
+            <li><a href="#dokumentasi" class="active"><i class="fas fa-camera"></i> Dokumentasi</a></li>
+            <li><a href="Credit.html"><i class="fas fa-users"></i> Credits</a></li>
+        </ul>
+    </nav>
 
-  <div class="container">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <ul class="mobile-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="artikel.html"><i class="fas fa-newspaper"></i> Artikel</a></li>
+            <li><a href="poster.html"><i class="fas fa-image"></i> Poster</a></li>
+            <li><a href="#dokumentasi" class="active"><i class="fas fa-camera"></i> Dokumentasi</a></li>
+            <li><a href="Credit.html"><i class="fas fa-users"></i> Credits</a></li>
+        </ul>
+    </div>
 
-    <div class="controls">
-      <select id="kategoriFilter">
-        <option value="semua" selected>Semua Kategori</option>
-        <option value="Apel">Apel</option>
-        <option value="Upacara">Upacara</option>
-        <option value="event">Event</option>
-         <option value="sosial">Sosial</option>
+    <!-- Hero Section -->
+    <section class="hero-section" id="dokumentasi">
+        <div class="container">
+            <h1 class="hero-title">Dokumentasi Kegiatan</h1>
+            <p class="hero-subtitle">
+                Arsip lengkap dokumentasi kegiatan sekolah, event, dan momen berharga yang 
+                mencatat perjalanan pendidikan di SMKN 10 Surabaya
+            </p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="total-docs">15+</div>
+                    <div class="stat-label">Kegiatan Tercatat</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="total-photos">200+</div>
+                    <div class="stat-label">Foto Dokumentasi</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="active-categories">5+</div>
+                    <div class="stat-label">Kategori Kegiatan</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <h2 class="filter-title">
+                <i class="fas fa-filter"></i>
+                Filter Dokumentasi
+            </h2>
+            
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label class="filter-label" for="categoryFilter">
+                        <i class="fas fa-folder"></i> Kategori Kegiatan
+                    </label>
+                    <select class="filter-select" id="categoryFilter">
+                        <option value="semua">Semua Kategori</option>
+                        <option value="apel">Apel</option>
+                        <option value="upacara">Upacara</option>
+                        <option value="event">Event</option>
+                        <option value="sosial">Sosial</option>
+                        <option value="lainnya">Lainnya</option>
+                    </select>
+                </div>
+                
+                <div class="search-input-container">
+                    <label class="filter-label" for="searchBox">
+                        <i class="fas fa-search"></i> Cari Dokumentasi
+                    </label>
+                    <div class="search-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="searchBox" 
+                        placeholder="Cari berdasarkan judul atau deskripsi..."
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Grid -->
+    <section class="docs-section">
+        <div class="container">
+            <div class="docs-grid" id="docsContainer">
+                
+                <!-- 
+                    TEMPLATE UNTUK MENAMBAHKAN DOKUMENTASI BARU:
+                    
+                    Copy kode di bawah ini dan paste dalam div#docsContainer
+                    Isi data sesuai dengan dokumentasi yang ingin ditambahkan
+                    
+                    Cara penggunaan:
+                    1. Ganti [GAMBAR] dengan URL gambar (contoh: "guru.jpeg")
+                    2. Ganti [JUDUL] dengan judul kegiatan
+                    3. Ganti [DESKRIPSI] dengan deskripsi singkat
+                    4. Ganti [KATEGORI] dengan kategori (apel/upacara/event/sosial/lainnya)
+                    5. Ganti [TANGGAL] dengan tanggal kegiatan
+                    6. Ganti [LINK] dengan link Google Drive/URL dokumentasi
+                -->
+                
+                <!-- Dokumentasi 1: Hari Guru -->
+                <div class="doc-card" data-category="apel">
+                    <div class="card-badge">Apel</div>
+                    <div class="card-image-container">
+                        <img src="guru.jpeg" alt="Apel Pagi Hari Guru" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Apel Pagi Hari Guru</h3>
+                        <p class="card-description">
+                            Pelaksanaan apel pagi dalam rangka memperingati Hari Guru Nasional 2025.
+                            Kegiatan diikuti oleh seluruh siswa dan guru SMKN 10 Surabaya.
+                        </p>
+                        <div class="card-meta">
+                            <div class="card-date">
+                                <i class="far fa-calendar-alt"></i>
+                                25 November 2025
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1y-ogjD3vQPoz896zgbg7xSF14nuH8big" 
+                               target="_blank" 
+                               class="card-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                                Lihat Dokumentasi
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dokumentasi 2: Apel Hari Senin -->
+                <div class="doc-card" data-category="apel">
+                    <div class="card-badge">Apel</div>
+                    <div class="card-image-container">
+                        <img src="17nov25.jpeg" alt="Apel Hari Senin" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Apel Hari Senin 17 November 2025</h3>
+                        <p class="card-description">
+                            Kegiatan apel pagi rutin hari Senin dengan pembinaan karakter siswa 
+                            dan pengumuman kegiatan mingguan sekolah.
+                        </p>
+                        <div class="card-meta">
+                            <div class="card-date">
+                                <i class="far fa-calendar-alt"></i>
+                                17 November 2025
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/17y4trW_fsLW2IPzll52ZJ2-iqahtoQo-" 
+                               target="_blank" 
+                               class="card-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                                Lihat Dokumentasi
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dokumentasi 3: Hari Pahlawan -->
+                <div class="doc-card" data-category="event">
+                    <div class="card-badge">Event</div>
+                    <div class="card-image-container">
+                        <img src="pahlawan.jpeg" alt="Hari Pahlawan" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Hari Pahlawan 2025: Action for Heroes</h3>
+                        <p class="card-description">
+                            Perayaan Hari Pahlawan dengan tema "Action for Heroes". 
+                            Kegiatan meliputi upacara, pentas seni, dan lomba-lomba bertema kepahlawanan.
+                        </p>
+                        <div class="card-meta">
+                            <div class="card-date">
+                                <i class="far fa-calendar-alt"></i>
+                                7 November 2025
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1YYDc9hrnZ0o96b1ckejM8E5SNS6Qcnpu" 
+                               target="_blank" 
+                               class="card-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                                Lihat Dokumentasi
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dokumentasi 4: Talkshow SEHATI -->
+                <div class="doc-card" data-category="sosial">
+                    <div class="card-badge">Sosial</div>
+                    <div class="card-image-container">
+                        <img src="Sehati.jpeg" alt="Talkshow SEHATI JATIM" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Talkshow Kesehatan & Peluncuran SEHATI JATIM</h3>
+                        <p class="card-description">
+                            Kegiatan sosialisasi kesehatan dan peluncuran program SEHATI JATIM 
+                            yang diikuti oleh perwakilan OSIS SMKN 10 Surabaya.
+                        </p>
+                        <div class="card-meta">
+                            <div class="card-date">
+                                <i class="far fa-calendar-alt"></i>
+                                Oktober 2025
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1pPryuVF0gEpa-HUkpgjw8sV8asH9aZB0" 
+                               target="_blank" 
+                               class="card-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                                Lihat Dokumentasi
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dokumentasi 5: Kunjungan Pelindo -->
+                <div class="doc-card" data-category="sosial">
+                    <div class="card-badge">Sosial</div>
+                    <div class="card-image-container">
+                        <img src="Pelindo.jpeg" alt="Kunjungan Pelindo" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Kunjungan & Sosialisasi Pelindo</h3>
+                        <p class="card-description">
+                            Kegiatan kunjungan dan sosialisasi dari Pelindo yang diikuti 
+                            oleh OSIS dan perwakilan jurusan di SMKN 10 Surabaya.
+                        </p>
+                        <div class="card-meta">
+                            <div class="card-date">
+                                <i class="far fa-calendar-alt"></i>
+                                Oktober 2025
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1_3AALo6yi99-I4Xrx8eYLOE2OMzQaXfc" 
+                               target="_blank" 
+                               class="card-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                                Lihat Dokumentasi
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 
+                    TEMPLATE KOSONG untuk dokumentasi baru:
+                    
+                <div class="doc-card" data-category="[KATEGORI]">
+                    <div class="card-badge">[KATEGORI]</div>
+                    <div class="card-image-container">
+                        <img src="[GAMBAR]" alt="[JUDUL]" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">[JUDUL]</h3>
+                        <p class="card-description">
+                            [DESKRIPSI]
+                        </p>
+                        <div class="card-meta">
+                            <div class="card-date">
+                                <i class="far fa-calendar-alt"></i>
+                                [TANGGAL]
+                            </div>
+                            <a href="[LINK]" 
+                               target="_blank" 
+                               class="card-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                                Lihat Dokumentasi
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                -->
+                
+            </div>
+            
+            <!-- Empty State (akan muncul jika tidak ada hasil filter) -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="empty-icon">
+                    <i class="fas fa-images"></i>
+                </div>
+                <h3 class="empty-title">Tidak Ditemukan</h3>
+                <p class="empty-text">
+                    Tidak ada dokumentasi yang sesuai dengan filter yang dipilih. 
+                    Coba gunakan kata kunci lain atau pilih kategori yang berbeda.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3 class="footer-logo">
+                        <i class="fas fa-newspaper"></i>
+                        OSTENNEWS+
+                    </h3>
+                    <p class="footer-text">
+                        Media publikasi resmi OSIS Seksi Bidang 9 SMKN 10 Surabaya. 
+                        Menyajikan dokumentasi lengkap kegiatan sekolah dalam format modern dan mudah diakses.
+                    </p>
+                </div>
+                
+                <div class="footer-links-container">
+                    <h4 class="footer-title">Navigasi Cepat</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="artikel.html"><i class="fas fa-chevron-right"></i> Artikel</a></li>
+                        <li><a href="poster.html"><i class="fas fa-chevron-right"></i> Poster</a></li>
+                        <li><a href="#dokumentasi"><i class="fas fa-chevron-right"></i> Dokumentasi</a></li>
+                        <li><a href="Credit.html"><i class="fas fa-chevron-right"></i> Credits</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4 class="footer-title">Kontak & Dukungan</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> ostennews@osis.sch.id</p>
+                        <p><i class="fas fa-phone"></i> +62 888-8547-368</p>
+                        <p><i class="fas fa-map-marker-alt"></i> SMKN 10 Surabaya</p>
+                        <p><i class="fas fa-info-circle"></i> Laporkan masalah atau tambahkan dokumentasi baru</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 OSTENNEWS+. All rights reserved. | Media Publikasi OSIS Seksi Bidang 9</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // Mobile Menu Toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileOverlay = document.getElementById('mobile-menu-overlay');
         
-      </select>
-      <input type="text" id="searchBox" placeholder="Cari dokumentasi..." />
-    </div>
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+        }
+        
+        navToggle.addEventListener('click', toggleMobileMenu);
+        mobileOverlay.addEventListener('click', toggleMobileMenu);
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-links a').forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
 
-    <div id="dokContainer">
+        // Filter and Search Functionality
+        const categoryFilter = document.getElementById('categoryFilter');
+        const searchBox = document.getElementById('searchBox');
+        const docCards = document.querySelectorAll('.doc-card');
+        const emptyState = document.getElementById('emptyState');
+        const docsContainer = document.getElementById('docsContainer');
+        
+        function filterDocs() {
+            const category = categoryFilter.value.toLowerCase();
+            const searchTerm = searchBox.value.toLowerCase();
+            
+            let visibleCount = 0;
+            
+            docCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category').toLowerCase();
+                const cardText = card.innerText.toLowerCase();
+                
+                const matchesCategory = category === 'semua' || cardCategory === category;
+                const matchesSearch = searchTerm === '' || cardText.includes(searchTerm);
+                
+                if (matchesCategory && matchesSearch) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                    
+                    // Add animation
+                    card.style.animation = 'fadeInUp 0.5s ease forwards';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Show/hide empty state
+            if (visibleCount === 0) {
+                emptyState.style.display = 'block';
+                docsContainer.style.display = 'none';
+            } else {
+                emptyState.style.display = 'none';
+                docsContainer.style.display = 'grid';
+            }
+        }
+        
+        // Add event listeners
+        categoryFilter.addEventListener('change', filterDocs);
+        searchBox.addEventListener('keyup', filterDocs);
+        
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+        
+        function toggleBackToTop() {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        }
+        
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Update back to top button on scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial filter
+            filterDocs();
+            
+            // Initialize back to top button
+            toggleBackToTop();
+            
+            // Add hover effects to cards
+            docCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transition = 'all 0.3s ease';
+                });
+            });
+            
+            // Update stats (you can customize these numbers)
+            const totalDocs = docCards.length;
+            const totalPhotos = totalDocs * 15; // Example calculation
+            const categories = new Set(Array.from(docCards).map(card => card.getAttribute('data-category')));
+            
+            document.getElementById('total-docs').textContent = totalDocs + '+';
+            document.getElementById('total-photos').textContent = totalPhotos + '+';
+            document.getElementById('active-categories').textContent = categories.size + '+';
+        });
 
-      <!-- Contoh Card (bisa kamu duplikasi bebas) -->
-      <div class="card" data-kategori="Apel">
-        <img src="guru.jpeg" />
-        <h3>Dokumentasi Apel Pagi Hari guru</h3>
-        <p>Pelaksanaan apel pagi Hari guru.</p>
-        <a class="btn" href="https://drive.google.com/drive/folders/1y-ogjD3vQPoz896zgbg7xSF14nuH8big">Buka Dokumentasi</a>
-      </div>
-
-      <div class="card" data-kategori="Apel">
-        <img src="17nov25.jpeg" />
-        <h3>Apel Hari Senin 17 nov 2025</h3>
-        <p>Apel Pagi</p>
-        <a class="btn" href="https://drive.google.com/drive/folders/17y4trW_fsLW2IPzll52ZJ2-iqahtoQo-">Buka Dokumentasi</a>
-      </div>
-
-<div class="card" data-kategori="event">
-        <img src="pahlawan.jpeg" />
-        <h3>hari pahlawan Senin 7 nov 2025</h3>
-        <p>ACTION FOR HEROES</p>
-        <a class="btn" href="https://drive.google.com/drive/folders/1YYDc9hrnZ0o96b1ckejM8E5SNS6Qcnpu">Buka Dokumentasi</a>
-      </div>
-
- <div class="card" data-kategori="Sosial">
-        <img src="Sehati.jpeg" />
-        <h3>talkshow kesehatan dan peluncuran SEHATI JATIM</h3>
-        <p>kegiatan sosialisasi yang di ikuti osis SMKIN 10 SURABAYA</p>
-        <a class="btn" href="https://drive.google.com/drive/folders/1pPryuVF0gEpa-HUkpgjw8sV8asH9aZB0">Buka Dokumentasi</a>
-      </div>
-
-<div class="card" data-kategori="Sosial">
-        <img src="Pelindo.jpeg" />
-        <h3>Pelindo</h3>
-        <p>kegiatan sosialisasi yang di ikuti osis dan perwakilan Jurusan di SMKIN 10 SURABAYA</p>
-        <a class="btn" href="https://drive.google.com/drive/folders/1_3AALo6yi99-I4Xrx8eYLOE2OMzQaXfc">Buka Dokumentasi</a>
-      </div>
-      
-    </div>
-  </div>
-
-  <script>
-    const kategoriFilter = document.getElementById("kategoriFilter");
-    const searchBox = document.getElementById("searchBox");
-    const cards = document.querySelectorAll(".card");
-
-    function filterDok() {
-      const kategori = kategoriFilter.value.toLowerCase();
-      const search = searchBox.value.toLowerCase();
-
-      cards.forEach(card => {
-        const katCard = card.getAttribute("data-kategori").toLowerCase();
-        const teks = card.innerText.toLowerCase();
-
-        const cocokKategori = kategori === "semua" || katCard.includes(kategori);
-        const cocokSearch = teks.includes(search);
-
-        card.style.display = (cocokKategori && cocokSearch) ? "block" : "none";
-      });
-    }
-
-    kategoriFilter.addEventListener("change", filterDok);
-    searchBox.addEventListener("keyup", filterDok);
-  </script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
