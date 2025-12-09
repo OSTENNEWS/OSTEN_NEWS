@@ -1,1974 +1,992 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>OSTENNEWS+ | Media OSIS Seksi Bidang 9</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endfield Archives - Database Artikel Arknights Endfield</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4da6ff;
-            --primary-dark: #0d8af5;
-            --secondary: #77e3ff;
-            --accent: #ff6b9d;
-            --dark-bg: #0a0e17;
-            --darker-bg: #070a12;
-            --card-bg: rgba(16, 20, 31, 0.9);
-            --border-color: rgba(77, 166, 255, 0.25);
-            --text: #e8f1ff;
-            --text-light: #a6c8ff;
-            --glow: 0 0 20px rgba(77, 166, 255, 0.5);
-            --cyber-blue: #00f7ff;
-            --hacker-green: #00ff9d;
+            --primary-dark: #0a0e17;
+            --secondary-dark: #1a2332;
+            --accent-blue: #3a6bc9;
+            --accent-teal: #2aa198;
+            --accent-orange: #f57c00;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0aec0;
+            --ui-border: #2d3748;
+            --ui-highlight: #4a5568;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
-
-        html {
-            scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
+        
         body {
-            font-family: 'Rajdhani', 'Inter', sans-serif;
-            background: var(--dark-bg);
-            color: var(--text);
-            overflow-x: hidden;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-primary);
             line-height: 1.6;
+            overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 20% 30%, rgba(77, 166, 255, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 80% 70%, rgba(255, 107, 157, 0.03) 0%, transparent 20%),
-                linear-gradient(180deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
-            min-height: 100vh;
+                radial-gradient(circle at 10% 20%, rgba(58, 107, 201, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(42, 161, 152, 0.05) 0%, transparent 20%);
         }
-
-        /* Holographic Grid Effect */
-        .grid-overlay {
-            position: fixed;
+        
+        /* Header & Navigation */
+        .header {
+            background-color: rgba(10, 14, 23, 0.95);
+            border-bottom: 1px solid var(--ui-border);
+            padding: 1rem 0;
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(12, 222, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(12, 222, 255, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -2;
-            pointer-events: none;
-            animation: gridMove 20s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(50px); }
-        }
-
-        /* Loading Screen dengan efek Endfield */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0a0e17 0%, #111827 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-
-        .loading-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--cyber-blue), var(--hacker-green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 2rem;
-            letter-spacing: 4px;
-            position: relative;
-            text-shadow: 0 0 30px rgba(0, 247, 255, 0.5);
-        }
-
-        .loading-logo::after {
-            content: '+';
-            color: var(--accent);
-            font-size: 4.5rem;
-            position: absolute;
-            top: -15px;
-            right: -35px;
-            text-shadow: 0 0 20px rgba(255, 107, 157, 0.7);
-            animation: pulse 2s infinite;
-        }
-
-        .loading-bar-container {
-            width: 300px;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-bottom: 1.5rem;
-            position: relative;
-            border: 1px solid rgba(77, 166, 255, 0.3);
-        }
-
-        .loading-bar-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(77, 166, 255, 0.3) 50%, 
-                transparent 100%);
-            animation: shimmer 2s infinite;
-        }
-
-        .loading-progress {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--cyber-blue), var(--hacker-green));
-            border-radius: 3px;
-            transition: width 0.3s ease;
-            position: relative;
-            z-index: 2;
-        }
-
-        .loading-text {
-            color: var(--text-light);
-            font-size: 1rem;
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        /* Header dengan efek sci-fi */
-        .main-header {
-            position: relative;
-            height: 100vh;
-            min-height: 700px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            isolation: isolate;
-        }
-
-        .header-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 30% 40%, rgba(0, 247, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 60%, rgba(0, 255, 157, 0.1) 0%, transparent 50%),
-                linear-gradient(45deg, rgba(10, 14, 23, 0.9) 0%, rgba(20, 28, 46, 0.7) 100%);
-            z-index: -1;
-        }
-
-        /* Terminal lines effect */
-        .terminal-lines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.3;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(0, 255, 157, 0.05) 2px,
-                rgba(0, 255, 157, 0.05) 4px
-            );
-        }
-
-        .header-content {
-            text-align: center;
-            max-width: 900px;
-            padding: 0 20px;
-            z-index: 2;
-            position: relative;
-        }
-
-        .header-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--cyber-blue), var(--hacker-green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            text-shadow: 
-                0 0 30px rgba(0, 247, 255, 0.7),
-                0 0 60px rgba(0, 247, 255, 0.3);
-            position: relative;
-            display: inline-block;
-        }
-
-        .header-logo::after {
-            content: '+';
-            color: var(--accent);
-            font-size: clamp(3.5rem, 11vw, 7rem);
-            position: absolute;
-            top: -20px;
-            right: -40px;
-            text-shadow: 
-                0 0 25px rgba(255, 107, 157, 0.8),
-                0 0 50px rgba(255, 107, 157, 0.4);
-            animation: logoPulse 3s infinite;
-        }
-
-        @keyframes logoPulse {
-            0%, 100% { 
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% { 
-                transform: scale(1.1);
-                opacity: 0.8;
-            }
-        }
-
-        .header-tagline {
-            font-size: clamp(1.1rem, 3.5vw, 1.8rem);
-            color: var(--text-light);
-            margin-bottom: 2.5rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 300;
-            letter-spacing: 1px;
-            line-height: 1.5;
-            text-shadow: 0 0 10px rgba(166, 200, 255, 0.3);
-            font-family: 'Rajdhani', sans-serif;
-            position: relative;
-        }
-
-        .header-tagline::before {
-            content: '>';
-            color: var(--cyber-blue);
-            position: absolute;
-            left: -25px;
-            top: 0;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* Navigation dengan efek cyber */
-        .main-nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(11, 16, 28, 0.95);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(77, 166, 255, 0.3);
             z-index: 1000;
-            padding: 15px 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 
-                0 5px 20px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            font-family: 'Rajdhani', sans-serif;
+            padding: 0 2rem;
         }
-
-        .nav-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 600;
-            background: linear-gradient(90deg, var(--cyber-blue), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-decoration: none;
-            letter-spacing: 2px;
-            padding: 5px 0;
-            position: relative;
-        }
-
-        .nav-logo::before {
-            content: '[';
-            color: var(--cyber-blue);
-            margin-right: 5px;
-        }
-
-        .nav-logo::after {
-            content: ']';
-            color: var(--cyber-blue);
-            margin-left: 5px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            padding: 8px 15px;
-            position: relative;
-            transition: all 0.3s;
-            white-space: nowrap;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid transparent;
-        }
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(77, 166, 255, 0.1), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.5s;
-        }
-
-        .nav-links a:hover::before {
-            transform: translateX(100%);
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: white;
-            border-color: rgba(77, 166, 255, 0.5);
-            box-shadow: 0 0 15px rgba(77, 166, 255, 0.3);
-        }
-
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: 1px solid var(--border-color);
-            color: var(--cyber-blue);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 8px;
-            width: 44px;
-            height: 44px;
-            border-radius: 5px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-toggle:hover {
-            background: rgba(77, 166, 255, 0.1);
-            box-shadow: 0 0 15px rgba(77, 166, 255, 0.3);
-        }
-
-        .nav-toggle::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(77, 166, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .nav-toggle:hover::before {
-            left: 100%;
-        }
-
-        /* Mobile Menu dengan efek cyber */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 300px;
-            height: 100vh;
-            background: rgba(11, 16, 28, 0.98);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 9999;
-            padding: 90px 30px 30px;
-            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-left: 1px solid var(--border-color);
-            box-shadow: 
-                -5px 0 30px rgba(0, 0, 0, 0.5),
-                inset 1px 0 0 rgba(77, 166, 255, 0.2);
-            overflow-y: auto;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
-        .mobile-menu.active {
-            right: 0;
-        }
-
-        .mobile-menu::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, transparent 0%, rgba(0, 247, 255, 0.05) 100%);
-            pointer-events: none;
-        }
-
-        .mobile-menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 9998;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
-        }
-
-        .mobile-menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .mobile-links {
-            list-style: none;
-            margin-bottom: 40px;
-        }
-
-        .mobile-links li {
-            margin-bottom: 10px;
-        }
-
-        .mobile-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 1.2rem;
-            padding: 12px 15px;
-            display: block;
-            border: 1px solid transparent;
-            border-left: 3px solid var(--cyber-blue);
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .mobile-links a:hover,
-        .mobile-links a.active {
-            color: white;
-            border-color: var(--cyber-blue);
-            background: rgba(77, 166, 255, 0.1);
-            padding-left: 20px;
-        }
-
-        .mobile-social {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-
-        .mobile-social a {
+        
+        .logo {
             display: flex;
             align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: rgba(77, 166, 255, 0.1);
-            border-radius: 10px;
-            color: var(--cyber-blue);
-            font-size: 1.3rem;
-            transition: all 0.3s;
-            border: 1px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .mobile-social a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .mobile-social a:hover::before {
-            left: 100%;
-        }
-
-        .mobile-social a:hover {
-            background: var(--cyber-blue);
-            color: var(--dark-bg);
-            transform: translateY(-5px) scale(1.1);
-            border-color: var(--cyber-blue);
-            box-shadow: 0 5px 20px rgba(0, 247, 255, 0.4);
-        }
-
-        /* Scroll Progress Indicator */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--cyber-blue), var(--hacker-green));
-            z-index: 1001;
-            transition: width 0.1s ease;
-            box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
-        }
-
-        /* Back to Top Button dengan efek sci-fi */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 55px;
-            height: 55px;
-            background: rgba(11, 16, 28, 0.9);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--cyber-blue);
-            font-size: 1.3rem;
-            text-decoration: none;
-            box-shadow: 
-                0 5px 20px rgba(0, 0, 0, 0.5),
-                inset 0 0 0 1px rgba(77, 166, 255, 0.3);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px) scale(0.9);
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            overflow: hidden;
-        }
-
-        .back-to-top::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 247, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .back-to-top:hover::before {
-            left: 100%;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
-        }
-
-        .back-to-top:hover {
-            color: white;
-            background: var(--cyber-blue);
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 
-                0 10px 25px rgba(0, 247, 255, 0.4),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        section {
-            padding: 100px 0;
-            position: relative;
-        }
-
-        .section-title {
+            gap: 10px;
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2rem, 6vw, 3.5rem);
             font-weight: 700;
-            text-align: center;
-            margin-bottom: 4rem;
-            color: white;
+            font-size: 1.8rem;
+            color: var(--accent-blue);
+        }
+        
+        .logo-icon {
+            color: var(--accent-teal);
+            font-size: 2rem;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-item {
+            list-style: none;
+        }
+        
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
             position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            transition: color 0.3s;
         }
-
-        .section-title::before {
-            content: '[ ';
-            color: var(--cyber-blue);
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-primary);
         }
-
-        .section-title::after {
-            content: ' ]';
-            color: var(--cyber-blue);
-        }
-
-        .section-title span {
-            background: linear-gradient(90deg, var(--cyber-blue), var(--hacker-green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* Hero Section dengan efek panel */
-        .hero {
-            padding-top: 120px;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 50px;
-            background: linear-gradient(135deg, rgba(16, 20, 31, 0.95) 0%, rgba(22, 28, 44, 0.95) 100%);
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content::before {
+        
+        .nav-link::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(45deg, transparent 30%, rgba(0, 247, 255, 0.05) 50%, transparent 70%);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .hero-title {
-            font-size: clamp(1.8rem, 5vw, 2.8rem);
-            color: var(--cyber-blue);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .hero-text {
-            font-size: clamp(1.05rem, 2.5vw, 1.3rem);
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
-        .highlight {
-            color: var(--hacker-green);
-            font-weight: 600;
-            text-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
-        }
-
-        /* Cards Section dengan efek sci-fi */
-        .cards-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .card {
-            background: linear-gradient(135deg, rgba(16, 20, 31, 0.9) 0%, rgba(22, 28, 44, 0.9) 100%);
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            padding: 30px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 247, 255, 0.1) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: rgba(0, 247, 255, 0.5);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.5),
-                0 0 30px rgba(0, 247, 255, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            color: var(--cyber-blue);
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: white;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .card-text {
-            color: var(--text-light);
-            line-height: 1.7;
-            font-size: 1.05rem;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
-        /* Interactive Timeline dengan efek cyber */
-        .timeline {
-            position: relative;
-            max-width: 900px;
-            margin: 50px auto;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 30px;
-            top: 0;
             bottom: 0;
-            width: 3px;
-            background: linear-gradient(to bottom, var(--cyber-blue), var(--hacker-green));
-            box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 50px;
-            padding-left: 80px;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 23px;
-            top: 10px;
-            width: 20px;
-            height: 20px;
-            background: var(--cyber-blue);
-            border-radius: 50%;
-            box-shadow: 
-                0 0 15px var(--cyber-blue),
-                0 0 30px rgba(0, 247, 255, 0.5);
-            animation: pulseDot 2s infinite;
-        }
-
-        @keyframes pulseDot {
-            0%, 100% { 
-                transform: scale(1);
-                box-shadow: 0 0 15px var(--cyber-blue), 0 0 30px rgba(0, 247, 255, 0.5);
-            }
-            50% { 
-                transform: scale(1.2);
-                box-shadow: 0 0 25px var(--cyber-blue), 0 0 50px rgba(0, 247, 255, 0.7);
-            }
-        }
-
-        .timeline-content {
-            background: linear-gradient(135deg, rgba(16, 20, 31, 0.9) 0%, rgba(22, 28, 44, 0.9) 100%);
-            border-radius: 15px;
-            padding: 25px;
-            border: 1px solid var(--border-color);
-            box-shadow: 
-                0 10px 25px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .timeline-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
             left: 0;
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--cyber-blue), var(--hacker-green));
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-teal);
+            transition: width 0.3s;
         }
-
-        .timeline-content:hover {
-            transform: translateX(10px);
-            border-color: rgba(0, 247, 255, 0.5);
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.4),
-                0 0 20px rgba(0, 247, 255, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-
-        .timeline-date {
-            color: var(--hacker-green);
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            text-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
-        }
-
-        .timeline-title {
-            color: white;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Image Gallery dengan efek hologram */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            height: 250px;
-            cursor: pointer;
-            border: 1px solid transparent;
-            transition: all 0.4s;
-        }
-
-        .gallery-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        
+        .nav-link:hover::after, .nav-link.active::after {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 30%, rgba(0, 247, 255, 0.1) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: var(--secondary-dark);
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--ui-border);
+        }
+        
+        .search-input {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            padding: 0.5rem;
+            width: 200px;
+            outline: none;
+        }
+        
+        .search-btn {
+            background: transparent;
+            border: none;
+            color: var(--accent-teal);
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        /* Main Layout */
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--secondary-dark) 0%, rgba(26, 35, 50, 0.9) 100%);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            border: 1px solid var(--ui-border);
+            position: relative;
+        }
+        
+        .hero-content {
+            padding: 3rem;
+            position: relative;
             z-index: 2;
         }
-
-        .gallery-item:hover::before {
-            transform: translateX(100%);
+        
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            text-shadow: 0 0 10px rgba(58, 107, 201, 0.5);
         }
-
-        .gallery-item img {
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background-color: var(--accent-orange);
+            color: var(--primary-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Articles Section */
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-teal);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            font-size: 1.5rem;
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .article-card {
+            background-color: var(--secondary-dark);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--ui-border);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-blue);
+        }
+        
+        .article-image {
+            height: 180px;
+            background-color: var(--ui-highlight);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .article-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.5s ease;
-            filter: brightness(0.9) contrast(1.1);
+            transition: transform 0.5s;
         }
-
-        .gallery-item:hover {
-            border-color: var(--cyber-blue);
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.5),
-                0 0 30px rgba(0, 247, 255, 0.3);
-            transform: translateY(-5px);
+        
+        .article-card:hover .article-image img {
+            transform: scale(1.05);
         }
-
-        .gallery-item:hover img {
-            transform: scale(1.08);
-            filter: brightness(1) contrast(1.2);
-        }
-
-        .gallery-overlay {
+        
+        .article-category {
             position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .article-content {
+            padding: 1.5rem;
+        }
+        
+        .article-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+        
+        .article-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--ui-border);
+            padding-top: 1rem;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .sidebar-widget {
+            background-color: var(--secondary-dark);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--ui-border);
+        }
+        
+        .widget-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            color: var(--accent-teal);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .operator-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .operator-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        
+        .operator-item:hover {
+            background-color: rgba(58, 107, 201, 0.1);
+        }
+        
+        .operator-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--ui-highlight);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent-teal);
+        }
+        
+        .operator-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .operator-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+        
+        .tag {
+            background-color: rgba(58, 107, 201, 0.2);
+            color: var(--accent-blue);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .tag:hover {
+            background-color: rgba(58, 107, 201, 0.4);
+        }
+        
+        /* Audio Player */
+        .audio-player {
+            position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            padding: 20px;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-            color: white;
-            transform: translateY(100%);
-            transition: transform 0.4s ease;
-            z-index: 3;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 1.1rem;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-        }
-
-        /* Info Section */
-        .info-section {
-            background: linear-gradient(135deg, rgba(16, 20, 31, 0.95) 0%, rgba(22, 28, 44, 0.95) 100%);
-            border-radius: 20px;
-            padding: 50px;
-            border: 1px solid var(--border-color);
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            margin-top: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .info-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(0, 247, 255, 0.1) 0%, transparent 70%);
-            filter: blur(20px);
-        }
-
-        .info-title {
-            font-size: 2.2rem;
-            color: var(--cyber-blue);
-            margin-bottom: 1.5rem;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .info-text {
-            color: var(--text-light);
-            line-height: 1.8;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
-        /* Newsletter Section dengan efek terminal */
-        .newsletter {
-            background: linear-gradient(135deg, rgba(16, 20, 31, 0.95) 0%, rgba(22, 28, 44, 0.95) 100%);
-            border-radius: 20px;
-            padding: 50px;
-            text-align: center;
-            margin-top: 80px;
-            border: 1px solid var(--border-color);
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .newsletter::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(0, 247, 255, 0.05) 2px,
-                    rgba(0, 247, 255, 0.05) 4px
-                );
-            pointer-events: none;
-            opacity: 0.3;
-        }
-
-        .newsletter-title {
-            font-size: 2.2rem;
-            color: var(--cyber-blue);
-            margin-bottom: 15px;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .newsletter-text {
-            color: var(--text-light);
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 1.1rem;
-            font-family: 'Rajdhani', sans-serif;
-            line-height: 1.7;
-        }
-
-        .newsletter-form {
+            background-color: var(--secondary-dark);
+            border-top: 1px solid var(--ui-border);
+            padding: 1rem 2rem;
             display: flex;
-            max-width: 500px;
-            margin: 0 auto;
-            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
         }
-
-        .newsletter-input {
-            flex: 1;
-            padding: 18px 25px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
+        
+        .track-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .track-thumbnail {
+            width: 50px;
+            height: 50px;
+            background-color: var(--ui-highlight);
+            border-radius: 4px;
+        }
+        
+        .track-details h4 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .track-details p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .control-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .control-btn:hover {
+            color: var(--accent-teal);
+        }
+        
+        .play-btn {
+            background-color: var(--accent-blue);
             color: white;
-            font-size: 1rem;
-            font-family: 'Rajdhani', sans-serif;
-            transition: all 0.3s;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .newsletter-input:focus {
-            outline: none;
-            border-color: var(--cyber-blue);
-            box-shadow: 
-                0 0 0 2px rgba(0, 247, 255, 0.2),
-                inset 0 2px 5px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .newsletter-input::placeholder {
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        /* Footer dengan efek sci-fi */
-        .main-footer {
-            background: linear-gradient(180deg, rgba(7, 10, 18, 0.95) 0%, rgba(11, 16, 28, 0.95) 100%);
-            border-top: 1px solid var(--border-color);
-            padding: 60px 0 30px;
-            margin-top: 100px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .main-footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--cyber-blue), transparent);
-            box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 50px;
-            margin-bottom: 50px;
-        }
-
-        .footer-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            font-weight: 600;
-            background: linear-gradient(90deg, var(--cyber-blue), var(--hacker-green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
-        }
-
-        .footer-text {
-            color: var(--text-light);
-            line-height: 1.7;
-            font-size: 1rem;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
-        .footer-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1.8rem;
-            color: var(--cyber-blue);
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .footer-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
             width: 40px;
-            height: 3px;
-            background: var(--hacker-green);
-            box-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--secondary-dark);
+            border-top: 1px solid var(--ui-border);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-teal);
+        }
+        
         .footer-links {
             list-style: none;
         }
-
+        
         .footer-links li {
-            margin-bottom: 12px;
-            position: relative;
-            padding-left: 15px;
+            margin-bottom: 0.8rem;
         }
-
-        .footer-links li::before {
-            content: '>';
-            position: absolute;
-            left: 0;
-            color: var(--hacker-green);
-            font-size: 0.9rem;
-        }
-
+        
         .footer-links a {
-            color: var(--text-light);
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: all 0.3s;
-            font-size: 1rem;
-            font-family: 'Rajdhani', sans-serif;
-            display: inline-block;
-            padding: 3px 0;
+            transition: color 0.3s;
         }
-
+        
         .footer-links a:hover {
-            color: var(--cyber-blue);
-            transform: translateX(5px);
-            text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+            color: var(--text-primary);
         }
-
-        .contact-info {
-            color: var(--text-light);
-            line-height: 1.8;
-            font-size: 1rem;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
-        .contact-info p {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .contact-info i {
-            color: var(--cyber-blue);
-            margin-right: 12px;
-            width: 20px;
-            font-size: 1.1rem;
-            margin-top: 3px;
-        }
-
+        
         .copyright {
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(77, 166, 255, 0.2);
-            color: var(--text-light);
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--ui-border);
+            color: var(--text-secondary);
             font-size: 0.9rem;
-            font-family: 'Rajdhani', sans-serif;
-            letter-spacing: 1px;
         }
-
-        /* Button dengan efek cyber */
-        .btn {
-            display: inline-block;
-            padding: 16px 36px;
-            background: linear-gradient(135deg, var(--cyber-blue), var(--hacker-green));
-            color: var(--dark-bg);
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            font-size: 1.1rem;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            min-height: 52px;
-            min-width: 140px;
-            touch-action: manipulation;
-            box-shadow: 
-                0 5px 15px rgba(0, 0, 0, 0.3),
-                0 0 20px rgba(0, 247, 255, 0.3);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.7s ease;
-            z-index: -1;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 
-                0 10px 25px rgba(0, 0, 0, 0.4),
-                0 0 30px rgba(0, 247, 255, 0.5);
-            color: var(--dark-bg);
-        }
-
-        .btn:active {
-            transform: translateY(-2px) scale(1.02);
-        }
-
-        /* Animasi yang dioptimalkan untuk mobile */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Responsive Design untuk Mobile */
-        @media (max-width: 768px) {
-            /* Navigation untuk mobile */
-            .nav-links {
-                display: none;
-            }
-            
-            .nav-toggle {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            /* Optimasi section padding untuk mobile */
-            section {
-                padding: 70px 0;
-            }
-            
-            .hero {
-                padding-top: 100px;
-            }
-            
-            .hero-content {
-                padding: 30px 20px;
-            }
-            
-            /* Grid layout untuk mobile */
-            .cards-section {
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .main-container {
                 grid-template-columns: 1fr;
-                gap: 25px;
             }
             
-            .gallery {
+            .footer-content {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
-            .newsletter-form {
-                flex-direction: column;
-            }
-            
-            .newsletter-input, .btn {
-                width: 100%;
-            }
-            
-            /* Timeline untuk mobile */
-            .timeline::before {
-                left: 20px;
-            }
-            
-            .timeline-item {
-                padding-left: 60px;
-            }
-            
-            .timeline-dot {
-                left: 13px;
-                width: 16px;
-                height: 16px;
-            }
-            
-            /* Perbaikan touch target */
-            .btn, .nav-toggle, .back-to-top, .mobile-links a {
-                min-height: 48px;
-            }
-            
-            .back-to-top {
-                width: 50px;
-                height: 50px;
-                bottom: 20px;
-                right: 20px;
-                font-size: 1.2rem;
-            }
-            
-            .info-section, .newsletter {
-                padding: 30px 20px;
-            }
-            
-            .footer-content {
-                gap: 35px;
-            }
         }
-
-        @media (max-width: 480px) {
-            .gallery {
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-menu {
+                gap: 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .articles-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .audio-player {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
             }
             
             .footer-content {
                 grid-template-columns: 1fr;
-                gap: 35px;
-            }
-            
-            .mobile-menu {
-                width: 100%;
-            }
-            
-            .loading-logo {
-                font-size: 2.5rem;
-            }
-            
-            .loading-logo::after {
-                font-size: 3rem;
-                top: -10px;
-                right: -25px;
-            }
-            
-            .section-title {
-                font-size: 2rem;
             }
         }
     </style>
 </head>
-
 <body>
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loading-logo">OSTENNEWS</div>
-        <div class="loading-bar-container">
-            <div class="loading-progress" id="loading-progress"></div>
-        </div>
-        <div class="loading-text" id="loading-text">INITIALIZING SYSTEM...</div>
-    </div>
-    
-    <!-- Holographic Grid Background -->
-    <div class="grid-overlay"></div>
-    
-    <!-- Terminal Lines Effect -->
-    <div class="terminal-lines"></div>
-    
-    <!-- Scroll Progress Indicator -->
-    <div class="scroll-progress" id="scroll-progress"></div>
-    
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="back-to-top">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-    
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
-    
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobile-menu">
-        <ul class="mobile-links">
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="artikel.html">Artikel</a></li>
-            <li><a href="poster.html">Poster</a></li>
-            <li><a href="Dekumentasi.html">Dokumentasi</a></li>
-            <li><a href="Credit.html">Credits</a></li>
-        </ul>
-        
-        <div class="mobile-social">
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
-        </div>
-    </div>
-    
     <!-- Header -->
-    <header class="main-header" id="header">
-        <div class="header-bg"></div>
-        <div class="header-content">
-            <h1 class="header-logo">OSTENNEWS</h1>
-            <p class="header-tagline">Media Publikasi Resmi OSIS Seksi Bidang 9 - Informasi Terkini, Dokumentasi Lengkap</p>
-            <a href="#about" class="btn" id="explore-btn">Jelajahi Sekarang</a>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-dragon logo-icon"></i>
+                <span>ENDFIELD ARCHIVES</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#" class="nav-link active">Database</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Operator</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Lore</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Mekanika</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Event</a></li>
+            </ul>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Cari artikel...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
         </div>
     </header>
 
-    <!-- Navigation -->
-    <nav class="main-nav" id="nav">
-        <a href="#" class="nav-logo">OSTENNEWS+</a>
-        <button class="nav-toggle" id="nav-toggle">
-            <i class="fas fa-bars"></i>
-        </button>
-        <ul class="nav-links">
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="artikel.html">Artikel</a></li>
-            <li><a href="poster.html">Poster</a></li>
-            <li><a href="Dekumentasi.html">Dokumentasi</a></li>
-            <li><a href="Credit.html">Credits</a></li>
-        </ul>
-    </nav>
-
     <!-- Main Content -->
-    <main class="container">
+    <main class="main-container">
         <!-- Hero Section -->
-        <section class="hero" id="home">
+        <section class="hero-section">
             <div class="hero-content">
-                <h2 class="hero-title">Tempat Artikel Informatif dan Positif</h2>
-                <p class="hero-text">
-                    Membawa <span class="highlight">inspirasi, informasi, dan edukasi</span> melalui tulisan yang mudah dipahami dan disajikan dengan tampilan modern.
-                    <br><br>
-                    <i>Ostennews adalah media publikasi OSIS Seksi Bidang 9 untuk dokumentasi event sekolah, informasi kegiatan, dan karya siswa dalam platform digital yang interaktif.</i>
-                </p>
-                <a href="artikel.html" class="btn" id="article-btn">Baca Artikel Terbaru</a>
+                <span class="hero-badge">ARTIKEL TERBARU</span>
+                <h1 class="hero-title">Mengenal Perusahaan Endfield: Masa Depan Teknologi di Talos-II</h1>
+                <p class="hero-subtitle">Eksplorasi mendalam tentang latar belakang, tujuan, dan struktur organisasi perusahaan Endfield dalam mengelola koloni di planet Talos-II.</p>
+                <button id="readHeroBtn" class="btn-primary">Baca Artikel Lengkap <i class="fas fa-arrow-right"></i></button>
             </div>
         </section>
 
-        <!-- Cards Section -->
-        <section id="about">
-            <h2 class="section-title"><span>Fitur Utama</span></h2>
-            <div class="cards-section">
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-newspaper"></i>
+        <!-- Featured Articles -->
+        <section class="articles-section">
+            <h2 class="section-title"><i class="fas fa-star"></i> Artikel Pilihan</h2>
+            <div class="articles-grid">
+                <!-- Artikel 1 -->
+                <article class="article-card" data-sound="sound1">
+                    <div class="article-image">
+                        <div class="article-category">LORE</div>
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Endfield Technology">
                     </div>
-                    <h3 class="card-title">Artikel Informatif</h3>
-                    <p class="card-text">Tulisan berkualitas tentang kegiatan sekolah, prestasi siswa, dan informasi pendidikan terkini yang disajikan dengan bahasa yang mudah dipahami.</p>
-                </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Sistem Catastrophe di Talos-II: Analisis dan Strategi Bertahan</h3>
+                        <p class="article-excerpt">Penjelasan detail tentang sistem bencana iklim ekstrem di Talos-II dan bagaimana teknologi Endfield mengatasinya untuk melindungi koloni.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> 12 April 2024</span>
+                            <span><i class="far fa-clock"></i> 8 min read</span>
+                        </div>
+                    </div>
+                </article>
                 
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-camera"></i>
+                <!-- Artikel 2 -->
+                <article class="article-card" data-sound="sound2">
+                    <div class="article-image">
+                        <div class="article-category">OPERATOR</div>
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Endfield Operator">
                     </div>
-                    <h3 class="card-title">Dokumentasi Lengkap</h3>
-                    <p class="card-text">Arsip foto dan video dari setiap kegiatan sekolah yang dapat diakses kapan saja oleh seluruh warga sekolah.</p>
-                </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Profil Operator: Archetto - Peran dan Kemampuan di Lapangan</h3>
+                        <p class="article-excerpt">Analisis mendalam tentang operator Archetto, termasuk latar belakang, kemampuan khusus, dan peran dalam misi Endfield.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> 10 April 2024</span>
+                            <span><i class="far fa-clock"></i> 6 min read</span>
+                        </div>
+                    </div>
+                </article>
                 
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-bullhorn"></i>
+                <!-- Artikel 3 -->
+                <article class="article-card" data-sound="sound3">
+                    <div class="article-image">
+                        <div class="article-category">MEKANIKA</div>
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Endfield Mechanics">
                     </div>
-                    <h3 class="card-title">Pengumuman Resmi</h3>
-                    <p class="card-text">Platform resmi untuk pengumuman OSIS dan sekolah, memastikan informasi penting sampai dengan cepat dan akurat.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Timeline Section -->
-        <section>
-            <h2 class="section-title"><span>Linimasa Kegiatan</span></h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">November 2025</div>
-                        <h3 class="timeline-title">Peluncuran OSTENNEWS+</h3>
-                        <p>Website OSTENNEWS+ resmi diluncurkan sebagai media informasi digital OSIS Seksi Bidang 9.</p>
+                    <div class="article-content">
+                        <h3 class="article-title">Sistem Konstruksi dan Manajemen Sumber Daya di Endfield</h3>
+                        <p class="article-excerpt">Panduan lengkap untuk memahami sistem konstruksi basis, manajemen sumber daya, dan rantai pasokan di Endfield.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> 8 April 2024</span>
+                            <span><i class="far fa-clock"></i> 10 min read</span>
+                        </div>
                     </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">November 2025</div>
-                        <h3 class="timeline-title">Artikel Pertama OSTENNEWS</h3>
-                        <p>Berisi tentang kegiatan/event Hari Pahlawan.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Desember 2025</div>
-                        <h3 class="timeline-title">Pembaruan Interface</h3>
-                        <p>Pembaruan tampilan halaman website dengan desain futuristik.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Gallery Preview -->
-        <section>
-            <h2 class="section-title"><span>Galeri Dokumentasi</span></h2>
-            <div class="gallery">
-                <div class="gallery-item">
-                    <img src="Sehati.jpeg" alt="Kegiatan Sekolah">
-                    <div class="gallery-overlay">Sosial</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="Pelindo.jpeg" alt="Kegiatan Belajar">
-                    <div class="gallery-overlay">Pelindo</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="17nov25.jpeg" alt="Ekstrakurikuler">
-                    <div class="gallery-overlay">Upacara</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="guru.jpeg" alt="Presentasi Siswa">
-                    <div class="gallery-overlay">Hari Guru</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Info Section -->
-        <section>
-            <h2 class="section-title"><span>Tentang OSTENNEWS</span></h2>
-            <div class="info-section">
-                <h3 class="info-title">Media Digital OSIS Seksi Bidang 9</h3>
-                <p class="info-text">
-                    OSTENNEWS+ merupakan pusat informasi digital resmi dari OSIS Seksi Bidang 9 yang dirancang dengan teknologi terkini untuk memberikan pengalaman terbaik dalam mengakses informasi sekolah. Semua kegiatan sekolah, dokumentasi, karya siswa, dan event besar dipublikasikan secara rapi dan modern dengan antarmuka yang intuitif.
-                    <br><br>
-                    Dengan desain yang terinspirasi dari konsep futuristik dan sci-fi, kami bertujuan untuk menciptakan platform yang tidak hanya informatif tetapi juga memberikan pengalaman visual yang memukau. Setiap konten dijamin akurat, positif, dan bermanfaat bagi perkembangan siswa serta kemajuan sekolah.
-                </p>
-                <a href="Credit.html" class="btn" id="credits-btn">Tim Pengembang</a>
-            </div>
-        </section>
-
-        <!-- Newsletter Section -->
-        <section>
-            <div class="newsletter">
-                <h3 class="newsletter-title">Berlangganan Newsletter</h3>
-                <p class="newsletter-text">Dapatkan update terbaru tentang kegiatan sekolah, artikel menarik, dan pengumuman penting langsung di email Anda.</p>
-                <form class="newsletter-form" id="newsletter-form">
-                    <input type="email" class="newsletter-input" placeholder="Email Anda" required>
-                    <button type="submit" class="btn" id="subscribe-btn">Berlangganan</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <h3 class="footer-logo">OSTENNEWS+</h3>
-                    <p class="footer-text">Media publikasi resmi OSIS Seksi Bidang 9. Menyajikan informasi terkini, dokumentasi lengkap, dan artikel edukatif untuk seluruh warga sekolah.</p>
-                </div>
-                
-                <div class="footer-links-container">
-                    <h4 class="footer-title">Menu Cepat</h4>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="artikel.html">Artikel</a></li>
-                        <li><a href="poster.html">Poster</a></li>
-                        <li><a href="Dekumentasi.html">Dokumentasi</a></li>
-                        <li><a href="Credit.html">Credits</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-contact">
-                    <h4 class="footer-title">Kontak & Bantuan</h4>
-                    <div class="contact-info">
-                        <p><i class="fas fa-envelope"></i> ostennews@osis.sch.id</p>
-                        <p><i class="fas fa-phone"></i> +62 888-8547-368</p>
-                        <p><i class="fas fa-map-marker-alt"></i> SMKN 10 SURABAYA</p>
-                        <p>Jika website memiliki bug atau kelemahan, hubungi kami segera.</p>
-                    </div>
-                </div>
+                </article>
             </div>
             
-            <div class="copyright">
-                <p>&copy; 2025 OSTENNEWS+. All rights reserved. | Media Publikasi OSIS Seksi Bidang 9</p>
+            <h2 class="section-title"><i class="fas fa-newspaper"></i> Artikel Terbaru</h2>
+            <div class="articles-grid">
+                <!-- Artikel 4 -->
+                <article class="article-card" data-sound="sound4">
+                    <div class="article-image">
+                        <div class="article-category">TEKNOLOGI</div>
+                        <img src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Endfield Tech">
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Teknologi Originium di Era Endfield: Evolusi dan Aplikasi Baru</h3>
+                        <p class="article-excerpt">Bagaimana teknologi Originium telah berkembang sejak era Arknights dan aplikasinya dalam teknologi Endfield.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> 5 April 2024</span>
+                            <span><i class="far fa-clock"></i> 7 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Artikel 5 -->
+                <article class="article-card" data-sound="sound5">
+                    <div class="article-image">
+                        <div class="article-category">STRATEGI</div>
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Endfield Strategy">
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Strategi Combat di Talos-II: Adaptasi Lingkungan dan Musuh</h3>
+                        <p class="article-excerpt">Panduan strategi menghadapi berbagai ancaman di Talos-II dengan memanfaatkan lingkungan dan kemampuan operator.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> 3 April 2024</span>
+                            <span><i class="far fa-clock"></i> 9 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Artikel 6 -->
+                <article class="article-card" data-sound="sound6">
+                    <div class="article-image">
+                        <div class="article-category">ANALISIS</div>
+                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Endfield Analysis">
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Hubungan Endfield dengan Rhodes Island: Kontinuitas dan Perubahan</h3>
+                        <p class="article-excerpt">Analisis hubungan historis dan operasional antara Endfield dan Rhodes Island dalam konteks cerita yang lebih luas.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> 1 April 2024</span>
+                            <span><i class="far fa-clock"></i> 11 min read</span>
+                        </div>
+                    </div>
+                </article>
             </div>
+        </section>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Operator Spotlight -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i class="fas fa-user-astronaut"></i> Operator Spotlight</h3>
+                <div class="operator-list">
+                    <div class="operator-item">
+                        <div class="operator-avatar"><i class="fas fa-robot"></i></div>
+                        <div class="operator-info">
+                            <h4>Perlica</h4>
+                            <p>Tech Specialist • Engineering</p>
+                        </div>
+                    </div>
+                    <div class="operator-item">
+                        <div class="operator-avatar"><i class="fas fa-bolt"></i></div>
+                        <div class="operator-info">
+                            <h4>Fjall</h4>
+                            <p>Guard • Field Operations</p>
+                        </div>
+                    </div>
+                    <div class="operator-item">
+                        <div class="operator-avatar"><i class="fas fa-shield-alt"></i></div>
+                        <div class="operator-info">
+                            <h4>Archetto</h4>
+                            <p>Sniper • Reconnaissance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trending Tags -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i class="fas fa-tags"></i> Trending Tags</h3>
+                <div class="tag-list">
+                    <span class="tag">Talos-II</span>
+                    <span class="tag">Originium</span>
+                    <span class="tag">Catastrophe</span>
+                    <span class="tag">Colonization</span>
+                    <span class="tag">Technology</span>
+                    <span class="tag">Lore</span>
+                    <span class="tag">Combat</span>
+                    <span class="tag">Strategy</span>
+                </div>
+            </div>
+
+            <!-- Archives -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i class="fas fa-archive"></i> Arsip Bulanan</h3>
+                <ul class="footer-links">
+                    <li><a href="#">April 2024</a></li>
+                    <li><a href="#">Maret 2024</a></li>
+                    <li><a href="#">Februari 2024</a></li>
+                    <li><a href="#">Januari 2024</a></li>
+                    <li><a href="#">Desember 2023</a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Audio Player -->
+    <div class="audio-player">
+        <div class="track-info">
+            <div class="track-thumbnail"></div>
+            <div class="track-details">
+                <h4>Endfield Main Theme</h4>
+                <p>Arknights Endfield OST</p>
+            </div>
+        </div>
+        
+        <div class="player-controls">
+            <button class="control-btn"><i class="fas fa-step-backward"></i></button>
+            <button class="control-btn play-btn" id="playBtn"><i class="fas fa-play" id="playIcon"></i></button>
+            <button class="control-btn"><i class="fas fa-step-forward"></i></button>
+            
+            <div class="volume-control">
+                <i class="fas fa-volume-down"></i>
+                <input type="range" min="0" max="100" value="70" class="volume-slider" id="volumeSlider">
+            </div>
+        </div>
+        
+        <div class="player-time">
+            <span id="currentTime">0:00</span> / <span id="totalTime">3:42</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Endfield Archives</h3>
+                <p>Database lengkap artikel, analisis, dan informasi seputar Arknights Endfield. Dikelola oleh para peneliti Rhodes Island.</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Kategori</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Lore & Cerita</a></li>
+                    <li><a href="#">Operator Analysis</a></li>
+                    <li><a href="#">Mekanika Game</a></li>
+                    <li><a href="#">Strategi & Tips</a></li>
+                    <li><a href="#">Event Updates</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Sumber Daya</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Glossary</a></li>
+                    <li><a href="#">Timeline</a></li>
+                    <li><a href="#">Peta Talos-II</a></li>
+                    <li><a href="#">Database Operator</a></li>
+                    <li><a href="#">Patch Notes</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Komunitas</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Forum Diskusi</a></li>
+                    <li><a href="#">User Submissions</a></li>
+                    <li><a href="#">Weekly Contest</a></li>
+                    <li><a href="#">Event Calendar</a></li>
+                    <li><a href="#">Contact Researchers</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2024 Endfield Archives. Semua hak cipta terkait Arknights Endfield dimiliki oleh Hypergryph / Studio Montagne.</p>
+            <p>Situs ini adalah proyek fan-made untuk tujuan edukasi dan informasi.</p>
         </div>
     </footer>
 
-    <!-- Sound Effects -->
-    <audio id="hover-sound" preload="auto">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-hover-sci-fi-909.mp3" type="audio/mpeg">
-    </audio>
-    
-    <audio id="click-sound" preload="auto">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
-    </audio>
-    
-    <audio id="ui-sound" preload="auto">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-sci-fi-interface-902.mp3" type="audio/mpeg">
-    </audio>
-    
-    <audio id="loading-sound" preload="auto">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-sci-fi-start-1121.mp3" type="audio/mpeg">
-    </audio>
-
     <script>
-        // Sound Effects Management
-        const sounds = {
-            hover: document.getElementById('hover-sound'),
-            click: document.getElementById('click-sound'),
-            ui: document.getElementById('ui-sound'),
-            loading: document.getElementById('loading-sound')
+        // Sound Effects
+        const soundEffects = {
+            sound1: new Audio("https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3"),
+            sound2: new Audio("https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3"),
+            sound3: new Audio("https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3"),
+            sound4: new Audio("https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3"),
+            sound5: new Audio("https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3"),
+            sound6: new Audio("https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3")
         };
-
-        // Mengatur volume sound effects
-        Object.values(sounds).forEach(sound => {
-            sound.volume = 0.3;
-        });
-
-        // Play sound function dengan error handling
-        function playSound(soundName) {
-            try {
-                const sound = sounds[soundName];
-                if (sound) {
-                    sound.currentTime = 0;
-                    sound.play().catch(e => console.log("Audio play failed:", e));
-                }
-            } catch (e) {
-                console.log("Sound error:", e);
-            }
-        }
-
-        // Debounce function untuk performa
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        // Loading Screen dengan sound effect
-        window.addEventListener('load', function() {
-            const loadingScreen = document.getElementById('loading-screen');
-            const loadingProgress = document.getElementById('loading-progress');
-            const loadingText = document.getElementById('loading-text');
+        
+        // Audio Player Functionality
+        const playBtn = document.getElementById('playBtn');
+        const playIcon = document.getElementById('playIcon');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const currentTimeEl = document.getElementById('currentTime');
+        const totalTimeEl = document.getElementById('totalTime');
+        let isPlaying = false;
+        
+        // Simulate audio playback
+        playBtn.addEventListener('click', function() {
+            isPlaying = !isPlaying;
             
-            // Main loading sound
-            setTimeout(() => playSound('loading'), 300);
-            
-            // Simulasi loading progress
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 15 + 5;
-                if (progress > 100) progress = 100;
-                loadingProgress.style.width = progress + '%';
+            if (isPlaying) {
+                playIcon.classList.remove('fa-play');
+                playIcon.classList.add('fa-pause');
+                playBtn.style.backgroundColor = 'var(--accent-orange)';
                 
-                if (progress < 30) loadingText.textContent = "LOADING SYSTEM...";
-                else if (progress < 60) loadingText.textContent = "INITIALIZING UI...";
-                else if (progress < 90) loadingText.textContent = "SYNCHRONIZING DATA...";
-                else loadingText.textContent = "SYSTEM READY";
-                
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    loadingText.textContent = "SYSTEM ONLINE";
-                    
-                    setTimeout(() => {
-                        loadingScreen.style.opacity = '0';
-                        loadingScreen.style.visibility = 'hidden';
-                        
-                        // Inisialisasi setelah loading selesai
-                        initPage();
-                    }, 800);
-                }
-            }, 200);
-        });
-
-        // Inisialisasi halaman setelah loading
-        function initPage() {
-            // Add sound effects to interactive elements
-            const interactiveElements = document.querySelectorAll('.btn, .card, .nav-links a, .gallery-item, .timeline-content');
-            
-            interactiveElements.forEach(element => {
-                element.addEventListener('mouseenter', () => {
-                    playSound('hover');
-                });
-                
-                element.addEventListener('click', () => {
-                    playSound('click');
-                });
-            });
-
-            // Mobile Menu Toggle
-            const navToggle = document.getElementById('nav-toggle');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileOverlay = document.getElementById('mobile-menu-overlay');
-            
-            function toggleMobileMenu() {
-                mobileMenu.classList.toggle('active');
-                mobileOverlay.classList.toggle('active');
-                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
-                playSound('ui');
-            }
-            
-            navToggle.addEventListener('click', toggleMobileMenu);
-            mobileOverlay.addEventListener('click', toggleMobileMenu);
-            
-            // Close mobile menu when clicking a link
-            document.querySelectorAll('.mobile-links a').forEach(link => {
-                link.addEventListener('click', toggleMobileMenu);
-            });
-            
-            // Scroll Progress Indicator
-            const scrollProgress = document.getElementById('scroll-progress');
-            
-            function updateScrollProgress() {
-                const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (window.scrollY / windowHeight) * 100;
-                scrollProgress.style.width = scrolled + '%';
-            }
-            
-            // Back to Top Button
-            const backToTop = document.getElementById('back-to-top');
-            
-            function toggleBackToTop() {
-                if (window.scrollY > 300) {
-                    backToTop.classList.add('visible');
-                } else {
-                    backToTop.classList.remove('visible');
-                }
-            }
-            
-            backToTop.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-            
-            // Update scroll progress dan back to top button
-            window.addEventListener('scroll', debounce(function() {
-                updateScrollProgress();
-                toggleBackToTop();
-            }, 10));
-            
-            // Smooth scroll untuk anchor links dengan sound
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#' || targetId.startsWith('#')) {
-                        e.preventDefault();
-                        
-                        const targetElement = document.querySelector(targetId);
-                        if (targetElement) {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 80,
-                                behavior: 'smooth'
-                            });
-                        }
+                // Simulate time progression
+                let seconds = 0;
+                const timer = setInterval(() => {
+                    if (!isPlaying) {
+                        clearInterval(timer);
+                        return;
                     }
-                });
-            });
+                    
+                    seconds++;
+                    const mins = Math.floor(seconds / 60);
+                    const secs = seconds % 60;
+                    currentTimeEl.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+                    
+                    // Stop at 3:42
+                    if (seconds >= 222) {
+                        isPlaying = false;
+                        playIcon.classList.remove('fa-pause');
+                        playIcon.classList.add('fa-play');
+                        playBtn.style.backgroundColor = 'var(--accent-blue)';
+                        currentTimeEl.textContent = '0:00';
+                        clearInterval(timer);
+                    }
+                }, 1000);
+            } else {
+                playIcon.classList.remove('fa-pause');
+                playIcon.classList.add('fa-play');
+                playBtn.style.backgroundColor = 'var(--accent-blue)';
+            }
             
-            // Form Submission dengan sound effect
-            const newsletterForm = document.getElementById('newsletter-form');
-            newsletterForm.addEventListener('submit', function(e) {
+            // Play a sound effect
+            const audio = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3");
+            audio.volume = volumeSlider.value / 100;
+            audio.play();
+        });
+        
+        // Volume control
+        volumeSlider.addEventListener('input', function() {
+            // In a real implementation, this would control the actual audio volume
+            console.log(`Volume set to: ${this.value}%`);
+        });
+        
+        // Article click effects
+        const articleCards = document.querySelectorAll('.article-card');
+        articleCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const soundType = this.getAttribute('data-sound');
+                
+                // Play sound effect
+                if (soundEffects[soundType]) {
+                    soundEffects[soundType].currentTime = 0;
+                    soundEffects[soundType].volume = volumeSlider.value / 100;
+                    soundEffects[soundType].play();
+                }
+                
+                // Visual feedback
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+                
+                // In a real implementation, this would navigate to the article page
+                alert(`Membuka artikel: "${this.querySelector('.article-title').textContent}"`);
+            });
+        });
+        
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        const searchBtn = document.querySelector('.search-btn');
+        
+        searchBtn.addEventListener('click', function() {
+            if (searchInput.value.trim() !== '') {
+                alert(`Mencari artikel dengan kata kunci: "${searchInput.value}"`);
+                
+                // Play search sound
+                const audio = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3");
+                audio.volume = volumeSlider.value / 100;
+                audio.play();
+            }
+        });
+        
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchBtn.click();
+            }
+        });
+        
+        // Hero button click
+        document.getElementById('readHeroBtn').addEventListener('click', function() {
+            alert('Membuka artikel utama: "Mengenal Perusahaan Endfield: Masa Depan Teknologi di Talos-II"');
+            
+            // Play sound
+            const audio = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3");
+            audio.volume = volumeSlider.value / 100;
+            audio.play();
+        });
+        
+        // Tag click functionality
+        const tags = document.querySelectorAll('.tag');
+        tags.forEach(tag => {
+            tag.addEventListener('click', function() {
+                alert(`Menampilkan artikel dengan tag: "${this.textContent}"`);
+                
+                // Visual feedback
+                this.style.backgroundColor = 'rgba(58, 107, 201, 0.6)';
+                setTimeout(() => {
+                    this.style.backgroundColor = '';
+                }, 300);
+                
+                // Play sound
+                const audio = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3");
+                audio.volume = volumeSlider.value / 100;
+                audio.play();
+            });
+        });
+        
+        // Operator item click
+        const operatorItems = document.querySelectorAll('.operator-item');
+        operatorItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const operatorName = this.querySelector('h4').textContent;
+                alert(`Membuka profil operator: ${operatorName}`);
+                
+                // Play sound
+                const audio = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3");
+                audio.volume = volumeSlider.value / 100;
+                audio.play();
+            });
+        });
+        
+        // Set initial total time
+        totalTimeEl.textContent = '3:42';
+        
+        // Navigation active state
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
                 e.preventDefault();
-                const emailInput = this.querySelector('.newsletter-input');
-                const email = emailInput.value;
                 
-                if (email) {
-                    playSound('ui');
-                    emailInput.value = '';
-                    
-                    // Efek visual untuk feedback
-                    const submitBtn = this.querySelector('.btn');
-                    const originalText = submitBtn.textContent;
-                    submitBtn.textContent = 'SUCCESS!';
-                    submitBtn.style.background = 'linear-gradient(135deg, var(--hacker-green), var(--cyber-blue))';
-                    
-                    setTimeout(() => {
-                        submitBtn.textContent = originalText;
-                        submitBtn.style.background = 'linear-gradient(135deg, var(--cyber-blue), var(--hacker-green))';
-                        alert('Terima kasih! Anda telah berlangganan newsletter OSTENNEWS+.');
-                    }, 1500);
-                }
-            });
-            
-            // Interactive Card Effects dengan sound
-            document.querySelectorAll('.card').forEach(card => {
-                card.addEventListener('touchstart', function() {
-                    this.style.transform = 'translateY(-8px) scale(1.02)';
-                });
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
                 
-                card.addEventListener('touchend', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-            
-            // Parallax Effect yang dioptimalkan
-            let ticking = false;
-            
-            function updateParallax() {
-                const scrolled = window.pageYOffset;
-                const headerContent = document.querySelector('.header-content');
+                // Play navigation sound
+                const audio = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3");
+                audio.volume = volumeSlider.value / 100;
+                audio.play();
                 
-                if (headerContent) {
-                    const speed = 0.5;
-                    const yPos = -(scrolled * speed);
-                    headerContent.style.transform = `translateY(${yPos}px)`;
-                }
-                
-                ticking = false;
-            }
-            
-            window.addEventListener('scroll', function() {
-                if (!ticking) {
-                    window.requestAnimationFrame(updateParallax);
-                    ticking = true;
-                }
+                // In a real implementation, this would navigate to the section
+                alert(`Navigasi ke: ${this.textContent}`);
             });
-            
-            // Glitch effect pada logo secara berkala
-            function glitchEffect() {
-                const logo = document.querySelector('.header-logo');
-                if (logo) {
-                    logo.style.textShadow = '0 0 30px rgba(255, 0, 0, 0.7), 0 0 60px rgba(255, 0, 0, 0.5)';
-                    logo.style.transform = 'translateX(5px)';
-                    
-                    setTimeout(() => {
-                        logo.style.textShadow = '0 0 30px rgba(0, 247, 255, 0.7), 0 0 60px rgba(0, 247, 255, 0.3)';
-                        logo.style.transform = 'translateX(0)';
-                    }, 100);
-                }
-            }
-            
-            // Jalankan glitch effect setiap 30 detik
-            setInterval(glitchEffect, 30000);
-            
-            // Inisialisasi awal
-            updateScrollProgress();
-            toggleBackToTop();
-            
-            // Typewriter effect untuk tagline
-            const tagline = document.querySelector('.header-tagline');
-            if (tagline) {
-                const originalText = tagline.textContent;
-                tagline.textContent = '';
-                let i = 0;
-                
-                function typeWriter() {
-                    if (i < originalText.length) {
-                        tagline.textContent += originalText.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, 30);
-                    }
-                }
-                
-                // Mulai typewriter setelah 1 detik
-                setTimeout(typeWriter, 1000);
-            }
-            
-            // Preload gambar penting
-            const imagesToPreload = [
-                'Sehati.jpeg',
-                'Pelindo.jpeg',
-                '17nov25.jpeg',
-                'guru.jpeg'
-            ];
-            
-            imagesToPreload.forEach(src => {
-                const img = new Image();
-                img.src = src;
-            });
-            
-            // Add keyboard shortcuts
-            document.addEventListener('keydown', (e) => {
-                // Space bar untuk scroll ke bawah
-                if (e.code === 'Space' && !e.target.matches('input, textarea')) {
-                    e.preventDefault();
-                    window.scrollBy({
-                        top: window.innerHeight * 0.8,
-                        behavior: 'smooth'
-                    });
-                }
-                
-                // Escape untuk close mobile menu
-                if (e.code === 'Escape' && mobileMenu.classList.contains('active')) {
-                    toggleMobileMenu();
-                }
-            });
-        }
-        
-        // Deteksi perangkat mobile dan optimasi
-        function isMobileDevice() {
-            return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-        }
-        
-        if (isMobileDevice()) {
-            // Nonaktifkan efek hover yang berat pada mobile
-            document.querySelectorAll('.card, .btn').forEach(element => {
-                element.style.willChange = 'auto';
-            });
-            
-            // Kurangi volume sound pada mobile
-            Object.values(sounds).forEach(sound => {
-                sound.volume = 0.2;
-            });
-        }
+        });
     </script>
 </body>
 </html>
