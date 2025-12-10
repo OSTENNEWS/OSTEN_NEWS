@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAS Ganjil 2025 — SMKN 10 Surabaya</title>
+  <style>
+    :root{--bg:#f7f9fc;--card:#ffffff;--accent:#2b6cb0;--muted:#6b7280;--success:#38a169}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color:#111;background:linear-gradient(180deg,var(--bg),#fff)}
+    header{background:linear-gradient(90deg,var(--accent),#4f9bd6);color:#fff;padding:48px 16px 64px}
+    .container{max-width:900px;margin:0 auto}
+    .hero{display:flex;gap:24px;align-items:center}
+    .hero h1{font-size:clamp(26px,4vw,40px);margin:0 0 8px}
+    .hero p{margin:0;color:rgba(255,255,255,0.92)}
+    main{max-width:900px;margin:-40px auto 48px;padding:20px}
+    article{background:var(--card);border-radius:12px;padding:28px;box-shadow:0 6px 18px rgba(42,56,80,0.08)}
+    h2{color:var(--accent);margin-top:20px}
+    p{line-height:1.7;color:#222}
+    ul{line-height:1.7;color:#222}
+    .meta{color:var(--muted);font-size:0.9rem}
+    footer{max-width:900px;margin:24px auto 80px;text-align:center;color:var(--muted);font-size:0.9rem}
+    .btn{display:inline-block;padding:10px 16px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;margin-top:12px}
+    .schedule-container{display:flex;flex-wrap:wrap;gap:16px;margin:24px 0}
+    .schedule-card{flex:1;min-width:250px;background:#f0f9ff;border-left:4px solid var(--accent);padding:16px;border-radius:8px}
+    .schedule-time{font-weight:bold;color:var(--accent);margin-bottom:4px}
+    .schedule-class{color:var(--success);font-weight:600}
+    .highlight-box{background:#f0fff4;border-left:4px solid var(--success);padding:16px;margin:20px 0;border-radius:8px}
+    .highlight-box p{margin:0}
+    @media (max-width:600px){.hero{flex-direction:column;align-items:flex-start}.schedule-container{flex-direction:column}}
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="hero">
+        <div>
+          <h1>Sumatif Akhir Semester (SAS) Ganjil 2025</h1>
+          <p>SMKN 10 Surabaya melaksanakan SAS dengan sistem berbasis LMS sekolah.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <article>
+      <p class="meta">Dipublikasikan: 3 Desember 2025 | Penulis: Sekbid 9 SMKN 10 Surabaya</p>
+
+      <h2>SMK Negeri 10 Surabaya Gelar SAS Ganjil 2025 dengan Sistem Berbasis LMS Sekolah</h2>
+      <p><strong>Surabaya, 3 Desember 2025</strong> — SMK Negeri 10 Surabaya melaksanakan kegiatan Sumatif Akhir Semester (SAS) Ganjil Tahun Pelajaran 2025/2026 mulai 3 Desember hingga 10 Desember 2025. Ujian ini diikuti seluruh peserta didik dari kelas X, XI, hingga XII dan diselenggarakan secara terstruktur, modern, serta memanfaatkan sistem LMS (Learning Management System) sekolah sebagai media pengerjaan.</p>
+      
+      <div class="highlight-box">
+        <p>Kegiatan SAS kali ini mengusung prinsip <strong>ketertiban, kejujuran, dan optimalisasi teknologi</strong> untuk memastikan proses evaluasi berjalan efektif dan efisien.</p>
+      </div>
+
+      <h2>Pembagian Waktu Ujian Tiga Sesi</h2>
+      <p>Dalam pelaksanaannya, sekolah menerapkan pembagian waktu ujian menjadi tiga sesi utama demi mengatur alur peserta dan menjaga kenyamanan selama ujian berlangsung.</p>
+      
+      <p>Agar kegiatan ujian dapat berjalan lancar dengan jumlah peserta yang besar, SMK Negeri 10 Surabaya mengatur jadwal SAS sebagai berikut:</p>
+      
+      <div class="schedule-container">
+        <div class="schedule-card">
+          <div class="schedule-time">Sesi Pagi (07.00–09.00 WIB)</div>
+          <div class="schedule-class">Kelas XII</div>
+          <p>Sesi ini dipilih agar siswa kelas akhir dapat fokus dan memiliki waktu optimal untuk mengerjakan soal, mengingat mereka telah mendekati masa kelulusan.</p>
+        </div>
+        
+        <div class="schedule-card">
+          <div class="schedule-time">Sesi Siang (09.00–11.30 WIB)</div>
+          <div class="schedule-class">Kelas X</div>
+          <p>Penjadwalan siang dinilai efektif karena siswa kelas awal dapat menyesuaikan diri dengan ritme ujian berbasis komputer tanpa terburu-buru.</p>
+        </div>
+        
+        <div class="schedule-card">
+          <div class="schedule-time">Sesi Sore (12.30–14.30 WIB)</div>
+          <div class="schedule-class">Kelas XI</div>
+          <p>Meski dilaksanakan pada sore hari, siswa tetap mengikuti ujian dengan kondusif berkat pengawasan serta fasilitas ruangan yang tetap nyaman.</p>
+        </div>
+      </div>
+      
+      <p>Pembagian sesi ini dilakukan untuk menghindari penumpukan peserta ujian serta memastikan server LMS berjalan stabil selama kegiatan berlangsung.</p>
+
+      <h2>Ujian Berbasis LMS: Lebih Modern dan Efisien</h2>
+      <p>Berbeda dengan metode ujian konvensional, SAS Ganjil 2025 di SMK Negeri 10 Surabaya dilaksanakan melalui LMS resmi sekolah. Sistem ini memudahkan siswa mengakses soal, mengunggah jawaban, hingga memantau waktu secara real-time.</p>
+      
+      <p>Dengan penggunaan LMS, peserta tidak perlu lagi menggunakan kertas, sehingga ujian berjalan lebih ramah lingkungan dan meminimalkan risiko kehilangan lembar jawaban. Selain itu, guru dapat melakukan koreksi lebih cepat, terutama untuk soal pilihan ganda yang dinilai otomatis oleh sistem.</p>
+      
+      <p>Penggunaan teknologi digital ini sekaligus melatih literasi teknologi siswa, menyesuaikan kebutuhan pembelajaran era modern, serta memastikan proses evaluasi lebih objektif.</p>
+
+      <h2>Kondisi Pelaksanaan: Tertib, Aman, dan Lancar</h2>
+      <p>Selama satu minggu pelaksanaan SAS, kegiatan berjalan lancar tanpa kendala berarti. Panitia dan guru pengawas telah bersiaga sejak pagi untuk memastikan kesiapan ruang ujian, kestabilan jaringan, serta membantu peserta yang membutuhkan penyesuaian teknis.</p>
+      
+      <p>Siswa terlihat antusias namun tetap disiplin saat memasuki ruang ujian. Mereka diwajibkan melakukan presensi digital sebelum login ke LMS, kemudian diarahkan duduk sesuai nomor yang telah ditentukan.</p>
+      
+      <p>Ketertiban ini menunjukkan bahwa seluruh civitas SMK Negeri 10 Surabaya memiliki kesadaran tinggi terhadap pentingnya pelaksanaan SAS sebagai bentuk evaluasi pembelajaran selama satu semester.</p>
+
+      <h2>Harapan dan Komitmen Sekolah</h2>
+      <p>Dengan berakhirnya SAS Ganjil 2025, sekolah berharap seluruh peserta didik mendapatkan hasil terbaik yang mencerminkan usaha dan proses belajar mereka. Pihak sekolah juga berkomitmen terus meningkatkan kualitas layanan pendidikan, termasuk pengembangan sistem ujian daring agar lebih optimal dan mudah digunakan.</p>
+      
+      <p>Kegiatan SAS Ganjil tahun ini menjadi bukti bahwa SMK Negeri 10 Surabaya mampu beradaptasi dengan perkembangan teknologi pendidikan sekaligus menjaga budaya disiplin, jujur, dan profesional dalam setiap proses akademik.</p>
+
+      <a class="btn" href="#" onclick="alert('Dokumentasi kegiatan akan tersedia setelah SAS berakhir.')">Info Jadwal Lengkap</a>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 — Sekbid 9 SMKN 10 Surabaya. Tulisan dapat digunakan untuk tujuan non-komersial dengan mencantumkan sumber.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
