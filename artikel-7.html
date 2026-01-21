@@ -16,7 +16,6 @@
         body {
             background-color: #0a0a0a;
             color: #0af50a;
-            overflow: hidden;
             position: relative;
             min-height: 100vh;
             display: flex;
@@ -26,18 +25,20 @@
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(0, 80, 0, 0.1) 0%, transparent 20%),
                 radial-gradient(circle at 90% 80%, rgba(0, 100, 0, 0.1) 0%, transparent 20%);
+            padding: 20px;
+            overflow-y: auto;
         }
         
         .container {
             max-width: 900px;
             width: 90%;
             padding: 30px;
-            background-color: rgba(0, 20, 0, 0.8);
+            background-color: rgba(0, 20, 0, 0.85);
             border: 1px solid #0af50a;
             box-shadow: 0 0 20px rgba(10, 245, 10, 0.3);
             position: relative;
-            overflow: hidden;
             border-radius: 5px;
+            margin: 40px 0;
         }
         
         .container::before {
@@ -108,6 +109,7 @@
             padding: 20px;
             margin: 25px 0;
             border-left: 4px solid #0af50a;
+            border-radius: 3px;
         }
         
         .contact-info h3 {
@@ -115,6 +117,7 @@
             margin-bottom: 10px;
             display: flex;
             align-items: center;
+            font-size: 1.2em;
         }
         
         .contact-info h3 i {
@@ -130,9 +133,15 @@
             display: flex;
             align-items: center;
             margin-bottom: 10px;
-            padding: 8px;
+            padding: 10px;
             background-color: rgba(0, 40, 0, 0.5);
             border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background-color: rgba(0, 50, 0, 0.7);
+            transform: translateX(5px);
         }
         
         .contact-item i {
@@ -155,15 +164,13 @@
         .console-line {
             margin-bottom: 8px;
             display: flex;
+            flex-wrap: wrap;
         }
         
         .prompt {
             color: #0af50a;
             margin-right: 10px;
-        }
-        
-        .command {
-            color: #ffcc00;
+            font-weight: bold;
         }
         
         .response {
@@ -174,8 +181,17 @@
             color: #ff3333;
         }
         
+        .success {
+            color: #0af50a;
+        }
+        
+        .info {
+            color: #ffcc00;
+        }
+        
         .blink {
             animation: blink 1s infinite;
+            display: inline-block;
         }
         
         @keyframes blink {
@@ -193,14 +209,14 @@
         }
         
         .matrix-bg {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
             z-index: -1;
-            opacity: 0.2;
+            opacity: 0.15;
         }
         
         .server-info {
@@ -209,34 +225,149 @@
             margin-top: 20px;
             font-size: 0.9em;
             color: #666;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         
         .warning {
             color: #ff9900;
             background-color: rgba(255, 153, 0, 0.1);
-            padding: 10px;
+            padding: 12px 15px;
             border-radius: 3px;
-            margin: 15px 0;
-            border-left: 3px solid #ff9900;
+            margin: 20px 0;
+            border-left: 4px solid #ff9900;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            font-weight: bold;
+            background-color: #ff3333;
+            color: white;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            background-color: rgba(10, 245, 10, 0.1);
+            color: #0af50a;
+            border: 1px solid #0af50a;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background-color: rgba(10, 245, 10, 0.2);
+            box-shadow: 0 0 10px rgba(10, 245, 10, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background-color: rgba(10, 245, 10, 0.2);
+            font-weight: bold;
+        }
+        
+        .support-info {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: rgba(0, 30, 0, 0.5);
+            border-radius: 3px;
+            text-align: center;
+            border: 1px solid rgba(10, 245, 10, 0.3);
+        }
+        
+        .support-text {
+            color: #ffcc00;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        
+        .kabinet-info {
+            color: #33ccff;
+            font-style: italic;
         }
         
         @media (max-width: 768px) {
             .container {
-                padding: 15px;
+                padding: 20px;
                 width: 95%;
             }
             
             .error-code {
-                font-size: 3em;
+                font-size: 3.5em;
             }
             
             .title {
                 font-size: 1.4em;
             }
             
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
             .server-info {
                 flex-direction: column;
+                gap: 15px;
             }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 2.8em;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .message {
+                font-size: 1em;
+            }
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 20, 0, 0.5);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(10, 245, 10, 0.3);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(10, 245, 10, 0.5);
         }
     </style>
 </head>
@@ -259,7 +390,8 @@
             <p>Situs web ini telah <span class="highlight">dipindahkan ke server lain</span> atau <span class="highlight">domain baru</span>. Akses ke lokasi sebelumnya telah dinonaktifkan.</p>
             
             <div class="warning">
-                <i class="fas fa-exclamation-triangle"></i> SORRY!!!!!!
+                <i class="fas fa-exclamation-triangle"></i> 
+                <span>Maaf, halaman ini sedang dalam proses migrasi server.</span>
             </div>
             
             <p>Kesalahan ini terjadi karena migrasi server yang belum sepenuhnya selesai atau konfigurasi DNS yang belum diperbarui.</p>
@@ -280,55 +412,69 @@
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
-                    <span><strong>afif.sakti@server-migration-team.id</strong></span>
+                    <span><strong>afifsakti328@gmail.com</strong></span>
                 </div>
-            <div class="console-line error">
-                <span class="response">Host unreachable - Server migrated to new location</span>
-          
+            </div>
+        </div>
+        
+        <div class="console">
+            <div class="console-line info">
+                <span>Server sedang dalam proses migrasi...</span>
             </div>
             <div class="console-line">
-                <span class="response">HTTP/1.1 451 Unavailable For Legal Reasons</span>
-            </div>
-            <div class="console-line">
-                <span class="response"></span>
-            </div>
-            <div class="console-line">
-                <span class="response">Location: for now, it cannot be revealed</span>
-            </div>
-            <div class="console-line">
-                <span class="response">: SERVER_MIGRATION</span>
-            </div>
-            <div class="console-line">
-                <span class="prompt">$</span>
-                <span class="command"></span>
-            </div>
-            <div class="console-line">
-                <span class="response"></span>
-            </div>
-            <div class="console-line">
-                <span class="response"> </span>
+                <span class="response">Status: Transfer data dalam progres</span>
             </div>
             <div class="console-line error">
-                <span class="response"> </span>
-            </div>
-            <div class="console-line error">
-                <span class="response"></span>
+                <span>Akses ditangguhkan sementara</span>
             </div>
             <div class="console-line">
-                <span class="prompt">you cannot access the source without permission this time</span>
-                <span class="command"><span class="blink">_</span></span>
+                <span class="response">Estimasi waktu: Belum dapat ditentukan</span>
             </div>
+            <div class="console-line">
+                <span>Harap hubungi administrator untuk informasi lebih lanjut</span>
+            </div>
+            <div class="console-line">
+                <span class="response">Mohon maaf atas ketidaknyamanannya</span>
+            </div>
+            <div class="console-line info">
+                <span>Proses migrasi dipantau oleh tim teknis</span>
+            </div>
+            <div class="console-line">
+                <span class="blink">_</span>
+            </div>
+        </div>
+        
+        <div class="support-info">
+            <div class="support-text">
+                DIDUKUNG DAN DIBUAT OLEH SEKBID 9
+            </div>
+            <div class="kabinet-info">
+                Tentunya bersama Kabinet Asa Cipta
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="javascript:void(0)" class="btn btn-primary" onclick="window.location.reload()">
+                <i class="fas fa-redo"></i> Refresh Page
+            </a>
+            <a href="javascript:void(0)" class="btn" onclick="showContactInfo()">
+                <i class="fas fa-headset"></i> Contact Support
+            </a>
+            <a href="javascript:void(0)" class="btn" onclick="showStatus()">
+                <i class="fas fa-info-circle"></i> Status Info
+            </a>
         </div>
         
         <div class="server-info">
-            <div></div>
-            <div>Last Updated: 2026</div>
-            <div>Status: <span class="error">OFFLINE</span></div>
+            <div>Status Server: <span class="error">OFFLINE</span></div>
+            <div>Terakhir Diperbarui: <span class="success">21 Januari 2026</span></div>
+            <div>Tim Teknis: <span class="info">Sekbid 9</span></div>
         </div>
         
         <div class="footer">
-            <p>© 2023 Server sekbid 9.</p>
-            <p>This server has been permanently moved to a new location.</p>
+            <p>© 2023-2026 Server Sekbid 9. Semua hak dilindungi.</p>
+            <p>Server ini telah dipindahkan secara permanen ke lokasi baru.</p>
+            <p>Didukung oleh Kabinet Asa Cipta</p>
         </div>
     </div>
 
@@ -338,20 +484,29 @@
         const ctx = canvas.getContext('2d');
         
         // Set canvas dimensions
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        resizeCanvas();
         
         // Matrix characters
-        const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~";
+        const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         const chars = matrixChars.split("");
         
         const fontSize = 14;
-        const columns = canvas.width / fontSize;
+        let columns;
         
         // Create an array of drops
-        const drops = [];
-        for (let i = 0; i < columns; i++) {
-            drops[i] = Math.floor(Math.random() * canvas.height / fontSize) * fontSize;
+        let drops = [];
+        
+        function initMatrix() {
+            columns = Math.floor(canvas.width / fontSize);
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.floor(Math.random() * canvas.height / fontSize) * fontSize;
+            }
         }
         
         function drawMatrix() {
@@ -386,20 +541,18 @@
             requestAnimationFrame(animate);
         }
         
-        // Start animation
+        // Initialize and start animation
+        initMatrix();
         animate();
         
         // Handle window resize
         window.addEventListener('resize', function() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            resizeCanvas();
+            initMatrix();
         });
         
-        // Add blinking cursor to console
-        const consoleElement = document.querySelector('.console');
-        const cursor = document.querySelector('.blink');
-        
         // Auto-scroll console to bottom
+        const consoleElement = document.querySelector('.console');
         consoleElement.scrollTop = consoleElement.scrollHeight;
         
         // Add some interactive effects
@@ -418,6 +571,83 @@
             setTimeout(() => {
                 this.style.boxShadow = '0 0 20px rgba(10, 245, 10, 0.3)';
             }, 300);
+        });
+        
+        // Interactive functions
+        function showContactInfo() {
+            const contactSection = document.querySelector('.contact-info');
+            contactSection.style.backgroundColor = 'rgba(0, 40, 0, 0.9)';
+            contactSection.style.borderLeftColor = '#ffcc00';
+            
+            setTimeout(() => {
+                contactSection.style.backgroundColor = '';
+                contactSection.style.borderLeftColor = '';
+            }, 2000);
+        }
+        
+        function showStatus() {
+            const statusBadge = document.querySelector('.server-info .error');
+            const originalText = statusBadge.textContent;
+            
+            statusBadge.textContent = 'PROSES MIGRASI';
+            statusBadge.style.color = '#ff9900';
+            
+            setTimeout(() => {
+                statusBadge.textContent = originalText;
+                statusBadge.style.color = '';
+            }, 1500);
+        }
+        
+        // Add typing effect to console
+        function typeConsoleText() {
+            const lines = [
+                {text: "Memperbarui status migrasi...", className: "info", delay: 100},
+                {text: "Transfer data: 75% selesai", className: "response", delay: 200},
+                {text: "Verifikasi integritas data...", className: "", delay: 300},
+                {text: "Proses akan segera dilanjutkan", className: "response", delay: 400}
+            ];
+            
+            const consoleElement = document.querySelector('.console');
+            let delay = 5000; // Start after 5 seconds
+            
+            lines.forEach((line, index) => {
+                setTimeout(() => {
+                    const consoleLine = document.createElement('div');
+                    consoleLine.className = 'console-line';
+                    
+                    if (line.className) {
+                        consoleLine.classList.add(line.className);
+                    }
+                    
+                    consoleLine.textContent = line.text;
+                    consoleElement.appendChild(consoleLine);
+                    
+                    // Remove the blinking cursor temporarily
+                    const blinkElement = document.querySelector('.blink');
+                    if (blinkElement) {
+                        blinkElement.style.visibility = 'hidden';
+                        setTimeout(() => {
+                            blinkElement.style.visibility = 'visible';
+                        }, 100);
+                    }
+                    
+                    consoleElement.scrollTop = consoleElement.scrollHeight;
+                }, delay);
+                
+                delay += 2000; // Add delay between lines
+            });
+        }
+        
+        // Start typing effect after page loads
+        window.addEventListener('load', () => {
+            setTimeout(typeConsoleText, 5000);
+            
+            // Add support info highlight effect
+            const supportInfo = document.querySelector('.support-info');
+            setInterval(() => {
+                supportInfo.style.borderColor = supportInfo.style.borderColor === 'rgba(10, 245, 10, 0.6)' ? 
+                    'rgba(255, 204, 0, 0.6)' : 'rgba(10, 245, 10, 0.6)';
+            }, 3000);
         });
     </script>
 </body>
