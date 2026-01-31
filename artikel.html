@@ -1,379 +1,654 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Grid Artikel — 100 Pilihan</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html,body { height: 100%; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:#0f1724; color:#e6eef8; }
-
-
-header {
-  padding: 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
-  position: sticky;
-  top:0;
-  z-index: 20;
-}
-.brand { display:flex; align-items:center; gap:12px; }
-.logo {
-  width:44px; height:44px; border-radius:8px;
-  background: linear-gradient(135deg,#1e293b,#0ea5a6);
-  display:flex; align-items:center; justify-content:center;
-  font-weight:700; color:#fff; font-size:18px;
-  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
-}
-h1 { font-size:18px; letter-spacing:0.2px; }
-.sub { font-size:13px; color:rgba(230,238,248,0.6); margin-top:2px; }
-
-.controls { display:flex; gap:8px; align-items:center; }
-.search {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.04);
-  padding:8px 12px; border-radius:8px;
-  color:inherit; width:220px;
-}
-.btn {
-  background: linear-gradient(180deg,#06b6d4,#0284c7);
-  border:none; color:white; padding:9px 12px; border-radius:8px;
-  cursor:pointer; font-weight:600;
-  box-shadow: 0 6px 18px rgba(2,6,23,0.45);
-}
-.btn.ghost {
-  background:transparent; border:1px solid rgba(255,255,255,0.06); color:inherit;
-  box-shadow:none;
-}
-
-main { padding: 20px; max-width:1200px; margin:0 auto; }
-
-/* GRID: gunakan satu container untuk semua card */
-.grid {
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* auto-fit agar mengisi baris sampai penuh */
-  gap:18px;
-  margin-top:18px;
-  width:100%;
-  align-items:start;
-}
-
-.card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius:12px; overflow:hidden;
-  border: 1px solid rgba(255,255,255,0.03);
-  display:flex; flex-direction:column;
-  transition: transform .18s ease, box-shadow .18s ease;
-  min-height: 320px;
-}
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(2,6,23,0.6);
-}
-
-.poster { width:100%; height:160px; object-fit:cover; background:#111827; display:block; }
-.content { padding:12px 14px 16px 14px; display:flex; flex-direction:column; gap:8px; flex:1; }
-.kicker { font-size:12px; color:#7dd3fc; font-weight:700; text-transform:uppercase; }
-.title { font-size:15px; font-weight:700; }
-.excerpt { font-size:13px; color: rgba(230,238,248,0.7); margin-top:6px; flex:1; }
-.meta { display:flex; gap:8px; align-items:center; justify-content:space-between; margin-top:8px; }
-.meta-left { font-size:12px; color:rgba(230,238,248,0.55); }
-
-.enter-btn {
-  padding:8px 10px; border-radius:8px;
-  background: linear-gradient(180deg,#06b6d4,#0284c7);
-  color:white; font-weight:700; border:none;
-  cursor:pointer; text-decoration:none; display:inline-block;
-}
-.read-more {
-  background: transparent;
-  border:1px solid rgba(255,255,255,0.06);
-  color:inherit; padding:8px 10px; border-radius:8px;
-}
-
-.overlay {
-  position:fixed; inset:0; display:none;
-  background:rgba(1,6,23,0.7);
-  align-items:center; justify-content:center;
-  z-index: 60; padding:20px;
-}
-.overlay.open { display:flex; }
-
-.modal {
-  width:min(980px,98%);
-  max-height:92vh;
-  background: linear-gradient(180deg,#061025,#07263d);
-  border-radius:12px; padding:20px;
-  overflow:auto;
-  border:1px solid rgba(255,255,255,0.04);
-  box-shadow:0 30px 80px rgba(2,6,23,0.7);
-}
-
-/* tweak responsif kecil */
-@media (max-width:420px){
-  .search { width:120px; }
-  .poster { height:140px; }
-}
-
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERROR 451: Unavailable For Legal Reasons</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            color: #0af50a;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 80, 0, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 100, 0, 0.1) 0%, transparent 20%);
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 90%;
+            padding: 30px;
+            background-color: rgba(0, 20, 0, 0.85);
+            border: 1px solid #0af50a;
+            box-shadow: 0 0 20px rgba(10, 245, 10, 0.3);
+            position: relative;
+            border-radius: 5px;
+            margin: 40px 0;
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #0af50a, transparent);
+            animation: scanline 3s linear infinite;
+        }
+        
+        @keyframes scanline {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #0af50a;
+            padding-bottom: 15px;
+        }
+        
+        .logo {
+            color: #0af50a;
+            font-size: 2.5em;
+            margin-right: 15px;
+            text-shadow: 0 0 10px rgba(10, 245, 10, 0.7);
+        }
+        
+        .title {
+            font-size: 1.8em;
+            color: #ff3333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .error-code {
+            font-size: 5em;
+            text-align: center;
+            color: #ff3333;
+            margin: 20px 0;
+            text-shadow: 0 0 15px rgba(255, 51, 51, 0.7);
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .message {
+            margin: 25px 0;
+            line-height: 1.6;
+            font-size: 1.2em;
+        }
+        
+        .highlight {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        
+        .contact-info {
+            background-color: rgba(0, 30, 0, 0.7);
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 4px solid #0af50a;
+            border-radius: 3px;
+        }
+        
+        .contact-info h3 {
+            color: #0af50a;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 1.2em;
+        }
+        
+        .contact-info h3 i {
+            margin-right: 10px;
+            color: #ffcc00;
+        }
+        
+        .contact-details {
+            margin-top: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: rgba(0, 40, 0, 0.5);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background-color: rgba(0, 50, 0, 0.7);
+            transform: translateX(5px);
+        }
+        
+        .contact-item i {
+            color: #0af50a;
+            width: 30px;
+            font-size: 1.2em;
+        }
+        
+        .console {
+            background-color: #000;
+            border: 1px solid #0af50a;
+            padding: 15px;
+            margin: 25px 0;
+            height: 200px;
+            overflow-y: auto;
+            font-size: 0.9em;
+            border-radius: 3px;
+        }
+        
+        .console-line {
+            margin-bottom: 8px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .prompt {
+            color: #0af50a;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .response {
+            color: #33ccff;
+        }
+        
+        .error {
+            color: #ff3333;
+        }
+        
+        .success {
+            color: #0af50a;
+        }
+        
+        .info {
+            color: #ffcc00;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+            display: inline-block;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+        }
+        
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.15;
+        }
+        
+        .server-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .warning {
+            color: #ff9900;
+            background-color: rgba(255, 153, 0, 0.1);
+            padding: 12px 15px;
+            border-radius: 3px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9900;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            font-weight: bold;
+            background-color: #ff3333;
+            color: white;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            background-color: rgba(10, 245, 10, 0.1);
+            color: #0af50a;
+            border: 1px solid #0af50a;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background-color: rgba(10, 245, 10, 0.2);
+            box-shadow: 0 0 10px rgba(10, 245, 10, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background-color: rgba(10, 245, 10, 0.2);
+            font-weight: bold;
+        }
+        
+        .support-info {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: rgba(0, 30, 0, 0.5);
+            border-radius: 3px;
+            text-align: center;
+            border: 1px solid rgba(10, 245, 10, 0.3);
+        }
+        
+        .support-text {
+            color: #ffcc00;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        
+        .kabinet-info {
+            color: #33ccff;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                width: 95%;
+            }
+            
+            .error-code {
+                font-size: 3.5em;
+            }
+            
+            .title {
+                font-size: 1.4em;
+            }
+            
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .server-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 2.8em;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .message {
+                font-size: 1em;
+            }
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 20, 0, 0.5);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(10, 245, 10, 0.3);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(10, 245, 10, 0.5);
+        }
+    </style>
 </head>
-
 <body>
-  <header>
-    <div class="brand">
-      <div class="logo">ART</div>
-      <div>
-        <h1>Platform Artikel</h1>
-        <div class="sub">Seratus pilihan — pilih yang membuat hidupmu sedikit lebih informatif</div>
-      </div>
-    </div>
-
-
-<div class="controls">
-  <input class="search" id="search" placeholder="Cari judul atau topik..." />
-  <button class="btn ghost" id="filterBtn">Filter</button>
-  <button class="btn" id="shuffleBtn">Acak</button>
-</div>
-
-
-  </header>
-
-  <main>
-
-
-<!-- SATUKAN SEMUA CARD DI SINI -->
-<section id="grid" class="grid">
-
-  <!-- Kartu manual 1 -->
-  <article class="card">
-    <img class="poster" src="jufufu.jpg" alt="Poster Artikel">
-    <div class="content">
-      <div class="kicker">Event</div>
-      <div class="title">Hari Guru</div>
-      <div class="excerpt">Hari Guru adalah momen untuk menghargai mereka yang membimbing, mengajari, dan membentuk karakter kita agar bisa melangkah lebih jauh.</div>
-      <div class="meta">
-        <div class="meta-left">Oleh Afif • 25 Nov 2025</div>
-        <div class="card-actions">
-          <a href="artikel-1.html" class="enter-btn">Buka Artikel</a>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- Kartu manual 2 -->
-  <article class="card">
-    <img class="poster" src="pahlawan.png" alt="Poster Artikel">
-    <div class="content">
-      <div class="kicker">Event, Lomba</div>
-      <div class="title">Hari Pahlawan</div>
-      <div class="excerpt">Hari Pahlawan adalah hari untuk mengenang perjuangan para pahlawan yang mempertahankan kemerdekaan Indonesia.</div>
-      <div class="meta">
-        <div class="meta-left">Oleh Muallifah • 10 Nov 2025</div>
-        <div class="card-actions">
-          <a href="artikel-2.html" class="enter-btn">Buka Artikel</a>
-        </div>
-      </div>
-    </div>
-  </article>
-
-   <!-- Kartu manual 3 -->
-  <article class="card">
-    <img class="poster" src="TKA.jpg" alt="Poster Artikel">
-    <div class="content">
-      <div class="kicker">Informasi,Kegiatan</div>
-      <div class="title">Tes kemampuan akademik</div>
-      <div class="excerpt">TKA atau Tes Kemampuan Akademik adalah asesmen standar nasional yang dirancang untuk mengukur capaian akademik siswa pada mata pelajaran tertentu sesuai dengan kurikulum yang berlaku.</div>
-      <div class="meta">
-        <div class="meta-left">Oleh Zahra • 29 Nov 2025</div>
-        <div class="card-actions">
-          <a href="artikel-3.html" class="enter-btn">Buka Artikel</a>
-        </div>
-      </div>
-    </div>
-  </article>
-
- <!-- Kartu manual 4 -->
-  <article class="card">
-    <img class="poster" src="Sehati.jpeg" alt="Poster Artikel">
-    <div class="content">
-      <div class="kicker">Sosial,Kegiatan</div>
-      <div class="title">Kegiatan talkshow kesehatan dan peluncuran SEHATI JATIM</div>
-      <div class="excerpt">Talkshow Jatim Sehati adalah acara yang diselenggarakan untuk meningkatkan kesadaran tentang kesehatan mental di Jawa Timur.</div>
-      <div class="meta">
-        <div class="meta-left">Oleh Afif • 29 Nov 2025</div>
-        <div class="card-actions">
-          <a href="artikel-4.html" class="enter-btn">Buka Artikel</a>
-        </div>
-      </div>
-    </div>
-  </article>
-
-   <!-- Kartu manual 5 -->
-  <article class="card">
-    <img class="poster" src="fls3n.png" alt="Poster Artikel">
-    <div class="content">
-      <div class="kicker">Event,Lomba</div>
-      <div class="title">FLS3N</div>
-      <div class="excerpt">FLS3N (Festival Lomba Seni Siswa Nasional) merupakan ajang kompetisi seni yang diselenggarakan oleh Kementerian Pendidikan</div>
-      <div class="meta">
-        <div class="meta-left">Oleh Muallifa • 29 Nov 2025</div>
-        <div class="card-actions">
-          <a href="artikel-5.html" class="enter-btn">Buka Artikel</a>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- Kartu manual 6 -->
-  <article class="card">
-    <img class="poster" src="Pelindo.jpeg" alt="Poster Artikel">
-    <div class="content">
-      <div class="kicker">Sosial,Kegiatan</div>
-      <div class="title">Pelindo</div>
-      <div class="excerpt">sebuah webinar edukatif yang dipersembahkan oleh Pelindo dalam rangka memperingati Dies Natalis ke-4</div>
-      <div class="meta">
-        <div class="meta-left">Oleh Afif • 29 Nov 2025</div>
-        <div class="card-actions">
-          <a href="artikel-6.html" class="enter-btn">Buka Artikel</a>
-        </div>
-      </div>
-    </div>
-  </article>
-  
-  <!-- Kartu otomatis akan dimasukkan di sini oleh JS -->
-</section>
-
-
-  </main>
-
-  <!-- MODAL -->
-
-  <div id="overlay" class="overlay" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true">
-      <button id="closeModal" style="float:right;background:transparent;border:none;color:rgba(230,238,248,0.7);font-weight:700;cursor:pointer">Tutup ✕</button>
-      <h2 id="modalTitle"></h2>
-      <div class="modal-meta" id="modalMeta"></div>
-      <img id="modalPoster" style="width:100%;max-height:320px;object-fit:cover;border-radius:8px;margin-bottom:12px;" alt="">
-      <div class="modal-body" id="modalBody"></div>
-    </div>
-  </div>
-
-  <script>
-    /* GENERATOR 100 BOX (opsional) */
-    const TOTAL = 0; // set >0 untuk mengisi otomatis
-    const topics = ["Teknologi","Politik","Ekonomi","Kesehatan","Budaya","Lingkungan","Pendidikan"];
-    const excerpts = [
-      "Ringkasan singkat artikel.",
-      "Gambaran besar topik yang dibahas.",
-      "Ulasan menarik dan informatif."
-    ];
-
-    const grid = document.getElementById('grid');
-
-    function escapeHtml(str) {
-      return String(str).replaceAll('"','&quot;').replaceAll("'",'&#39;');
-    }
-
-    function createCard(i) {
-      const topic = topics[i % topics.length];
-      const title = "Artikel Otomatis " + (i+1);
-      const excerpt = excerpts[i % excerpts.length];
-      const posterSrc = "poster.jpg";
-      const date = "2025";
-
-      const card = document.createElement('article');
-      card.className = 'card';
-
-      card.innerHTML = `
-        <img class="poster" src="${posterSrc}" alt="Poster">
-        <div class="content">
-          <div class="kicker">${topic}</div>
-          <div class="title">${title}</div>
-          <div class="excerpt">${excerpt}</div>
-          <div class="meta">
-            <div class="meta-left">${date}</div>
-            <div class="card-actions">
-              <button class="enter-btn"
-                data-title="${escapeHtml(title)}"
-                data-topic="${topic}"
-                data-excerpt="${escapeHtml(excerpt)}"
-                data-poster="${posterSrc}"
-                data-date="${date}">
-                Buka Artikel
-              </button>
+    <div class="matrix-bg" id="matrixCanvas"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-server"></i>
             </div>
-          </div>
+            <div class="title">
+                <h1>SERVER TRANSFER ERROR</h1>
+            </div>
         </div>
-      `;
-      return card;
-    }
+        
+        <div class="error-code">ERROR 451</div>
+        
+        <div class="message">
+            <p>Situs web ini telah <span class="highlight">dipindahkan ke server lain</span> atau <span class="highlight">domain baru</span>. Akses ke lokasi sebelumnya telah dinonaktifkan.</p>
+            
+            <div class="warning">
+                <i class="fas fa-exclamation-triangle"></i> 
+                <span>Maaf, halaman ini sedang dalam proses migrasi server.</span>
+            </div>
+            
+            <p>Kesalahan ini terjadi karena migrasi server yang belum sepenuhnya selesai atau konfigurasi DNS yang belum diperbarui.</p>
+        </div>
+        
+        <div class="contact-info">
+            <h3><i class="fas fa-user-shield"></i> PENANGGUNG JAWAB UTAMA PROYEK</h3>
+            <p>Jika Anda yakin ini adalah kesalahan, hubungi penanggung jawab utama proyek ini:</p>
+            
+            <div class="contact-details">
+                <div class="contact-item">
+                    <i class="fas fa-user"></i>
+                    <span><strong>AFIF SAKTI WL</strong></span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span><strong>8888547368</strong></span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span><strong>afifsakti328@gmail.com</strong></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="console">
+            <div class="console-line info">
+                <span>Server sedang dalam proses migrasi...</span>
+            </div>
+            <div class="console-line">
+                <span class="response">Status: Transfer data dalam progres</span>
+            </div>
+            <div class="console-line error">
+                <span>Akses ditangguhkan sementara</span>
+            </div>
+            <div class="console-line">
+                <span class="response">Estimasi waktu: Belum dapat ditentukan</span>
+            </div>
+            <div class="console-line">
+                <span>Harap hubungi administrator untuk informasi lebih lanjut</span>
+            </div>
+            <div class="console-line">
+                <span class="response">Mohon maaf atas ketidaknyamanannya</span>
+            </div>
+            <div class="console-line info">
+                <span>Proses migrasi dipantau oleh tim teknis</span>
+            </div>
+            <div class="console-line">
+                <span class="blink">_</span>
+            </div>
+        </div>
+        
+        <div class="support-info">
+            <div class="support-text">
+                DIDUKUNG DAN DIBUAT OLEH SEKBID 9
+            </div>
+            <div class="kabinet-info">
+                Tentunya bersama Kabinet Asa Cipta
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="javascript:void(0)" class="btn btn-primary" onclick="window.location.reload()">
+                <i class="fas fa-redo"></i> Refresh Page
+            </a>
+            <a href="javascript:void(0)" class="btn" onclick="showContactInfo()">
+                <i class="fas fa-headset"></i> Contact Support
+            </a>
+            <a href="javascript:void(0)" class="btn" onclick="showStatus()">
+                <i class="fas fa-info-circle"></i> Status Info
+            </a>
+        </div>
+        
+        <div class="server-info">
+            <div>Status Server: <span class="error">OFFLINE</span></div>
+            <div>Terakhir Diperbarui: <span class="success">21 Januari 2026</span></div>
+            <div>Tim Teknis: <span class="info">Sekbid 9</span></div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023-2026 Server Sekbid 9. Semua hak dilindungi.</p>
+            <p>Server ini telah dipindahkan secara permanen ke lokasi baru.</p>
+            <p>Didukung oleh Kabinet Asa Cipta</p>
+        </div>
+    </div>
 
-    function renderAll() {
-      for (let i = 0; i < TOTAL; i++) {
-        grid.appendChild(createCard(i));
-      }
-    }
-
-    renderAll();
-
-    /* MODAL */
-    const overlay = document.getElementById('overlay');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalMeta = document.getElementById('modalMeta');
-    const modalPoster = document.getElementById('modalPoster');
-    const modalBody = document.getElementById('modalBody');
-
-    function openModal(data) {
-      modalTitle.textContent = data.title;
-      modalMeta.textContent = `${data.topic} • ${data.date}`;
-      modalPoster.src = data.poster;
-      modalPoster.alt = data.title;
-      modalBody.innerHTML = `<p>${data.excerpt}</p>`;
-      overlay.classList.add("open");
-      overlay.setAttribute('aria-hidden','false');
-    }
-    function closeModal() {
-      overlay.classList.remove("open");
-      overlay.setAttribute('aria-hidden','true');
-    }
-
-    document.body.addEventListener('click', (e) => {
-      const btn = e.target.closest('.enter-btn');
-      if (btn && btn.dataset.title) {
-        openModal({
-          title: btn.dataset.title,
-          topic: btn.dataset.topic,
-          excerpt: btn.dataset.excerpt,
-          poster: btn.dataset.poster,
-          date: btn.dataset.date
+    <script>
+        // Matrix background effect
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Set canvas dimensions
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        resizeCanvas();
+        
+        // Matrix characters
+        const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        const chars = matrixChars.split("");
+        
+        const fontSize = 14;
+        let columns;
+        
+        // Create an array of drops
+        let drops = [];
+        
+        function initMatrix() {
+            columns = Math.floor(canvas.width / fontSize);
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.floor(Math.random() * canvas.height / fontSize) * fontSize;
+            }
+        }
+        
+        function drawMatrix() {
+            // Semi-transparent black background for trail effect
+            ctx.fillStyle = "rgba(10, 10, 10, 0.04)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = "#0af50a";
+            ctx.font = `${fontSize}px monospace`;
+            
+            // Draw characters
+            for (let i = 0; i < drops.length; i++) {
+                // Random character
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                
+                // Draw character
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                // Move drop down
+                drops[i]++;
+                
+                // Reset drop if it goes beyond canvas height
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+            }
+        }
+        
+        // Animation loop
+        function animate() {
+            drawMatrix();
+            requestAnimationFrame(animate);
+        }
+        
+        // Initialize and start animation
+        initMatrix();
+        animate();
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            resizeCanvas();
+            initMatrix();
         });
-      }
-      if (e.target.id === 'closeModal') closeModal();
-    });
-
-    /* SEARCH */
-    const searchInput = document.getElementById('search');
-    function filterCards(keyword) {
-      keyword = keyword.toLowerCase();
-      const allCards = document.querySelectorAll('.card');
-
-      allCards.forEach(card => {
-        const title = card.querySelector('.title')?.textContent.toLowerCase() || "";
-        const kicker = card.querySelector('.kicker')?.textContent.toLowerCase() || "";
-
-        card.style.display = (title.includes(keyword) || kicker.includes(keyword)) ? "flex" : "none";
-      });
-    }
-    searchInput.addEventListener("input", () => {
-      filterCards(searchInput.value);
-    });
-  </script>
-
+        
+        // Auto-scroll console to bottom
+        const consoleElement = document.querySelector('.console');
+        consoleElement.scrollTop = consoleElement.scrollHeight;
+        
+        // Add some interactive effects
+        document.addEventListener('keydown', function() {
+            const errorCode = document.querySelector('.error-code');
+            errorCode.style.textShadow = '0 0 20px rgba(255, 51, 51, 0.9)';
+            setTimeout(() => {
+                errorCode.style.textShadow = '0 0 15px rgba(255, 51, 51, 0.7)';
+            }, 300);
+        });
+        
+        // Add click effect on container
+        const container = document.querySelector('.container');
+        container.addEventListener('click', function() {
+            this.style.boxShadow = '0 0 25px rgba(10, 245, 10, 0.5)';
+            setTimeout(() => {
+                this.style.boxShadow = '0 0 20px rgba(10, 245, 10, 0.3)';
+            }, 300);
+        });
+        
+        // Interactive functions
+        function showContactInfo() {
+            const contactSection = document.querySelector('.contact-info');
+            contactSection.style.backgroundColor = 'rgba(0, 40, 0, 0.9)';
+            contactSection.style.borderLeftColor = '#ffcc00';
+            
+            setTimeout(() => {
+                contactSection.style.backgroundColor = '';
+                contactSection.style.borderLeftColor = '';
+            }, 2000);
+        }
+        
+        function showStatus() {
+            const statusBadge = document.querySelector('.server-info .error');
+            const originalText = statusBadge.textContent;
+            
+            statusBadge.textContent = 'PROSES MIGRASI';
+            statusBadge.style.color = '#ff9900';
+            
+            setTimeout(() => {
+                statusBadge.textContent = originalText;
+                statusBadge.style.color = '';
+            }, 1500);
+        }
+        
+        // Add typing effect to console
+        function typeConsoleText() {
+            const lines = [
+                {text: "Memperbarui status migrasi...", className: "info", delay: 100},
+                {text: "Transfer data: 75% selesai", className: "response", delay: 200},
+                {text: "Verifikasi integritas data...", className: "", delay: 300},
+                {text: "Proses akan segera dilanjutkan", className: "response", delay: 400}
+            ];
+            
+            const consoleElement = document.querySelector('.console');
+            let delay = 5000; // Start after 5 seconds
+            
+            lines.forEach((line, index) => {
+                setTimeout(() => {
+                    const consoleLine = document.createElement('div');
+                    consoleLine.className = 'console-line';
+                    
+                    if (line.className) {
+                        consoleLine.classList.add(line.className);
+                    }
+                    
+                    consoleLine.textContent = line.text;
+                    consoleElement.appendChild(consoleLine);
+                    
+                    // Remove the blinking cursor temporarily
+                    const blinkElement = document.querySelector('.blink');
+                    if (blinkElement) {
+                        blinkElement.style.visibility = 'hidden';
+                        setTimeout(() => {
+                            blinkElement.style.visibility = 'visible';
+                        }, 100);
+                    }
+                    
+                    consoleElement.scrollTop = consoleElement.scrollHeight;
+                }, delay);
+                
+                delay += 2000; // Add delay between lines
+            });
+        }
+        
+        // Start typing effect after page loads
+        window.addEventListener('load', () => {
+            setTimeout(typeConsoleText, 5000);
+            
+            // Add support info highlight effect
+            const supportInfo = document.querySelector('.support-info');
+            setInterval(() => {
+                supportInfo.style.borderColor = supportInfo.style.borderColor === 'rgba(10, 245, 10, 0.6)' ? 
+                    'rgba(255, 204, 0, 0.6)' : 'rgba(10, 245, 10, 0.6)';
+            }, 3000);
+        });
+    </script>
 </body>
 </html>
